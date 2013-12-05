@@ -1,0 +1,72 @@
+
+.container-narrow
+
+  .masthead
+    %h3
+      .event-name
+        = @event.name
+    %h3.event-logo
+      LOGO
+
+    / %hr
+
+    / .jumbotron
+    /   %h1 Super awesome marketing speak!
+    /   %p.lead Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    /   %a.btn.btn-large.btn-success{href: "#"} Sign up today
+    / %hr/
+    / .row-fluid.marketing
+    /   .span6
+    /     %h4 Subheading
+    /     %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+    /     %h4 Subheading
+    /     %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+    /     %h4 Subheading
+    /     %p Maecenas sed diam eget risus varius blandit sit amet non magna.
+    /   .span6
+    /     %h4 Subheading
+    /     %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+    /     %h4 Subheading
+    /     %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+    /     %h4 Subheading
+    /     %p Maecenas sed diam eget risus varius blandit sit amet non magna.
+    / %hr/
+    / .footer
+    /   %p Company 2012
+
+    .row-fluid
+
+      .span12
+        .event-date
+          = t('.date')
+          = @event.date
+
+        .event-address
+          = t('.address')
+          = @event.address
+
+    .row-fluid
+
+      .span4
+        - latlng = [@event.latitude, @event.longitude]
+        = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
+
+      .span8
+        %section.event-registration
+          Registration
+
+        %section.event-description
+          = @event.description_html.html_safe
+
+
+    %section.event-share
+      Social media and stuff
+
+    %aside
+      Created by, extra info
+
+    %footer
+      Footer stuff
+
+    = link_to t('.edit'), edit_event_path(@event)
+    = link_to t('.back'), events_path

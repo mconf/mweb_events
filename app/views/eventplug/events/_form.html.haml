@@ -1,0 +1,14 @@
+= simple_form_for(@event) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.label :date
+    = f.text_field :date
+    = f.input :address
+    = f.hidden_field :description
+
+  #epiceditor
+
+  .form-actions
+    = f.button :submit
