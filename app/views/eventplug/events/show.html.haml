@@ -1,72 +1,80 @@
 
-.container-narrow
+.event-container.container-fluid{:itemscope=>true, :itemtype=>"http://schema.org/Event"}
 
-  .masthead
-    %h3
-      .event-name
-        = @event.name
-    %h3.event-logo
+  .event-header.masthead.rounded
+    %h1.name.muted{:itemprop => "name"}
+      = @event.name
+    .logo.pull-right
       LOGO
+    .creator
+      by Lucas
 
-    / %hr
+  %hr
 
-    / .jumbotron
-    /   %h1 Super awesome marketing speak!
-    /   %p.lead Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-    /   %a.btn.btn-large.btn-success{href: "#"} Sign up today
-    / %hr/
-    / .row-fluid.marketing
-    /   .span6
-    /     %h4 Subheading
-    /     %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
-    /     %h4 Subheading
-    /     %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-    /     %h4 Subheading
-    /     %p Maecenas sed diam eget risus varius blandit sit amet non magna.
-    /   .span6
-    /     %h4 Subheading
-    /     %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
-    /     %h4 Subheading
-    /     %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-    /     %h4 Subheading
-    /     %p Maecenas sed diam eget risus varius blandit sit amet non magna.
-    / %hr/
-    / .footer
-    /   %p Company 2012
+  .row-fluid
 
-    .row-fluid
+    .span8
+      %h3 Registration
 
-      .span12
-        .event-date
-          = t('.date')
-          = @event.date
+      %section.event-registration
+        %table
+          %colgroup
+            %col#col_tkt_name
+            %col#col_tkt_date
+            %col#col_tkt_qty
+          %thead
+            %tr
+              %th Type
+              %th Available until
+              %th Remaining
+          %tbody
+            %tr
+              %td{colspan: "6"} Not available
 
-        .event-address
-          = t('.address')
+        .btn.large.main.pull-right
+          Inscreva-se
+
+      %hr
+
+      %section.event-description.rounded{:itemprop => "description"}
+        = @event.description_html.html_safe
+
+
+    .span4
+      .summary.rounded
+        %h4
+          = t '.date'
+        %p
+          %meta{:itemprop => "startDate", :content => @event.date}
+          %time{ :datetime => @event.date }
+            = l @event.date
+
+        %h4
+          = t '.address'
+        %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
           = @event.address
 
-    .row-fluid
+        .event-map
+          - latlng = [@event.latitude, @event.longitude]
+          = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
 
-      .span4
-        - latlng = [@event.latitude, @event.longitude]
-        = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
+        %h3
+          %a.calendar-button{:href => "#"} Add to my calendar
 
-      .span8
-        %section.event-registration
-          Registration
+        %hr
 
-        %section.event-description
-          = @event.description_html.html_safe
+        %aside
+          Created by, extra info
 
+  %hr
 
-    %section.event-share
-      Social media and stuff
+  .row
+    .span4
+      %section.event-share
+        Social media and stuff
 
-    %aside
-      Created by, extra info
-
-    %footer
-      Footer stuff
+  %footer
+    Footer stuff
 
     = link_to t('.edit'), edit_event_path(@event)
     = link_to t('.back'), events_path

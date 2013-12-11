@@ -1,0 +1,41 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass here: http://sass-lang.com/
+//
+
+@import 'base/epiceditor';
+@import 'preview/bartik';
+@import 'preview/github';
+@import 'preview/preview-dark';
+@import 'editor/epic-dark';
+@import 'editor/epic-light';
+
+@import 'bootstrap_and_overrides';
+
+.event-description {
+  background-color: #eee;
+}
+
+.rounded {
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+  padding:15px 15px 15px 15px;
+}
+
+.summary {
+  background-color: #eee;
+}
+
+#map {
+  height: 180px;
+}
+
+.event-container {
+  padding-top: 60px;
+}
+
+hr {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

@@ -1,0 +1,7 @@
+--- 
+en:
+  eventplug:
+    events:
+      show:
+        date: When?
+        address: Where?
