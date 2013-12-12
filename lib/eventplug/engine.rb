@@ -8,9 +8,9 @@ require 'jquery-ui-rails'
 require 'epic-editor-rails'
 require 'leaflet-rails'
 require 'geocoder'
-# require 'therubyracer'
 require 'less-rails'
 require 'twitter-bootstrap-rails'
+require 'compass-rails'
 
 module Eventplug
   class Engine < ::Rails::Engine

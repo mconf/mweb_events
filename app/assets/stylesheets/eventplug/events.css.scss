@@ -10,16 +10,18 @@
 @import 'editor/epic-dark';
 @import 'editor/epic-light';
 
-@import 'bootstrap_and_overrides';
+@import 'compass';
+
+.event-header {
+  height: 280px;
+}
 
 .event-description {
   background-color: #eee;
 }
 
 .rounded {
-  -webkit-border-radius: 10px;
-     -moz-border-radius: 10px;
-          border-radius: 10px;
+  @include border-radius(10px);
   padding:15px 15px 15px 15px;
 }
 
@@ -32,7 +34,7 @@
 }
 
 .event-container {
-  padding-top: 60px;
+  /*padding-top: 60px;*/
 }
 
 hr {

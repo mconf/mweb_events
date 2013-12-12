@@ -2,10 +2,10 @@
 .event-container.container-fluid{:itemscope=>true, :itemtype=>"http://schema.org/Event"}
 
   .event-header.masthead.rounded
+    .logo
+      %img{:src =>'http://placehold.it/1280x200/ffa/&text=Logo'}
     %h1.name.muted{:itemprop => "name"}
       = @event.name
-    .logo.pull-right
-      LOGO
     .creator
       by Lucas
 
@@ -14,7 +14,7 @@
   .row-fluid
 
     .span8
-      %h3 Registration
+      %h2 Registration
 
       %section.event-registration
         %table
@@ -42,6 +42,9 @@
 
     .span4
       .summary.rounded
+        %h3
+          Summary
+
         %h4
           = t '.date'
         %p
@@ -64,7 +67,9 @@
         %hr
 
         %aside
-          Created by, extra info
+          %h3 Organizers
+
+          %h3 Extra info and logos
 
   %hr
 
