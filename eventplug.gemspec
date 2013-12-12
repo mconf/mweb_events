@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "TODO: Description of Eventplug."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 3.2.15'
   s.add_dependency 'sass-rails', '~> 3.2.3'
@@ -34,4 +34,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'compass-rails', '~> 1.0'
 
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'factory_girl_rails'
 end
