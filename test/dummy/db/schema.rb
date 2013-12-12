@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202180907) do
+ActiveRecord::Schema.define(:version => 20131212170412) do
 
   create_table "eventplug_events", :force => true do |t|
     t.string   "name"
@@ -19,10 +19,21 @@ ActiveRecord::Schema.define(:version => 20131202180907) do
     t.string   "location"
     t.string   "address"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "owner_id"
+    t.string   "owner_type",  :default => "User"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.float    "latitude"
     t.float    "longitude"
+  end
+
+  create_table "eventplug_participants", :force => true do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type", :default => "User"
+    t.integer  "event_id"
+    t.string   "email"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
 end

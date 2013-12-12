@@ -5,6 +5,9 @@ module Eventplug
     geocoded_by :address
     after_validation :geocode
 
+    belongs_to :owner
+    has_many :participants
+
     def description_html
       if description
         require 'redcarpet'
