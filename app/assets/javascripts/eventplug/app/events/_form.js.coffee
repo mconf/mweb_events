@@ -1,5 +1,6 @@
 $ ->
-  if isOnPage 'eventplug-events', 'edit' or isOnPage 'eventplug-events', 'new'
+
+  if isOnPage('eventplug-events', 'new') or isOnPage('eventplug-events', 'edit')
     $("#event_date").datepicker()
 
     opts =
