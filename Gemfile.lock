@@ -77,8 +77,11 @@ GEM
     factory_girl_rails (4.3.0)
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
+<<<<<<< HEAD
     font-awesome-rails (4.0.3.0)
       railties (>= 3.2, < 5.0)
+=======
+>>>>>>> 7fe66014749e13ce496518b12366cfcaef1767d9
     fssm (0.2.9)
     geocoder (1.1.8)
     haml (4.0.4)
