@@ -8,13 +8,16 @@ module Eventplug
     belongs_to :owner
     has_many :participants
 
+    validates :name, :presence => true
+    validates :date, :presence => true
+
     def description_html
-      if description
+      if not description.blank?
         require 'redcarpet'
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new)
         html = markdown.render description
       else
-        html = t('event.no_description')
+        html = I18n.t('eventplug.events.no_description')
       end
 
       html
