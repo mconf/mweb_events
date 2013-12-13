@@ -2,6 +2,7 @@
 en:
   eventplug:
     events:
+      no_description: No description available
       show:
         date: When?
         address: Where?

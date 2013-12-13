@@ -4,7 +4,7 @@
   .event-header.masthead.rounded
     .logo
       %img{:src =>'http://placehold.it/1280x200/ffa/&text=Logo'}
-    %h1.name.muted{:itemprop => "name"}
+    %h1.name{:itemprop => "name"}
       = @event.name
     .creator
       by Lucas
@@ -12,74 +12,38 @@
   %hr
 
   .row-fluid
-
     .span8
-      %h2 Registration
-
-      %section.event-registration
-        %table
-          %colgroup
-            %col#col_tkt_name
-            %col#col_tkt_date
-            %col#col_tkt_qty
-          %thead
-            %tr
-              %th Type
-              %th Available until
-              %th Remaining
-          %tbody
-            %tr
-              %td{colspan: "6"} Not available
-
-        .btn.large.main.pull-right
-          Inscreva-se
+      = render 'registration'
 
       %hr
 
-      %section.event-description.rounded{:itemprop => "description"}
+      %section.event-description.well{:itemprop => "description"}
         = @event.description_html.html_safe
+
+      %hr
+
+        = render 'social_media'
 
 
     .span4
-      .summary.rounded
-        %h3
-          Summary
+      .event-summary
+        .well
+          = render 'summary'
 
-        %h4
-          = t '.date'
-        %p
-          %meta{:itemprop => "startDate", :content => @event.date}
-          %time{ :datetime => @event.date }
-            = l @event.date
+        .well
+          %aside
+            %h3 Organizers
 
-        %h4
-          = t '.address'
-        %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
-          = @event.address
-
-        .event-map
-          - latlng = [@event.latitude, @event.longitude]
-          = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
-
-        %h3
-          %a.calendar-button{:href => "#"} Add to my calendar
-
-        %hr
-
-        %aside
-          %h3 Organizers
-
-          %h3 Extra info and logos
+            %h3 Extra info and logos
 
   %hr
 
   .row
     .span4
-      %section.event-share
-        Social media and stuff
+
 
   %footer
     Footer stuff
 
-    = link_to t('.edit'), edit_event_path(@event)
-    = link_to t('.back'), events_path
+  %i.fa.fa-edit
+  = link_to t('.edit'), edit_event_path(@event)

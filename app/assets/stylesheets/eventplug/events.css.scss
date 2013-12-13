@@ -12,32 +12,62 @@
 
 @import 'compass';
 
+#map {
+  height: 180px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
 .event-header {
   height: 280px;
+  font-size: 200%;
 }
 
 .event-description {
-  background-color: #eee;
 }
 
-.rounded {
-  @include border-radius(10px);
-  padding:15px 15px 15px 15px;
+.event-summary {
+
+  i {
+    margin-right: 10px;
+  }
+
+  p {
+    font-size: 110%;
+  }
+
 }
 
-.summary {
-  background-color: #eee;
+.summary-button {
+  font-weight: bold;
+  font-size: 120%;
 }
 
-#map {
-  height: 180px;
-}
 
 .event-container {
-  /*padding-top: 60px;*/
 }
 
 hr {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.social-buttons {
+  margin-left: 0;
+
+  li {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  a:hover {
+    color: #ccf;
+    text-decoration: none;
+  }
+
 }

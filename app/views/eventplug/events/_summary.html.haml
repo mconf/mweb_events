@@ -1,0 +1,38 @@
+%h3
+  = @event.name
+
+%p
+  %i.fa.fa-calendar-o
+  %meta{:itemprop => "startDate", :content => @event.date}
+  %time{ :datetime => @event.date }
+    = l @event.date
+
+%p
+  %i.fa.fa-clock-o
+  %meta{:itemprop => "startTime", :content => @event.date}
+  %time{ :datetime => @event.date }
+    = t('.startTime')
+
+.event-map
+  - latlng = [@event.latitude, @event.longitude]
+  = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
+
+%p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
+  %i.fa.fa-map-marker
+  = @event.address
+
+%ul.nav.nav-pills.nav-stacked
+  %li
+    %a.calendar.summary-button{:href => "#"}
+      %i.fa.fa-calendar
+      = t('.calendar')
+
+  %li
+    %a.contact.summary-button{:href => "#"}
+      %i.fa.fa-envelope
+      = t('.contact')
+
+  %li
+    %a.rss.summary-button{:href => "#"}
+      %i.fa.fa-rss
+      = t('.rss')

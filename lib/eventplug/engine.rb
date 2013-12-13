@@ -10,6 +10,7 @@ require 'leaflet-rails'
 require 'geocoder'
 require 'less-rails'
 require 'twitter-bootstrap-rails'
+require 'font-awesome-rails'
 require 'compass-rails'
 
 module Eventplug
