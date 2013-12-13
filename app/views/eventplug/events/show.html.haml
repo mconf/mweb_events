@@ -1,7 +1,6 @@
-
 .event-container.container-fluid{:itemscope=>true, :itemtype=>"http://schema.org/Event"}
 
-  .event-header.masthead.rounded
+  .event-header.masthead
     .logo
       %img{:src =>'http://placehold.it/1280x200/ffa/&text=Logo'}
     %h1.name{:itemprop => "name"}
@@ -13,37 +12,30 @@
 
   .row-fluid
     .span8
-      = render 'registration'
+      .well
+        = render 'registration'
 
-      %hr
+      .well
+        = render 'description'
 
-      %section.event-description.well{:itemprop => "description"}
-        = @event.description_html.html_safe
-
-      %hr
-
+      .row-fluid
         = render 'social_media'
 
-
     .span4
-      .event-summary
+      .well
+        = render 'summary'
+
+      .well
+        %aside
+          %h3 Organizers
+
+          %h3 Extra info and logos
+
+  .row-fluid
+    .span12
+      %footer
         .well
-          = render 'summary'
+          %h1 Footer stuff
 
-        .well
-          %aside
-            %h3 Organizers
-
-            %h3 Extra info and logos
-
-  %hr
-
-  .row
-    .span4
-
-
-  %footer
-    Footer stuff
-
-  %i.fa.fa-edit
-  = link_to t('.edit'), edit_event_path(@event)
+        %i.fa.fa-edit
+        = link_to t('.edit'), edit_event_path(@event)

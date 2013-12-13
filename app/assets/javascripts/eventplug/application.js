@@ -10,10 +10,11 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require epiceditor
 //= require leaflet
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-pt-BR
-//= require epiceditor
+//= require jquery.expander.min
 //= require_tree .

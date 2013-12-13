@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Owner:
+  = @participant.owner
+%p
+  %b Email:
+  = @participant.email
+%p
+  %b Event:
+  = @participant.event
+
+= link_to 'Edit', edit_participant_path(@participant)
+\|
+= link_to 'Back', participants_path
