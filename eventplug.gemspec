@@ -7,11 +7,11 @@ require "eventplug/version"
 Gem::Specification.new do |s|
   s.name        = "eventplug"
   s.version     = Eventplug::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Eventplug."
-  s.description = "TODO: Description of Eventplug."
+  s.authors     = ["Lucas Zawacki", "mconf"]
+  s.email       = ["lfzawacki@mconf.com"]
+  s.homepage    = "http://github.com/mconf/mweb-events"
+  s.summary     = "Summary of Eventplug."
+  s.description = "Description of Eventplug."
 
   s.files = Dir["{app,config,db,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
