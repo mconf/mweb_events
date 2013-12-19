@@ -12,6 +12,7 @@ require 'less-rails'
 require 'twitter-bootstrap-rails'
 require 'font-awesome-rails'
 require 'compass-rails'
+require 'icalendar'
 
 module Eventplug
   class Engine < ::Rails::Engine

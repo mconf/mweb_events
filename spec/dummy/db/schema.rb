@@ -15,7 +15,10 @@ ActiveRecord::Schema.define(:version => 20131212170412) do
 
   create_table "eventplug_events", :force => true do |t|
     t.string   "name"
-    t.date     "date"
+    t.date     "start_on"
+    t.date     "end_on"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.string   "location"
     t.string   "address"
     t.text     "description"

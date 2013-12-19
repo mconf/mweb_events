@@ -18,6 +18,12 @@ module Eventplug
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @event }
+        format.ics do
+		  calendar = Icalendar::Calendar.new
+		  calendar.add_event(@event.to_ics)
+		  calendar.publish
+		  render :text => calendar.to_ical
+        end
       end
     end
 

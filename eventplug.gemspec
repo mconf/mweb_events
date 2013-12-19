@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'twitter-bootstrap-rails'
   s.add_dependency 'font-awesome-rails'
   s.add_dependency 'compass-rails', '~> 1.0'
+  s.add_dependency 'icalendar'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'

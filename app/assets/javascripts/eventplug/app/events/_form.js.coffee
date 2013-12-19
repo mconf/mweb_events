@@ -2,7 +2,7 @@ $ ->
 
   if isOnPage('eventplug-events', 'new') or isOnPage('eventplug-events', 'edit')
 
-    $("#event_date").datepicker()
+    $("#event_start_on").datepicker()
 
     opts =
       button: false

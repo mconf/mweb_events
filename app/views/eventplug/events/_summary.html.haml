@@ -4,14 +4,14 @@
 
   %p
     %i.fa.fa-calendar-o
-    %meta{:itemprop => "startDate", :content => @event.date}
-    %time{ :datetime => @event.date }
-      = l @event.date
+    %meta{:itemprop => "startDate", :content => @event.start_on}
+    %time{ :datetime => @event.start_on }
+      = l @event.start_on
 
   %p
     %i.fa.fa-clock-o
-    %meta{:itemprop => "startTime", :content => @event.date}
-    %time{ :datetime => @event.date }
+    %meta{:itemprop => "startTime", :content => @event.start_on}
+    %time{ :datetime => @event.start_on }
       = t('.startTime')
 
   .event-map
