@@ -1,7 +1,10 @@
-%h1 Editing event
+.container-fluid
 
-= render 'form'
+  %h1
+    = t('.edit')
 
-= link_to 'Show', @event
-\|
-= link_to 'Back', events_path
+  = render 'form'
+
+  = link_to 'Show', @event
+  \|
+  = link_to 'Back', events_path

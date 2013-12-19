@@ -2,7 +2,12 @@ $ ->
 
   if isOnPage('eventplug-events', 'new') or isOnPage('eventplug-events', 'edit')
 
-    $("#event_start_on").datepicker()
+    $('#start_on, #end_on').datetimepicker
+
+    # Kind of a hack to show the arrows
+    $('#start_on i, #end_on i').on 'click', (e) ->
+      $('.icon-chevron-down').attr('class', 'fa fa-chevron-down')
+      $('.icon-chevron-up').attr('class', 'fa fa-chevron-up')
 
     opts =
       button: false

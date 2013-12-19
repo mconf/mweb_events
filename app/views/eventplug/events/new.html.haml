@@ -1,5 +1,7 @@
-%h1 New event
+.container-fluid
 
-= render 'form'
+  %h1
+    = t('.new')
 
-= link_to 'Back', events_path
+  = render 'form'
+  = link_to 'Back', events_path

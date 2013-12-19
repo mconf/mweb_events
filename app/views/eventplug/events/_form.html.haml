@@ -3,8 +3,23 @@
 
   .form-inputs
     = f.input :name
-    = f.label :start_on
-    = f.text_field :start_on
+
+    .input-append.date#start_on
+      = f.label :start_on
+      = f.text_field :start_on, :'data-format' => 'dd/MM/yyyy hh:mm:ss'
+
+      %span.add-on
+        %i{:'data-time-icon'=>"fa fa-clock-o", :'data-date-icon'=>"fa fa-calendar"}
+
+    %br
+
+    .input-append.date#end_on
+      = f.label :end_on
+      = f.text_field :end_on, :'data-format' => 'dd/MM/yyyy hh:mm:ss'
+
+      %span.add-on
+        %i{:'data-time-icon'=>"fa fa-clock-o", :'data-date-icon'=>"fa fa-calendar"}
+
     = f.input :address
     = f.hidden_field :description
 
