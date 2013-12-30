@@ -3,6 +3,7 @@ $ ->
   if isOnPage('eventplug-events', 'new') or isOnPage('eventplug-events', 'edit')
 
     $('#start_on, #end_on').datetimepicker
+      language: 'pt-BR'
 
     # Kind of a hack to show the arrows
     $('#start_on i, #end_on i').on 'click', (e) ->
