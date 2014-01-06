@@ -15,7 +15,7 @@ PATH
       jquery-ui-rails
       leaflet-rails
       less-rails
-      rails (~> 3.2.15)
+      rails (~> 3.2.0)
       redcarpet
       sass-rails (~> 3.2.3)
       simple_form (~> 2.1.0)
