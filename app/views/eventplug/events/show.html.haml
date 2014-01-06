@@ -5,9 +5,11 @@
       %img{:src =>'http://placehold.it/1280x200/ffa/&text=Logo'}
     %h1.name{:itemprop => "name"}
       = @event.name
-    .creator
-      by Lucas
-
+    - if @event.owner
+      .creator
+        %p
+          Created by
+          = @event.owner.name
   %hr
 
   .row-fluid
@@ -37,5 +39,5 @@
         .well
           %h1 Footer stuff
 
-        %i.fa.fa-edit
-        = link_to t('.edit'), edit_event_path(@event)
+          %i.fa.fa-edit
+          = link_to t('.edit'), edit_event_path(@event)
