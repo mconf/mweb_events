@@ -7,7 +7,7 @@ class CreateEventplugEvents < ActiveRecord::Migration
       t.string :location
       t.string :address
       t.text :description
-      t.references :owner, :polymorphic => {:default => 'User'}
+      t.references :owner, :polymorphic => true
 
       t.timestamps
     end
