@@ -1,4 +1,5 @@
 Eventplug::Engine.routes.draw do
-  resources :events
-  resources :participants
+  resources :events do
+    resources :participants
+  end
 end
