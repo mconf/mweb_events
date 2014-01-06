@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20140103170903) do
 
-  create_table "eventplug_events", :force => true do |t|
+  create_table "mweb_events_events", :force => true do |t|
     t.string   "name"
     t.date     "start_on"
     t.date     "end_on"
@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(:version => 20140103170903) do
     t.float    "longitude"
   end
 
-  create_table "eventplug_participants", :force => true do |t|
+  create_table "mweb_events_participants", :force => true do |t|
     t.integer  "owner_id"
-    t.string   "owner_type", :default => "User"
+    t.string   "owner_type"
     t.integer  "event_id"
     t.string   "email"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

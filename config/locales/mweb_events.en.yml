@@ -1,0 +1,15 @@
+--- 
+en:
+  mweb_events:
+    events:
+      no_description: No description available
+      show:
+        date: When?
+        address: Where?
+        register: Register
+      social_media:
+        twitter: Share on Twitter
+        twitter_link: Check out this cool event at Mconf! %{url}
+        facebook: Share on Facebook
+        facebook_link: Check out this cool event at Mconf! %{url}
+        google+: Share on Google+
