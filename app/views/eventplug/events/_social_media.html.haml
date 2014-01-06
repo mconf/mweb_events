@@ -2,9 +2,9 @@
   %ul.social-buttons
 
     %li.badge.badge-info
-      %a{:href => '#'}
+      %a{:href => facebook_button_url, :target => '_blank'}
         %i.fa.fa-facebook-square
-        Facebook
+        = t('.facebook')
 
     %li.badge.badge-info
       %a{:href => '#'}
@@ -12,9 +12,9 @@
         Foursquare
 
     %li.badge.badge-info
-      %a{:href => '#'}
+      %a{:href => googleplus_button_url}
         %i.fa.fa-google-plus-square
-        Google+
+        = t('.google+')
 
     %li.badge.badge-info
       %a{:href => '#'}
@@ -27,6 +27,6 @@
         Pinterest
 
     %li.badge.badge-info
-      %a{:href => '#'}
+      %a{:href => twitter_button_url, :target => '_blank'}
         %i.fa.fa-twitter-square
-        Twitter
+        = t('.twitter')

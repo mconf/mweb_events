@@ -6,3 +6,9 @@ en:
       show:
         date: When?
         address: Where?
+      social_media:
+        twitter: Share on Twitter
+        twitter_link: Check out this cool event at Mconf! %{url}
+        facebook: Share on Facebook
+        facebook_link: Check out this cool event at Mconf! %{url}
+        google+: Share on Google+
