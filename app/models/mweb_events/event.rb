@@ -5,7 +5,7 @@ module MwebEvents
     geocoded_by :address
     after_validation :geocode
 
-    belongs_to :owner
+    belongs_to :owner, :polymorphic => true
     has_many :participants
 
     validates :name, :presence => true
