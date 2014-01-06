@@ -53,8 +53,11 @@ GEM
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     arel (3.0.3)
+    atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     bootstrap-datetimepicker-rails (0.0.11)
     builder (3.0.4)
+    cancan (1.6.10)
     chunky_png (1.2.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -70,6 +73,12 @@ GEM
       sass (~> 3.1)
     compass-rails (1.1.2)
       compass (>= 0.12.2)
+    devise (3.2.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     epic-editor-rails (0.2.0)
       railties (>= 3.2, < 5.0)
@@ -113,6 +122,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     multi_json (1.8.2)
+    orm_adapter (0.5.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -170,6 +180,8 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
+    thread_safe (0.1.3)
+      atomic
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
@@ -180,11 +192,15 @@ GEM
       rails (>= 3.1)
       railties (>= 3.1)
     tzinfo (0.3.38)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan
+  devise
   eventplug!
   factory_girl_rails
   jquery-rails
