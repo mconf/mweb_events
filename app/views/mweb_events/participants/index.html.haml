@@ -14,10 +14,10 @@
       %td= participant.owner
       %td= participant.email
       %td= participant.event
-      %td= link_to 'Show', participant
-      %td= link_to 'Edit', edit_event_participant_path(@event, participant)
-      %td= link_to 'Destroy', participant, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+      %td show
+      %td edit
+      %td destroy
+      /%td= link_to 'Show', participant
+      /%td= link_to 'Edit', edit_event_participant_path(@event, participant)
+      /%td= link_to 'Destroy', participant, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
-
-= link_to 'New Participant', new_event_participant_path(@event)

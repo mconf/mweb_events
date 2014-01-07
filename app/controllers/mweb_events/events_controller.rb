@@ -14,6 +14,7 @@ module MwebEvents
 
     def show
       @event = Event.find(params[:id])
+      @participant = Participant.new
 
       respond_to do |format|
         format.html # show.html.erb

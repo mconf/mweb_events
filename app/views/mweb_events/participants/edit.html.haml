@@ -1,7 +1,9 @@
-%h1 Editing participant
+.container-fluid
 
-= render 'form'
+  %h1 Editing participant
 
-= link_to 'Show', @participant
-\|
-= link_to 'Back', event_participants_path(@event)
+  = render 'form'
+
+  = link_to 'Show', @participant
+  \|
+  = link_to 'Back', event_participants_path(@event)

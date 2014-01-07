@@ -6,7 +6,8 @@ en:
       show:
         date: When?
         address: Where?
-        register: Register
+      registration:
+        button: Register
       social_media:
         twitter: Share on Twitter
         twitter_link: Check out this cool event at Mconf! %{url}

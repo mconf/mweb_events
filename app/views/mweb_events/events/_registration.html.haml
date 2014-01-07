@@ -1,19 +1,7 @@
 %h2 Registration
 
-%section.event-registration
-  %table
-    %colgroup
-      %col#col_tkt_name
-      %col#col_tkt_date
-      %col#col_tkt_qty
-    %thead
-      %tr
-        %th Type
-        %th Available until
-        %th Remaining
-    %tbody
-      %tr
-        %td{colspan: "6"} Not available
+- unless current_user && current_user.admin?
 
-  .btn.large.main
-    = t('.register')
+  %section.event-registration
+    = form_for [@event, @participant] do |f|
+      = f.submit t('.button'), :class => 'btn large main'
