@@ -2,6 +2,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  mount Eventplug::Engine => "/eventplug"
-  root :to => 'eventplug/events#index'
+  mount MwebEvents::Engine => "/mweb_events"
+  root :to => 'mweb_events/events#index'
 end

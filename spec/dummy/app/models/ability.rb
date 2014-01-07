@@ -5,8 +5,8 @@ class Ability
 
     user ||= User.new
 
-    can :index, Eventplug::Event
-    can :manage, Eventplug::Event, :owner_id => user.id
+    can :index, MwebEvents::Event
+    can :manage, MwebEvents::Event, :owner_id => user.id
 
   end
 end
