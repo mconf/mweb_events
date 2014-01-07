@@ -8,7 +8,7 @@ module MwebEvents
     # GET /participants
     # GET /participants.json
     def index
-      @participants = Participant.all
+      @participants = Participant.where(:event_id => @event.id)
 
       respond_to do |format|
         format.html # index.html.erb
@@ -31,7 +31,6 @@ module MwebEvents
     # GET /participants/new.json
     def new
       email = current_user && current_user.email
-      @event = Event.find(params[:event_id])
       @participant = Participant.new :email => email, :event_id => @event.id
 
       respond_to do |format|
@@ -48,12 +47,13 @@ module MwebEvents
     # POST /participants
     # POST /participants.json
     def create
-      @event = Event.find(params[:event_id])
       @participant = Participant.new(params[:participant])
+      @participant.owner = @event
+      @participant.event = @event
 
       respond_to do |format|
         if @participant.save
-          format.html { redirect_to @event, notice: 'Participant was successfully created.' }
+          format.html { redirect_to @event, notice: t('mweb_events.participants.registered') }
           format.json { render json: @participant, status: :created, location: @participant }
         else
           format.html { render action: "new" }
@@ -88,9 +88,6 @@ module MwebEvents
         format.html { redirect_to participants_url }
         format.json { head :no_content }
       end
-    end
-
-    def admin
     end
 
     private
