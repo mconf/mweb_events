@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/zethussuen/epic-editor-rails.git
+  revision: 66e0cac7d901d36c430adbc6c9429b9c4a5e2503
+  specs:
+    epic-editor-rails (0.2.0)
+      railties (>= 3.2, < 5.0)
+
 PATH
   remote: .
   specs:
@@ -81,8 +88,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    epic-editor-rails (0.2.0)
-      railties (>= 3.2, < 5.0)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -204,6 +209,7 @@ PLATFORMS
 DEPENDENCIES
   cancan
   devise
+  epic-editor-rails!
   factory_girl_rails
   jquery-rails
   mweb_events!

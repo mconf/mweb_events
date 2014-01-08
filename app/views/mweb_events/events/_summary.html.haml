@@ -9,12 +9,13 @@
       = t('.start_on')
       = l @event.start_on_with_time_zone
 
-  %p
-    %i.fa.fa-calendar-o
-    %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
-    %time{ :datetime => @event.end_on_with_time_zone }
-      = t('.end_on')
-      = l @event.end_on_with_time_zone
+  -if @event.end_on
+    %p
+      %i.fa.fa-calendar-o
+      %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
+      %time{ :datetime => @event.end_on_with_time_zone }
+        = t('.end_on')
+        = l @event.end_on_with_time_zone
 
   %p
     %i.fa.fa-clock-o

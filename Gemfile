@@ -7,6 +7,7 @@ gemspec
 
 # jquery-rails is used by the dummy application
 gem "jquery-rails"
+gem 'epic-editor-rails', :git => 'https://github.com/zethussuen/epic-editor-rails.git'
 
 gem 'devise'
 gem 'cancan'

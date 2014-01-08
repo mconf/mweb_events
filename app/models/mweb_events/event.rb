@@ -36,7 +36,7 @@ module MwebEvents
     end
 
     def end_on_with_time_zone
-      end_on.in_time_zone(time_zone) if start_on && time_zone
+      end_on.in_time_zone(time_zone) if end_on && time_zone
     end
 
     def to_ics

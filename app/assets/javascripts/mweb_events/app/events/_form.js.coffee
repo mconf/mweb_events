@@ -14,14 +14,17 @@ $ ->
 
     opts =
       button: false
-      file:
-        name: 'epiceditor',
-        defaultContent: $('#event_description').text(),
-        autoSave: 1000
       autogrow:
-        scroll: true
+         minHeight: 150
+         maxHeight: 300
 
     editor = new EpicEditor(opts).load()
+    editor.importFile('epiceditor', $('#event_description').text())
 
-    editor.on 'save', ->
-      $('#event_description').val(editor.exportFile())
+    $("#event_description").hide()
+
+    editor.on 'update', ->
+      $('#event_description').text(editor.exportFile())
+
+    window.onresize = ->
+      editor.reflow()
