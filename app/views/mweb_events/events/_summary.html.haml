@@ -4,15 +4,22 @@
 
   %p
     %i.fa.fa-calendar-o
-    %meta{:itemprop => "startDate", :content => @event.start_on}
-    %time{ :datetime => @event.start_on }
-      = l @event.start_on
+    %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
+    %time{ :datetime => @event.start_on_with_time_zone }
+      = t('.start_on')
+      = l @event.start_on_with_time_zone
+
+  %p
+    %i.fa.fa-calendar-o
+    %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
+    %time{ :datetime => @event.end_on_with_time_zone }
+      = t('.end_on')
+      = l @event.end_on_with_time_zone
 
   %p
     %i.fa.fa-clock-o
-    %meta{:itemprop => "startTime", :content => @event.start_on}
-    %time{ :datetime => @event.start_on }
-      = t('.startTime')
+    = t('.time_zone')
+    = @event.time_zone
 
   .event-map
     - latlng = [@event.latitude, @event.longitude]
@@ -24,7 +31,7 @@
 
   %ul.nav.nav-pills.nav-stacked
     %li
-      %a.calendar.summary-button{:href => "#"}
+      %a.calendar.summary-button{:href => event_path(@event, :format => 'ics')}
         %i.fa.fa-calendar
         = t('.calendar')
 

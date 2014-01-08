@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml-rails'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-rails'
+  s.add_dependency 'select2-rails'
   s.add_dependency 'epic-editor-rails'
   s.add_dependency 'leaflet-rails'
   s.add_dependency 'geocoder'
@@ -35,6 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-rails'
   s.add_dependency 'compass-rails', '~> 1.0'
   s.add_dependency 'icalendar'
+
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140103170903) do
+ActiveRecord::Schema.define(:version => 20140108172141) do
 
   create_table "mweb_events_events", :force => true do |t|
     t.string   "name"
-    t.date     "start_on"
-    t.date     "end_on"
+    t.datetime "start_on"
+    t.datetime "end_on"
     t.string   "location"
     t.string   "address"
     t.text     "description"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20140103170903) do
     t.datetime "updated_at",  :null => false
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "time_zone"
   end
 
   create_table "mweb_events_participants", :force => true do |t|

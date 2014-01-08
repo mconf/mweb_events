@@ -20,6 +20,13 @@
       %span.add-on
         %i{:'data-time-icon'=>"fa fa-clock-o", :'data-date-icon'=>"fa fa-calendar"}
 
+    %br
+
+    = f.label :time_zone
+    = f.time_zone_select :time_zone
+
+    %br
+
     = f.input :address
     = f.hidden_field :description
 
