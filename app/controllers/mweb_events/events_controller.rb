@@ -1,5 +1,6 @@
 module MwebEvents
   class EventsController < ApplicationController
+    layout "mweb_events/application"
 
     def index
       @events = Event.all

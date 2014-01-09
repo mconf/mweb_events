@@ -1,5 +1,6 @@
 module MwebEvents
   class ParticipantsController < ApplicationController
+    layout "mweb_events/application"
 
     before_filter :event!
 
