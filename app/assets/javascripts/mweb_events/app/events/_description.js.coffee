@@ -1,7 +1,5 @@
 $ ->
-
-  if isOnPage 'mweb_events-events', 'show'
-
+  if MwebEvents.isOnPage 'mweb_events-events', 'show'
     $('.event-description').expander
       slicePoint: 840,
       preserveWords: true,

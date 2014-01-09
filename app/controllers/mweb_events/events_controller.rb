@@ -1,5 +1,3 @@
-require_dependency "mweb_events/application_controller"
-
 module MwebEvents
   class EventsController < ApplicationController
 

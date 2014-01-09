@@ -11,5 +11,5 @@
  *= require leaflet
  *= require select2
  *= require_self
- *= require_tree .
+ *= require_tree ./mweb_events
  */

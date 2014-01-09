@@ -18,4 +18,4 @@
 //= require locales/bootstrap-datetimepicker.pt-BR
 //= require jquery.expander.min
 //= require select2
-//= require_tree .
+//= require_tree ./mweb_events

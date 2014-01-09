@@ -2,15 +2,15 @@
 %html
   %head
     %title MwebEvents
-    = stylesheet_link_tag    "mweb_events/application", :media => "all"
+    = stylesheet_link_tag    "application", :media => "all"
     = stylesheet_link_tag    "bootstrap_and_overrides", :media => "all"
 
-    = javascript_include_tag "mweb_events/application"
+    = javascript_include_tag "application"
     = javascript_include_tag "twitter/bootstrap"
 
     = csrf_meta_tags
 
   %body{:class => "#{controller_name_for_view} #{params[:action]}"}
 
-    = render partial: "mweb_events/shared/flash_messages", flash: flash
+    = render partial: "shared/flash_messages", flash: flash
     = yield

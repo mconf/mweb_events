@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require mweb_events
 //= require_tree .

@@ -1,6 +1,5 @@
 $ ->
-
-  if isOnPage('mweb_events-events', 'new') or isOnPage('mweb_events-events', 'edit')
+  if MwebEvents.isOnPage('mweb_events-events', 'new') or MwebEvents.isOnPage('mweb_events-events', 'edit')
 
     $('#start_on, #end_on').datetimepicker
       language: 'pt-BR'
@@ -10,13 +9,11 @@ $ ->
       $('.icon-chevron-down').attr('class', 'fa fa-chevron-down')
       $('.icon-chevron-up').attr('class', 'fa fa-chevron-up')
 
-    $("#event_time_zone").select2()
-
     opts =
       button: false
       autogrow:
-         minHeight: 150
-         maxHeight: 300
+        minHeight: 150
+        maxHeight: 300
 
     editor = new EpicEditor(opts).load()
     editor.importFile('epiceditor', $('#event_description').text())
