@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  # TODO: temporary, so that mweb_events/events/show won't break
-  attr_accessor :name
+  # TODO: temporary accessors, so that the gem won't break when accessing them
+  attr_accessor :name, :time_zone
+  def admin?
+    true
+  end
 end
