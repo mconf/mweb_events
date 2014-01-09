@@ -53,5 +53,47 @@ module MwebEvents
       event.add_comment("")
       event
     end
+
+    # Events that are either in the future or are running now.
+    scope :upcoming, lambda {
+      where("end_on > ?", Time.now).order("start_on")
+    }
+
+    # Returns whether the event is happening now or not.
+    def is_happening_now?
+      if start_on.past? && end_on.future?
+        true
+      else
+        false
+      end
+    end
+
+    # Returns whether the event will happen in the future or not.
+    def future?
+      start_date.future?
+    end
+
+    # Returns a string with the starting hour of an event in the correct format
+    def get_formatted_hour
+      start_on.strftime("%H:%M")
+    end
+
+    # Returns a string with the starting date of an event in the correct format
+    def get_formatted_date(date=nil)
+      if date.nil?
+        I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone})")
+      else
+        I18n::localize(date, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone(date)})")
+      end
+    end
+
+    def get_formatted_timezone(date=nil)
+      if date.nil?
+        "GMT#{start_on.formatted_offset}"
+      else
+        "GMT#{date.formatted_offset}"
+      end
+    end
+
   end
 end
