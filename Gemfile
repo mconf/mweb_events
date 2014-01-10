@@ -10,7 +10,6 @@ gem "jquery-rails"
 gem 'epic-editor-rails', :git => 'https://github.com/zethussuen/epic-editor-rails.git'
 
 gem 'devise'
-gem 'cancan'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or

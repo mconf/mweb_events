@@ -15,6 +15,7 @@ require 'bootstrap-datetimepicker-rails'
 require 'font-awesome-rails'
 require 'compass-rails'
 require 'icalendar'
+require 'cancan'
 
 module MwebEvents
   class Engine < ::Rails::Engine

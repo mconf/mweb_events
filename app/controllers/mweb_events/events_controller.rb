@@ -1,10 +1,9 @@
 module MwebEvents
   class EventsController < ApplicationController
-    layout "mweb_events/application"
+    # layout "mweb_events/application"
+    load_and_authorize_resource :class => MwebEvents::Event
 
     def index
-      @events = Event.all
-
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @events }
@@ -30,8 +29,6 @@ module MwebEvents
     end
 
     def new
-      @event = Event.new
-
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @event }
@@ -39,11 +36,9 @@ module MwebEvents
     end
 
     def edit
-      @event = Event.find(params[:id])
     end
 
     def create
-      @event = Event.new(params[:event])
       @event.owner = current_user
 
       respond_to do |format|
@@ -58,8 +53,6 @@ module MwebEvents
     end
 
     def update
-      @event = Event.find(params[:id])
-
       respond_to do |format|
         if @event.update_attributes(params[:event])
           format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -72,7 +65,6 @@ module MwebEvents
     end
 
     def destroy
-      @event = Event.find(params[:id])
       @event.destroy
 
       respond_to do |format|
