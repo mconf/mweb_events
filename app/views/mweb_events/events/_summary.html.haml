@@ -22,9 +22,8 @@
     = t('.time_zone')
     = @event.time_zone
 
-  .event-map
-    - latlng = [@event.latitude, @event.longitude]
-    = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
+  .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
+    #map
 
   %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
     %i.fa.fa-map-marker
