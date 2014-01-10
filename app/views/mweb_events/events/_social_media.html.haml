@@ -4,5 +4,5 @@
     - @event.social_networks.each do |network|
       %li.badge.badge-info
         %a{:href => button_url(network), :target => '_blank'}
-          %i{:class => "fa fa-#{network.downcase}-square"}
-          = t(".#{network.downcase}")
+          %i{:class => "icon icon-#{network.downcase.gsub(' ','-')}-sign"}
+          = t(".#{network.downcase.gsub(' ','_')}")

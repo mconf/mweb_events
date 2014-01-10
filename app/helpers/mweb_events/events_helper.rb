@@ -3,7 +3,7 @@ module MwebEvents
 
     def button_url type
       case type
-        when 'Google+' then googleplus_button_url
+        when 'Google Plus' then googleplus_button_url
         when 'Twitter' then twitter_button_url
         when 'Facebook' then facebook_button_url
       end

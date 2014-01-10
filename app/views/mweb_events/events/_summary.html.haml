@@ -3,7 +3,7 @@
     = @event.name
 
   %p
-    %i.fa.fa-calendar-o
+    %i.icon.icon-calendar-empty
     %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
     %time{ :datetime => @event.start_on_with_time_zone }
       = t('.start_on')
@@ -11,14 +11,14 @@
 
   -if @event.end_on
     %p
-      %i.fa.fa-calendar-o
+      %i.icon.icon-calendar-empty
       %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
       %time{ :datetime => @event.end_on_with_time_zone }
         = t('.end_on')
         = l @event.end_on_with_time_zone
 
   %p
-    %i.fa.fa-clock-o
+    %i.icon.icon-time
     = t('.time_zone')
     = @event.time_zone
 
@@ -26,21 +26,21 @@
     #map
 
   %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
-    %i.fa.fa-map-marker
+    %i.icon.icon-map-marker
     = @event.address
 
   %ul.nav.nav-pills.nav-stacked
     %li
       %a.calendar.summary-button{:href => event_path(@event, :format => 'ics')}
-        %i.fa.fa-calendar
+        %i.icon.icon-calendar
         = t('.calendar')
 
     %li
       %a.contact.summary-button{:href => "#"}
-        %i.fa.fa-envelope
+        %i.icon.icon-envelope
         = t('.contact')
 
     %li
       %a.rss.summary-button{:href => "#"}
-        %i.fa.fa-rss
+        %i.icon.icon-rss
         = t('.rss')

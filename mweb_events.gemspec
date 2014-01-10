@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'less-rails'
   s.add_dependency 'twitter-bootstrap-rails'
   s.add_dependency 'bootstrap-datetimepicker-rails'
-  s.add_dependency 'font-awesome-rails'
+  s.add_dependency 'font-awesome-rails', '~> 3.2'
   s.add_dependency 'compass-rails', '~> 1.0'
   s.add_dependency 'icalendar'
   s.add_dependency 'cancan'

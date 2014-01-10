@@ -6,8 +6,8 @@ $ ->
 
     # Kind of a hack to show the arrows
     $('#start_on i, #end_on i').on 'click', (e) ->
-      $('.icon-chevron-down').attr('class', 'fa fa-chevron-down')
-      $('.icon-chevron-up').attr('class', 'fa fa-chevron-up')
+      $('.icon-chevron-down').attr('class', 'icon icon-chevron-down')
+      $('.icon-chevron-up').attr('class', 'icon icon-chevron-up')
 
     $("#event_time_zone").select2()
 
