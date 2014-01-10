@@ -11,6 +11,16 @@ module MwebEvents
     validates :name, :presence => true
     validates :start_on, :presence => true
 
+    # Events that are either in the future or are running now.
+    scope :upcoming, lambda {
+      where("end_on > ?", Time.now).order("start_on")
+    }
+
+    # Events that happen between `from` and `to`
+    scope :within, lambda { |from, to|
+      where("(start_on >= ? AND start_on <= ?) OR (end_on >= ? AND end_on <= ?)", from, to, from, to)
+    }
+
     def description_html
       if not description.blank?
         require 'redcarpet'
@@ -53,11 +63,6 @@ module MwebEvents
       event.add_comment("")
       event
     end
-
-    # Events that are either in the future or are running now.
-    scope :upcoming, lambda {
-      where("end_on > ?", Time.now).order("start_on")
-    }
 
     # Returns whether the event is happening now or not.
     def is_happening_now?
