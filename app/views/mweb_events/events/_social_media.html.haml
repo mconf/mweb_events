@@ -1,32 +1,8 @@
 %section.event-share
   %ul.social-buttons
 
-    %li.badge.badge-info
-      %a{:href => facebook_button_url, :target => '_blank'}
-        %i.fa.fa-facebook-square
-        = t('.facebook')
-
-    %li.badge.badge-info
-      %a{:href => '#'}
-        %i.fa.fa-foursquare
-        Foursquare
-
-    %li.badge.badge-info
-      %a{:href => googleplus_button_url}
-        %i.fa.fa-google-plus-square
-        = t('.google+')
-
-    %li.badge.badge-info
-      %a{:href => '#'}
-        %i.fa.fa-linkedin-square
-        Linkedin
-
-    %li.badge.badge-info
-      %a{:href => '#'}
-        %i.fa.fa-pinterest-square
-        Pinterest
-
-    %li.badge.badge-info
-      %a{:href => twitter_button_url, :target => '_blank'}
-        %i.fa.fa-twitter-square
-        = t('.twitter')
+    - @event.social_networks.each do |network|
+      %li.badge.badge-info
+        %a{:href => button_url(network), :target => '_blank'}
+          %i{:class => "fa fa-#{network.downcase}-square"}
+          = t(".#{network.downcase}")

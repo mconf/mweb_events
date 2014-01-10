@@ -1,7 +1,5 @@
 %h2 Registration
 
-- unless current_user && current_user.admin?
+%section.event-registration
 
-  %section.event-registration
-    = form_for [@event, @participant] do |f|
-      = f.submit t('.button'), :class => 'btn large main'
+  = link_to t('.button'), new_event_participant_path(@event), :class => 'btn large main'

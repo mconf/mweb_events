@@ -5,4 +5,5 @@ Leaflet.attribution = " \u00A9 OpenStreetMap contributors <a href=\"http://creat
 Leaflet.max_zoom = 15
 
 module MwebEvents
+  SOCIAL_NETWORKS = ['Facebook', 'Google+', 'Twitter', 'Linkedin', 'Pinterest', 'Foursquare']
 end

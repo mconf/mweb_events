@@ -1,6 +1,14 @@
 module MwebEvents
   module EventsHelper
 
+    def button_url type
+      case type
+        when 'Google+' then googleplus_button_url
+        when 'Twitter' then twitter_button_url
+        when 'Facebook' then facebook_button_url
+      end
+    end
+
     def googleplus_button_url
       "https://plus.google.com/share?url=#{CGI.escape(request.original_url)}"
     end

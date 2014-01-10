@@ -5,9 +5,9 @@ module MwebEvents
     belongs_to :owner, :polymorphic => true
     belongs_to :event
 
-    validates :email, :presence => true
+    validates :email, :presence => true, :uniqueness => true
     validates :event_id, :presence => true
-    validates :owner, :presence => true
+    validates :owner, :presence => true, :uniqueness => true
 
   end
 end
