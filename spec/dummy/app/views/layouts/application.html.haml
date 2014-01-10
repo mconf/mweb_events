@@ -15,12 +15,12 @@
     .container
       %ul.nav.nav-pills.pull-right
         - if current_user
-          %li
+          %p
             Hello
             = current_user.email
-
           %li.active
-            = link_to t('.logout'), main_app.user_session_path
+            = link_to t('.logout'), main_app.destroy_user_session_path, :method => 'delete'
+
         - else
           %li.active
             = link_to t('.login'), main_app.new_user_session_path

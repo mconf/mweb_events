@@ -9,6 +9,8 @@ $ ->
       $('.icon-chevron-down').attr('class', 'fa fa-chevron-down')
       $('.icon-chevron-up').attr('class', 'fa fa-chevron-up')
 
+    $("#event_time_zone").select2()
+
     opts =
       button: false
       autogrow:
