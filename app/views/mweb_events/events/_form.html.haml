@@ -31,6 +31,12 @@
 
     = f.input :description
 
+    %br
+
+    = f.label :social_networks
+    = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
+
+
   #epiceditor
 
   .form-actions

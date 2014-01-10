@@ -1,6 +1,6 @@
 module MwebEvents
   class Event < ActiveRecord::Base
-    attr_accessible :address, :start_on, :end_on, :description, :location, :name, :time_zone
+    attr_accessible :address, :start_on, :end_on, :description, :location, :name, :time_zone, :social_networks
 
     geocoded_by :address
     after_validation :geocode
@@ -21,6 +21,14 @@ module MwebEvents
       end
 
       html
+    end
+
+    def social_networks=(networks)
+      write_attribute(:social_networks , networks.select{|n| !n.empty?}.join(','))
+    end
+
+    def social_networks
+      read_attribute(:social_networks).split(',')
     end
 
     def summary
