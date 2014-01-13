@@ -38,7 +38,8 @@ module MwebEvents
     end
 
     def social_networks
-      read_attribute(:social_networks).split(',')
+      networks = read_attribute(:social_networks)
+      newtworks.split(',') if networks
     end
 
     def summary
