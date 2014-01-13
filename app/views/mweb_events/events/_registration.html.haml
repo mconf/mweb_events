@@ -2,4 +2,8 @@
 
 %section.event-registration
 
-  = link_to t('.button'), new_event_participant_path(@event), :class => 'btn large main'
+  - if can? :register, @event
+    = link_to t('.button'), new_event_participant_path(@event), :class => 'btn large main'
+
+  - if can? :organize, @event
+    = link_to t('.manage'), event_participants_path(@event)

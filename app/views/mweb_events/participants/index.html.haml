@@ -11,13 +11,12 @@
 
   - @participants.each do |participant|
     %tr
-      %td= participant.owner
+      %td= participant.owner.try(:email)
       %td= participant.email
-      %td= participant.event
+      %td= participant.event.name
       %td show
       %td edit
-      %td destroy
+      %td= link_to 'Destroy', event_participant_path(@event, participant), :method => :delete, :data => { :confirm => 'Are you sure?' }
       /%td= link_to 'Show', participant
       /%td= link_to 'Edit', edit_event_participant_path(@event, participant)
-      /%td= link_to 'Destroy', participant, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br

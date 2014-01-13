@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :time_zone
   # attr_accessible :title, :body
 
   # TODO: temporary accessors, so that the gem won't break when accessing them
-  attr_accessor :name, :time_zone
+  attr_accessor :name
   def admin?
     true
   end

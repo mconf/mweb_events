@@ -47,8 +47,8 @@ module MwebEvents
     # POST /participants.json
     def create
       @participant = Participant.new(params[:participant])
-      @participant.owner = @event
       @participant.event = @event
+      @participant.owner = current_user
 
       respond_to do |format|
         if @participant.save

@@ -9,12 +9,21 @@ module MwebEvents
       can :read, Event
       can :create, Event
 
-      can :update, Event do |e|
+      alias_action :create, :read, :update, :destroy, :to => :organize
+
+      can :organize, Event do |e|
         e.owner == user
       end
 
+      # Test if user is authorized to register himself in the event
+      can :register, Event do |e|
+        e.owner != user && Participant.where(:owner_id => user.id, :event_id => e.id).empty?
+      end
+
       # Participants
-      cannot :read, Participant
+      can :read, Participant do |p|
+        p.event.owner == user || p.owner == user
+      end
 
       can :manage, Participant do |p|
         p.event.owner == user
