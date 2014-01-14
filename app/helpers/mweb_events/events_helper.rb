@@ -6,7 +6,15 @@ module MwebEvents
         when 'Google Plus' then googleplus_button_url
         when 'Twitter' then twitter_button_url
         when 'Facebook' then facebook_button_url
+        when 'Linkedin' then linkedin_button_url
       end
+    end
+
+    def linkedin_button_url
+      title = CGI.escape(@event.name)
+      summary = CGI.escape(@event.description)
+      url = CGI.escape(request.original_url)
+      "http://www.linkedin.com/shareArticle?mini=true&url=#{url}&summary=#{summary}&title=#{title}&source=Mconf Events"
     end
 
     def googleplus_button_url

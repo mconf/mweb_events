@@ -11,7 +11,7 @@ module MwebEvents
 
       alias_action :create, :read, :update, :destroy, :to => :organize
 
-      can :organize, Event do |e|
+      can [:edit, :create, :read, :update, :destroy], Event do |e|
         e.owner == user
       end
 
