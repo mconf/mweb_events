@@ -1,7 +1,7 @@
 module MwebEvents
   class EventsController < ApplicationController
-    # layout "mweb_events/application"
-    load_and_authorize_resource :class => MwebEvents::Event
+    layout "mweb_events/application"
+    load_and_authorize_resource :find_by => :permalink
 
     def index
       respond_to do |format|
@@ -11,7 +11,6 @@ module MwebEvents
     end
 
     def show
-      @event = Event.find(params[:id])
       @participant = Participant.new
 
       respond_to do |format|

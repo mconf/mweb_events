@@ -16,6 +16,7 @@ require 'font-awesome-rails'
 require 'compass-rails'
 require 'icalendar'
 require 'cancan'
+require 'friendly_id'
 
 module MwebEvents
   class Engine < ::Rails::Engine

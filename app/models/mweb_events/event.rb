@@ -1,5 +1,7 @@
 module MwebEvents
   class Event < ActiveRecord::Base
+    extend FriendlyId
+
     attr_accessible :address, :start_on, :end_on, :description, :location, :name, :time_zone, :social_networks
 
     geocoded_by :address
@@ -11,6 +13,8 @@ module MwebEvents
     validates :name, :presence => true
     validates :start_on, :presence => true
 
+    friendly_id :name, use: :slugged, :slug_column => :permalink
+
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {
       where("end_on > ?", Time.now).order("start_on")
@@ -20,6 +24,10 @@ module MwebEvents
     scope :within, lambda { |from, to|
       where("(start_on >= ? AND start_on <= ?) OR (end_on >= ? AND end_on <= ?)", from, to, from, to)
     }
+
+    def should_generate_new_friendly_id?
+      new_record?
+    end
 
     def description_html
       if not description.blank?
@@ -43,10 +51,6 @@ module MwebEvents
     end
 
     def summary
-      ''
-    end
-
-    def permalink
       ''
     end
 

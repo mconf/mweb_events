@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'compass-rails', '~> 1.0'
   s.add_dependency 'icalendar'
   s.add_dependency 'cancan'
+  s.add_dependency 'friendly_id'
 
 
   s.add_development_dependency 'sqlite3'

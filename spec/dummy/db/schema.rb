@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(:version => 20140115183355) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "slug"
+    t.string   "permalink"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "mweb_events_events", ["slug"], :name => "index_mweb_events_events_on_slug"
+  add_index "mweb_events_events", ["permalink"], :name => "index_mweb_events_events_on_permalink"
 
   create_table "mweb_events_participants", :force => true do |t|
     t.integer  "owner_id"
