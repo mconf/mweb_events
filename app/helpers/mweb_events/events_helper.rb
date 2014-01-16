@@ -1,6 +1,17 @@
 module MwebEvents
   module EventsHelper
 
+    def event_logo(event, options={})
+      options[:class] = "#{options[:class]} mweb_events-event-logo" # disabled tooltipped upwards
+      options[:title] = 'title'
+      options[:href] = mweb_events.event_path(event)
+
+      day = content_tag(:div, sanitize(event.start_on.strftime("%d")), { :class => 'mweb_events-event-logo-day' })
+      month = content_tag(:div, localize(event.start_on, :format => "%b"), { :class => 'mweb_events-event-logo-month' })
+      hour = content_tag(:div, event.get_formatted_hour, { :class => 'mweb_events-event-logo-hour' })
+      content_tag(:a, day + month + hour, options)
+    end
+
     def button_url type
       case type
         when 'Google Plus' then googleplus_button_url

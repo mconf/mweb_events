@@ -60,3 +60,39 @@ hr {
   }
 
 }
+
+
+/* For event logos */
+
+$font-big: 28px;
+$font-color: #333;
+
+.mweb_events-event-logo {
+  display: inline-block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  width: 100%;
+  color: $font-color;
+
+  .mweb_events-event-logo-day {
+    font-size: $font-big;
+    line-height: $font-big;
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  .mweb_events-event-logo-month {
+    font-size: $font-big * 0.8;
+    line-height: $font-big * 0.8;
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+
+  .mweb_events-event-logo-hour {
+    font-size: $font-big / 2;
+    line-height: $font-big / 2;
+    white-space: nowrap;
+  }
+}
