@@ -1,0 +1,28 @@
+---
+en:
+  mweb_events:
+    events:
+      no_description: Sem descrição
+      edit:
+        edit: Editar evento
+      show:
+        date: Quando?
+        address: Onde?
+        edit: Editar
+      registration:
+        button: Registre-se
+        manage: Administração
+      summary:
+        start_on: Começa em
+        end_on: Acaba em
+        time_zone: Fuso Horário
+        calendar: Adicionar ao Calendário
+        contact: Fale com o organizador
+        rss: RSS
+      social_media:
+        twitter: Compartilhar no Twitter
+        twitter_link: Olha só que evento legal no Mconf! %{url}
+        facebook: Compartilhar no Facebook
+        facebook_link: Olha só que evento legal no Mconf! %{url}
+        google_plus: Compartilhar no Google+
+        linkedin: Compartilhar no Linkedin

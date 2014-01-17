@@ -1,13 +1,24 @@
---- 
+---
 en:
   mweb_events:
     events:
       no_description: No description available
+      edit:
+        edit: Edit event
       show:
         date: When?
         address: Where?
+        edit: Edit
       registration:
         button: Register
+        manage: Manage
+      summary:
+        start_on: Starts on
+        end_on: Ends on
+        time_zone: Time Zone
+        calendar: Add to Calendar
+        contact: Contact the organizer
+        rss: RSS
       social_media:
         twitter: Share on Twitter
         twitter_link: Check out this cool event at Mconf! %{url}
