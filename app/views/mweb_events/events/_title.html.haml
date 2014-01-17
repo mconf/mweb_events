@@ -1,0 +1,10 @@
+.logo
+%h1.name{:itemprop => "name"}
+  = @event.name
+- if @event.owner
+  .creator
+    %p
+      Created by
+      = @event.owner.name
+
+%hr

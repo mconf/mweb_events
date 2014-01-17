@@ -1,15 +1,7 @@
 .event-container.container-fluid{:itemscope=>true, :itemtype=>"http://schema.org/Event"}
 
   .event-header.masthead
-    .logo
-    %h1.name{:itemprop => "name"}
-      = @event.name
-    - if @event.owner
-      .creator
-        %p
-          Created by
-          = @event.owner.name
-  %hr
+    = render 'title'
 
   .row-fluid
     .span8
