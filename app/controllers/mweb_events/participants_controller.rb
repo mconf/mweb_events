@@ -1,14 +1,12 @@
 module MwebEvents
   class ParticipantsController < ApplicationController
     layout "mweb_events/application"
-
-    before_filter :event!
+    load_and_authorize_resource :event, :class => MwebEvents::Event, :find_by => :permalink
+    load_and_authorize_resource :participant, :class => MwebEvents::Participant, :through => :event
 
     # GET /participants
     # GET /participants.json
     def index
-      @participants = Participant.where(:event_id => @event.id)
-
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @participants }
@@ -18,8 +16,6 @@ module MwebEvents
     # GET /participants/1
     # GET /participants/1.json
     def show
-      @participant = Participant.find(params[:id])
-
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @participant }
@@ -30,7 +26,7 @@ module MwebEvents
     # GET /participants/new.json
     def new
       email = current_user && current_user.email
-      @participant = Participant.new :email => email, :event_id => @event.id
+      @participant.email = email
 
       respond_to do |format|
         format.html # new.html.erb
@@ -40,7 +36,6 @@ module MwebEvents
 
     # GET /participants/1/edit
     def edit
-      @participant = Participant.find(params[:id])
     end
 
     # POST /participants
@@ -64,8 +59,6 @@ module MwebEvents
     # PUT /participants/1
     # PUT /participants/1.json
     def update
-      @participant = Participant.find(params[:id])
-
       respond_to do |format|
         if @participant.update_attributes(params[:participant])
           format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
@@ -80,19 +73,12 @@ module MwebEvents
     # DELETE /participants/1
     # DELETE /participants/1.json
     def destroy
-      @participant = Participant.find(params[:id])
       @participant.destroy
 
       respond_to do |format|
         format.html { redirect_to participants_url }
         format.json { head :no_content }
       end
-    end
-
-    private
-
-    def event!
-      @event ||= MwebEvents::Event.find(params[:event_id])
     end
 
   end
