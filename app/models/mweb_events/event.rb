@@ -13,7 +13,6 @@ module MwebEvents
 
     validates :name, :presence => true
     validates :start_on, :presence => true
-    validates :location, :presence => true
     validates :summary, :length => {:maximum => 140}
 
     friendly_id :name, use: :slugged, :slug_column => :permalink

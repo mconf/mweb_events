@@ -1,6 +1,7 @@
 $ ->
-  if MwebEvents.isOnPage('mweb_events-events', 'new') or MwebEvents.isOnPage('mweb_events-events', 'edit')
+  if MwebEvents.isOnPage('mweb_events-events', 'new') or MwebEvents.isOnPage('mweb_events-events', 'edit') or MwebEvents.isOnPage('mweb_events-events', 'create')
 
+    # Calendar
     $('#start_on, #end_on').datetimepicker
       language: 'pt-BR'
 
@@ -9,8 +10,23 @@ $ ->
       $('.icon-chevron-down').attr('class', 'icon icon-chevron-down')
       $('.icon-chevron-up').attr('class', 'icon icon-chevron-up')
 
+    # Time zone
     $("#event_time_zone").select2()
 
+    # Location
+    if $("#event_location")[0].value is ""
+        $(".event_address").hide()
+
+    show_time = 500
+    show_address = ->
+      if @value isnt ""
+        $(".event_address").show(show_time)
+      else
+        $(".event_address").hide(show_time)
+
+    $("#event_location").on 'input keyup', show_address
+
+    # Description
     opts =
       button: false
       autogrow:
