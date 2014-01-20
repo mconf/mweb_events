@@ -2,7 +2,8 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessible :address, :start_on, :end_on, :description, :location, :name, :time_zone, :social_networks
+    attr_accessible :address, :start_on, :end_on, :description, 
+      :location, :name, :time_zone, :social_networks, :summary
 
     geocoded_by :address
     after_validation :geocode
@@ -13,6 +14,7 @@ module MwebEvents
     validates :name, :presence => true
     validates :start_on, :presence => true
     validates :location, :presence => true
+    validates :summary, :length => {:maximum => 140}
 
     friendly_id :name, use: :slugged, :slug_column => :permalink
 
@@ -55,10 +57,6 @@ module MwebEvents
     def social_networks
       networks = read_attribute(:social_networks)
       networks ? networks.split(',') : []
-    end
-
-    def summary
-      ''
     end
 
     def start_on_with_time_zone

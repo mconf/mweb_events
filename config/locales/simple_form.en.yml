@@ -17,6 +17,7 @@ en:
         location: Where is the event going to happen? For example 'Mconf Headquarters'
         address: Where is the event location physically at. Entering a valid address will mark it on a map on the event page.
         social_networks: Which social network share buttons should be visible on the event page?
+        summary: Type a 140 or less characters summary of the event.
         description: Type in the event description. You can use Markdown to make the text pretty.
     error_notification:
       default_message: "Please review the problems below:"

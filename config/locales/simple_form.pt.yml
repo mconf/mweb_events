@@ -19,12 +19,14 @@ pt:
         time_zone: Fuso Horário
         social_networks: Redes Sociais
         description: Descrições
+        summary: Resumo
     hints:
       event:
         location: Onde irá acontecer o evento? Por exemplo 'Sede do MConf'
         address: Endereço físico de onde se localizará o evento. Um endereço válido será mostrado como um marcador e mapa na página do evento.
         social_networks: Quais botões de redes sociais devem ficar visíveis na página do evento?
         description: Digite a descrição do evento. Você pode usar Markdown para embelezar o texto.
+        summary: Digite um resumo do evento em 140 ou menos caracteres.
     error_notification:
       default_message: "Por favor corrija os erros abaixo:"
     # Labels and hints examples

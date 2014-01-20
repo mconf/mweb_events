@@ -43,6 +43,7 @@
     = f.hint :social_networks
     = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
 
+    = f.input :summary, :input_html => { :rows => 3 }
 
     = f.input :description
 
