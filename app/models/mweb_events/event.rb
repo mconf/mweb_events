@@ -26,6 +26,12 @@ module MwebEvents
       where("(start_on >= ? AND start_on <= ?) OR (end_on >= ? AND end_on <= ?)", from, to, from, to)
     }
 
+    # For form pretty display only
+    attr_accessor :owner_name
+    def owner_name
+      @owner_name || owner.try(:name) || owner.try(:email)
+    end
+
     def should_generate_new_friendly_id?
       new_record?
     end

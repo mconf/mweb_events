@@ -28,6 +28,8 @@ module MwebEvents
     end
 
     def new
+      @event.owner_name = current_user.try(:email)
+
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @event }

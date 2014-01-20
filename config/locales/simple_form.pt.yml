@@ -1,4 +1,4 @@
-en:
+pt:
   simple_form:
     "yes": 'Sim'
     "no": 'Não'
@@ -13,6 +13,12 @@ en:
         name: Nome
         location: Localização
         address: Endereço
+        owner_name: Este pertence a
+        start_on: Data de início
+        end_on: Data de Término
+        time_zone: Fuso Horário
+        social_networks: Redes Sociais
+        description: Descrições
     hints:
       event:
         location: Onde irá acontecer o evento? Por exemplo 'Sede do MConf'

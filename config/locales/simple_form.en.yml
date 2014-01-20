@@ -8,6 +8,9 @@ en:
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
+    labels:
+      event:
+        owner_name: This event belongs to
     hints:
       event:
         time_zone: Set this if the event will happen in a different time zone than the site is using.
