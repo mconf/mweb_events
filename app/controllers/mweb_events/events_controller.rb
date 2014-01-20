@@ -39,6 +39,7 @@ module MwebEvents
 
     def create
       @event = Event.new(params[:event])
+      @event.owner = current_user
 
       respond_to do |format|
         if @event.save
