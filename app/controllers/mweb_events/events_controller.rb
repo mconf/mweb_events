@@ -1,6 +1,6 @@
 module MwebEvents
   class EventsController < ApplicationController
-    # layout "mweb_events/application"
+    layout "mweb_events/application"
     load_and_authorize_resource :find_by => :permalink
 
     def index
