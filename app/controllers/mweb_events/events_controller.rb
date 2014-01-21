@@ -1,6 +1,6 @@
 module MwebEvents
   class EventsController < ApplicationController
-    layout "mweb_events/application"
+    # layout "mweb_events/application"
     load_and_authorize_resource :find_by => :permalink
 
     def index
@@ -28,7 +28,13 @@ module MwebEvents
     end
 
     def new
-      @event.owner_name = current_user.try(:email)
+
+      if params[:owner_id] && params[:owner_type]
+        @event.owner_id = params[:owner_id]
+        @event.owner_type = params[:owner_type]
+      else
+        @event.owner_name = current_user.try(:email)
+      end
 
       respond_to do |format|
         format.html # new.html.erb
