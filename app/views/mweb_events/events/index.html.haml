@@ -3,11 +3,12 @@
 %table
   %tr
     %th Name
-    %th Date
+    %th Start On
+    %th End On
+    %th Location
     %th Address
     %th Description
     %th Owner
-    %th
     %th
     %th
 
@@ -15,9 +16,11 @@
     %tr
       %td= event.name
       %td= event.start_on
+      %td= event.end_on
+      %td= event.location
       %td= event.address
       %td= event.description
-      %td= event.owner.try(:email)
+      %td= event.owner.try(:name) || event.owner.try(:email)
       %td= link_to 'Show', event
       %td= link_to 'Edit', edit_event_path(event)
       %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }

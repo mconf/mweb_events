@@ -2,6 +2,9 @@
   = f.error_notification
 
   .form-inputs
+
+    = f.input :owner_name, :disabled => true
+
     = f.input :name
 
     .input-append.date#start_on
@@ -23,23 +26,30 @@
     %br
 
     = f.label :time_zone
-    = f.time_zone_select :time_zone
+    = f.time_zone_select :time_zone, [Time.zone]
+    .time_zone_options{:'data-default' => Time.zone}
+    = f.hint :time_zone
 
     %br
+    %br
+
+    = f.input :location
 
     = f.input :address
-
-    = f.input :description
 
     %br
 
     = f.label :social_networks
-
     .form-inline
       = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
+    = f.hint :social_networks
 
 
-  #epiceditor
+    = f.input :summary, :input_html => { :rows => 3 }
+
+    = f.input :description
+
+    #epiceditor
 
   .form-actions
     = f.button :submit

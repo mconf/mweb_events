@@ -2,7 +2,8 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessible :address, :start_on, :end_on, :description, :location, :name, :time_zone, :social_networks
+    attr_accessible :address, :start_on, :end_on, :description, 
+      :location, :name, :time_zone, :social_networks, :summary
 
     geocoded_by :address
     after_validation :geocode
@@ -12,6 +13,7 @@ module MwebEvents
 
     validates :name, :presence => true
     validates :start_on, :presence => true
+    validates :summary, :length => {:maximum => 140}
 
     friendly_id :name, use: :slugged, :slug_column => :permalink
 
@@ -24,6 +26,12 @@ module MwebEvents
     scope :within, lambda { |from, to|
       where("(start_on >= ? AND start_on <= ?) OR (end_on >= ? AND end_on <= ?)", from, to, from, to)
     }
+
+    # For form pretty display only
+    attr_accessor :owner_name
+    def owner_name
+      @owner_name || owner.try(:name) || owner.try(:email)
+    end
 
     def should_generate_new_friendly_id?
       new_record?
@@ -48,10 +56,6 @@ module MwebEvents
     def social_networks
       networks = read_attribute(:social_networks)
       networks ? networks.split(',') : []
-    end
-
-    def summary
-      ''
     end
 
     def start_on_with_time_zone

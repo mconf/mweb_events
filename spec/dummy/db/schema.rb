@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20140115183355) do
 
   create_table "mweb_events_events", :force => true do |t|
     t.string   "name"
+    t.text     "summary"
     t.text     "description"
     t.string   "social_networks"
     t.integer  "owner_id"
