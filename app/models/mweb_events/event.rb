@@ -2,8 +2,9 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessible :address, :start_on, :end_on, :description, 
-      :location, :name, :time_zone, :social_networks, :summary
+    attr_accessible :address, :start_on, :end_on, :description,
+      :location, :name, :time_zone, :social_networks, :summary,
+      :owner_id, :owner_type
 
     geocoded_by :address
     after_validation :geocode

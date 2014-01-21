@@ -7,6 +7,9 @@
 
     = f.input :name
 
+    = f.hidden_field :owner_id
+    = f.hidden_field :owner_type
+
     .input-append.date#start_on
       = f.label :start_on
       = f.text_field :start_on, :'data-format' => 'dd/MM/yyyy hh:mm:ss'
