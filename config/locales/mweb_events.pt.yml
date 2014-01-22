@@ -26,3 +26,6 @@ pt:
         facebook_link: Olha só que evento legal no Mconf! %{url}
         google_plus: Compartilhar no Google+
         linkedin: Compartilhar no Linkedin
+      organizers:
+        organizers: Organizadores
+        organized_by: Este evento está sendo organizado por

@@ -26,3 +26,5 @@ en:
         facebook_link: Check out this cool event at Mconf! %{url}
         google_plus: Share on Google+
         linkedin: Share on Linkedin
+      organizers:
+        organized_by: This event is being organized by
