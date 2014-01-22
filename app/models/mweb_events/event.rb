@@ -20,6 +20,7 @@ module MwebEvents
 
     # If the event has no ending date, use a day from start date
     before_save :check_end_on
+    before_save :check_summary
 
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {
@@ -122,7 +123,14 @@ module MwebEvents
     end
 
     def check_end_on
-      end_on = start_on + 1.day if end_on.nil?
+      write_attribute(:end_on, start_on + 1.day) if end_on.blank?
+    end
+
+    def check_summary
+      if summary.blank?
+        s = HTML::FullSanitizer.new.sanitize(description_html).truncate(136, :omission => '...')
+        write_attribute(:summary, s)
+      end
     end
 
   end
