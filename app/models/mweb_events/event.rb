@@ -18,6 +18,9 @@ module MwebEvents
 
     friendly_id :name, use: :slugged, :slug_column => :permalink
 
+    # If the event has no ending date, use a day from start date
+    before_save :check_end_on
+
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {
       where("end_on > ?", Time.now).order("start_on")
@@ -116,6 +119,10 @@ module MwebEvents
       else
         "GMT#{date.formatted_offset}"
       end
+    end
+
+    def check_end_on
+      end_on = start_on + 1.day if end_on.nil?
     end
 
   end
