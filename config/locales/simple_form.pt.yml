@@ -13,7 +13,7 @@ pt:
         name: Nome
         location: Localização
         address: Endereço
-        owner_name: Este pertence a
+        owner_name: Este evento pertence a
         start_on: Data de início
         end_on: Data de Término
         time_zone: Fuso Horário

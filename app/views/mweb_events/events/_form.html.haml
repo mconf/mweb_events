@@ -28,25 +28,30 @@
 
     %br
 
-    = f.label :time_zone
-    = f.time_zone_select :time_zone, [Time.zone]
-    .time_zone_options{:'data-default' => Time.zone}
-    = f.hint :time_zone
+    .input.string.event_time_zone.field_with_hint
+      %span.hint
+        = f.hint :time_zone
 
-    %br
-    %br
+      = f.label :time_zone
+      = f.time_zone_select :time_zone, [Time.zone]
+      #time_zone_options{:'data-default' => Time.zone}
+
 
     = f.input :location
 
     = f.input :address
 
+    .input.event_social_networks.field_with_hint
+
+      %span.hint
+        = f.hint :social_networks
+
+      = f.label :social_networks
+      .form-inline
+        = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
+
     %br
-
-    = f.label :social_networks
-    .form-inline
-      = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
-    = f.hint :social_networks
-
+    %br
 
     = f.input :summary, :input_html => { :rows => 3 }
 
