@@ -15,16 +15,15 @@ $ ->
 
     # Location
     if $("#event_location")[0].value is ""
-        $(".event_address").hide()
+        $("#event_address").attr('disabled', true)
 
-    show_time = 500
-    show_address = ->
+    enable_address = ->
       if @value isnt ""
-        $(".event_address").show(show_time)
+        $("#event_address").removeAttr("disabled")
       else
-        $(".event_address").hide(show_time)
+        $("#event_address").attr("disabled", true)
 
-    $("#event_location").on 'input keyup', show_address
+    $("#event_location").on 'input keyup', enable_address
 
     # Description
     opts =
