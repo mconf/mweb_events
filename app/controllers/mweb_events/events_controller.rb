@@ -1,6 +1,7 @@
 module MwebEvents
   class EventsController < ApplicationController
     layout "mweb_events/application"
+    before_filter :load_events_in_order, :only => [:index]
     load_and_authorize_resource :find_by => :permalink
 
     def index
@@ -83,5 +84,12 @@ module MwebEvents
         format.json { head :no_content }
       end
     end
+
+    private
+
+    def load_events_in_order
+      @events = Event.order "start_on ASC"
+    end
+
   end
 end
