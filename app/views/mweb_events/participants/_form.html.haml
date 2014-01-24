@@ -1,5 +1,5 @@
 %h2
-  Registering for
+  = t('.title')
   = @event.name
 
 = simple_form_for([@event, @participant]) do |f|
@@ -9,4 +9,4 @@
     = f.input :email
 
   .actions
-    = f.submit 'Save'
+    = f.submit t('.submit')

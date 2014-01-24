@@ -10,6 +10,7 @@ pt:
         address: Onde?
         edit: Editar
       registration:
+        title: Registro de participante
         button: Registre-se
         manage: Administração
       summary:
@@ -29,3 +30,7 @@ pt:
       organizers:
         organizers: Organizadores
         organized_by: Este evento está sendo organizado por
+    participants:
+      form:
+        title: Inscrevendo-se em
+        submit: Inscrever-se
