@@ -25,12 +25,16 @@ $ ->
 
     $("#event_location").on 'input keyup', enable_address
 
-    # Description
+    # Description editor box
     opts =
       button: false
       autogrow:
         minHeight: 150
         maxHeight: 300
+      button:
+        preview: true
+        fullscreen: false
+        bar: true
 
     editor = new EpicEditor(opts).load()
     editor.importFile('epiceditor', $('#event_description').text())
