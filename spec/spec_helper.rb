@@ -1,9 +1,12 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path("../dummy/config/environment.rb", __FILE__)
+
+require 'faker'
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'factory_girl_rails'
+require 'shoulda-matchers'
+require 'cancan/matchers'
 
 Rails.backtrace_cleaner.remove_silencers!
 
