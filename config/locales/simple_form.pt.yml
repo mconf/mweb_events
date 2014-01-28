@@ -9,17 +9,19 @@ pt:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     labels:
-      events:
+      event:
         name: Nome
         location: Localização
         address: Endereço
         owner_name: Este evento pertence a
-        start_on: Data de início
-        end_on: Data de Término
+        start_on: Data e Horário de início
+        end_on: Data e Horário de Término
         time_zone: Fuso Horário
         social_networks: Redes Sociais
-        description: Descrições
+        description: Descrição
         summary: Resumo
+      participants:
+        email: E-mail
     hints:
       event:
         location: Onde irá acontecer o evento? Por exemplo 'Sede do MConf'

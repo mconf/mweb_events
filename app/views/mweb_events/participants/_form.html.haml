@@ -1,12 +1,7 @@
-%h2
-  = t('.title')
-  = @event.name
-
 = simple_form_for([@event, @participant]) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :email
 
-  .actions
-    = f.submit t('.submit')
+  = f.button :wrapped, :cancel => event_path(@event), :value => t(".submit")

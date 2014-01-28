@@ -1,14 +1,37 @@
 ---
 pt:
+  activerecord:
+    attributes:
+      mweb_events/event:
+        name: Nome
+        location: Localização
+        address: Endereço
+        start_on: Data e Horário de início
+        end_on: Data e Horário de Término
+        time_zone: Fuso Horário
+        social_networks: Redes Sociais
+        description: Descrição
+        summary: Resumo
+      mweb_events/participant:
+        email: E-mail
+    models:
+      mweb_events/event: Evento
+      mweb_events/participant: Participant
+
   mweb_events:
+    _other:
+      cancel: Cancelar
+      create: Criar
+      destroy: Destruir
+      edit: Editar
+      save: Salvar
+      update: Atualizar
+      more: Ler Mais
     events:
       no_description: Sem descrição
-      edit:
-        edit: Editar evento
       show:
         date: Quando?
         address: Onde?
-        edit: Editar
       registration:
         title: Registro de participante
         button: Registre-se
@@ -31,6 +54,7 @@ pt:
         organizers: Organizadores
         organized_by: Este evento está sendo organizado por
     participants:
-      form:
+      new:
         title: Inscrevendo-se em
+      form:
         submit: Inscrever-se

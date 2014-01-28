@@ -1,4 +1,8 @@
+- content_for :title, "#{t('.title')} #{@event.name}"
+
+%h1
+  = content_for :title
+
 .container-fluid
 
   = render 'form'
-  = link_to t('.back'), event_path(@event)
