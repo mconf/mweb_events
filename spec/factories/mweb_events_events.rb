@@ -12,7 +12,7 @@ FactoryGirl.define do
     e.social_networks { MwebEvents::SOCIAL_NETWORKS.sample(3) }
     e.start_on { Time.now + 2.hours }
     e.end_on { Time.now + 4.hours }
-    # e.association :owner, :factory => :user
+    e.association :owner
   end
 end
 

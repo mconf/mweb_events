@@ -10,17 +10,18 @@ module MwebEvents
     after_validation :geocode
 
     belongs_to :owner, :polymorphic => true
-    has_many :participants
+    has_many :participants, :dependent => :destroy
 
     validates :name, :presence => true
     validates :start_on, :presence => true
     validates :summary, :length => {:maximum => 140}
 
     friendly_id :name, use: :slugged, :slug_column => :permalink
+    validates :permalink, :presence => true
 
     # If the event has no ending date, use a day from start date
     before_save :check_end_on
-    before_save :check_summary
+    before_validation :check_summary
 
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {

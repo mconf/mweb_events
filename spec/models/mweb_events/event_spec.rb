@@ -4,7 +4,13 @@ describe MwebEvents::Event do
 
   let(:event) { FactoryGirl.create(:event) }
 
+  pending '' do
+  end
+
   it "should not validate an event with wrong date range" do
+    pending
+    FactoryGirl.build(:event,
+      :start_on => Date.today, :end_on => Date.today - 1).should_not be_valid
   end
 
   it "creates a new instance given valid attributes" do
@@ -13,13 +19,38 @@ describe MwebEvents::Event do
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:permalink) }
+  it { should ensure_length_of(:summary).is_at_most(140) }
 
   it { should have_many(:participants).dependent(:destroy) }
 
-  it "#set_author_as_organizer"
-  it "sets the author as organizer when the event is saved"
-  it "doesn't set the author as organizer twice when the event is saved"
-  it "doesn't set the author as organizer if there's no author set"
+  it { should belong_to(:owner) }
+
+  it { should respond_to(:address) }
+  it { should respond_to(:address=) }
+  it { should respond_to(:start_on) }
+  it { should respond_to(:start_on=) }
+  it { should respond_to(:end_on) }
+  it { should respond_to(:end_on=) }
+  it { should respond_to(:description) }
+  it { should respond_to(:description=) }
+  it { should respond_to(:location) }
+  it { should respond_to(:location=) }
+  it { should respond_to(:name) }
+  it { should respond_to(:name=) }
+  it { should respond_to(:time_zone) }
+  it { should respond_to(:time_zone=) }
+  it { should respond_to(:social_networks) }
+  it { should respond_to(:social_networks=) }
+  it { should respond_to(:summary) }
+  it { should respond_to(:summary=) }
+  it { should respond_to(:owner_id) }
+  it { should respond_to(:owner_id=) }
+  it { should respond_to(:owner_type) }
+  it { should respond_to(:owner_type=) }
+
+
+  it { should respond_to(:owner_name) }
+  it { should respond_to(:owner_name=) }
 
   describe ".within" do
     let(:today) { Time.now }
@@ -29,19 +60,44 @@ describe MwebEvents::Event do
       e2 = FactoryGirl.create(:event, :start_on => today, :end_on => today + 2.day)
     end
 
-    it { Event.within(today, today + 2.day).should_not be_empty }
-    it { Event.within(today + 1.day, today + 2.day).should_not be_empty }
-    it { Event.within(today + 4.day, today + 5.day).should be_empty }
+    it { MwebEvents::Event.within(today, today + 2.day).should_not be_empty }
+    it { MwebEvents::Event.within(today + 1.day, today + 2.day).should_not be_empty }
+    it { MwebEvents::Event.within(today + 4.day, today + 5.day).should be_empty }
+  end
+
+  describe "social_networks attribute tokenization" do
+
+    context "valid social network names" do
+      let(:target) { FactoryGirl.create(:event, :social_networks => ['Facebook', 'Twitter']) }
+
+      it { target.social_networks.should_not be_empty }
+      it { target.social_networks.should include('Facebook') }
+      it { target.social_networks.should include('Twitter') }
+    end
+
+    context "one invalid social network name" do
+      let(:target) { FactoryGirl.create(:event, :social_networks => ['Facistbook', 'Twitter']) }
+
+      it { target.social_networks.should_not be_empty }
+      it { target.social_networks.should_not include('Facistbook') }
+      it { target.social_networks.should include('Twitter') }
+    end
+
   end
 
   describe "abilities", :abilities => true do
     subject { ability }
-    let(:ability) { Abilities.ability_for(user) }
-    let(:target) { FactoryGirl.create(:event, :owner => FactoryGirl(:user)) }
+    let(:ability) { MwebEvents::Ability.new(owner) }
+    let(:target) { FactoryGirl.create(:event) }
 
-    context "when is the event creator" do
-      let(:user) { target.owner }
-      it { should_not be_able_to_do_anything_to(target).except([:read, :edit, :update, :destroy]) }
+    context "when it's the event creator" do
+      let(:owner) { target.owner }
+      it { should be_able_to_do_anything_to(target).except([:register]) }
+    end
+
+    context "when it's not the event creator" do
+      let(:owner) { FactoryGirl.create(:owner) }
+      it { should_not be_able_to_do_anything_to(target).except([:read, :create]) }
     end
 
   end
