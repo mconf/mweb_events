@@ -1,7 +1,8 @@
+- content_for :title, "#{t('_other.create')} #{MwebEvents::Event.model_name.human}"
+
 .container-fluid
 
   %h1
-    = t('.new')
+    = content_for :title
 
   = render 'form'
-  = link_to 'Back', events_path

@@ -1,10 +1,8 @@
+- content_for :title, "#{t('_other.edit')} #{@event.name}"
+
 .container-fluid
 
   %h1
-    = t('.edit')
+    = content_for :title
 
   = render 'form'
-
-  = link_to 'Show', @event
-  \|
-  = link_to 'Back', events_path

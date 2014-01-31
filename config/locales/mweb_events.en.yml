@@ -1,14 +1,19 @@
 ---
 en:
   mweb_events:
+    _other:
+      cancel: Cancel
+      create: Create
+      destroy: Destroy
+      edit: Edit
+      save: Save
+      update: Update
+      more: Read More
     events:
       no_description: No description available
-      edit:
-        edit: Edit event
       show:
         date: When?
         address: Where?
-        edit: Edit
       registration:
         title: Registration
         button: Register
