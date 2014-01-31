@@ -2,217 +2,171 @@ require "spec_helper"
 
 describe MwebEvents::EventsController do
 
-  # describe "#index" do
-  #   let(:space) { FactoryGirl.create(:space) }
-  #   let(:user) { FactoryGirl.create(:superuser) }
-  #   before(:each) { sign_in(user) }
+  routes { MwebEvents::Engine.routes }
 
-  #   context "layout and view" do
-  #     before(:each) { get :index, :space_id => space.to_param }
-  #     it { should render_template("events/index") }
-  #     it { should render_with_layout("spaces_show") }
-  #   end
+  describe "#index" do
 
-  #   it "assigns @space"
-  #   it "assigns @events"
-  #   it "assigns @current_events"
+    context "layout and view" do
+      before(:each) { get :index }
+      it { should render_template("mweb_events/events/index") }
+    end
 
-  #   context "if params[:show] == 'past_events'" do
-  #     it "assigns @past_events"
-  #   end
-  #   context "if params[:show] == 'upcoming_events'" do
-  #     it "assigns @upcoming_events"
-  #   end
-  #   context "if params[:show] not set or invalid" do
-  #     it "assigns @last_past_events"
-  #     it "assigns @first_upcoming_events"
-  #   end
-  # end
+    it "assigns @events"
 
-  # describe "#index.atom" do
-  #   it "returns an rss with all the events in the space"
-  # end
+    # context "if params[:show] == 'past_events'" do
+    #   it "assigns @past_events"
+    # end
+    # context "if params[:show] == 'upcoming_events'" do
+    #   it "assigns @upcoming_events"
+    # end
+    # context "if params[:show] not set or invalid" do
+    #   it "assigns @last_past_events"
+    #   it "assigns @first_upcoming_events"
+    # end
+  end
 
-  # describe "#show" do
-  #   let(:space) { FactoryGirl.create(:space) }
-  #   let(:event) { FactoryGirl.create(:event, :space => space) }
-  #   let(:user) { FactoryGirl.create(:superuser) }
-  #   before(:each) { sign_in(user) }
+  describe "#index.atom" do
+    it "returns an rss with all the events available"
+  end
 
-  #   context "layout and view" do
-  #     before(:each) { get :show, :space_id => space.to_param, :id => event.to_param }
-  #     it { should render_template("events/show") }
-  #     it { should render_with_layout("spaces_show") }
-  #   end
+  describe "#show.atom" do
+    it "returns an rss with all the updates in the event"
+  end
 
-  #   it "assigns @space"
-  #   it "assigns @event"
-  #   it "assigns @webconf_room"
-  #   it "assigns @attendees with the users that confirmed attendance"
-  #   it "assigns @not_attendees with the users that confirmed that will not attend"
-  # end
+  describe "#show" do
+    let(:event) { FactoryGirl.create(:event) }
 
-  # describe "#new" do
-  #   let(:space) { FactoryGirl.create(:space) }
-  #   let(:user) { FactoryGirl.create(:superuser) }
-  #   before(:each) { sign_in(user) }
+    context "layout and view" do
+      before(:each) { get :show, :id => event.to_param }
+      it { should render_template("mweb_events/events/show") }
+    end
 
-  #   context "layout and view" do
-  #     before(:each) { get :new, :space_id => space.to_param }
-  #     it { should render_template("events/new") }
-  #     it { should render_with_layout("spaces_show") }
-  #   end
+    it "assigns @event"
+    it "assigns @attendees with the users that confirmed attendance"
+    it "assigns @not_attendees with the users that confirmed that will not attend"
+  end
 
-  #   it "assigns @space"
-  #   it "assigns @event"
-  #   it "assigns @webconf_room"
-  # end
+  describe "#new" do
+    let(:owner) { FactoryGirl.create(:owner) }
 
-  # describe "#create" do
-  #   let(:space) { FactoryGirl.create(:space) }
-  #   let(:user) { FactoryGirl.create(:superuser) }
-  #   before(:each) { sign_in(user) }
+    context "layout and view" do
+      before(:each) { get :new }
+      it { should render_template("mweb_events/events/new") }
+    end
 
-  #   context "with valid attributes" do
-  #     let(:event) { FactoryGirl.build(:event) }
+    it "assigns @event"
+  end
 
-  #     before(:each) {
-  #       expect {
-  #         post :create, :space_id => space.to_param, :event => event.attributes
-  #       }.to change(Event, :count).by(1)
-  #     }
+  describe "#create" do
+    let(:owner) { FactoryGirl.create(:owner) }
+    before(:each) { sign_in(owner) }
 
-  #     describe "creates the new event with the correct attributes" do
-  #       # TODO: for some reason the matcher is not found, maybe we just need to update rspec and other gems
-  #       pending { Event.last.should have_same_attibutes_as(event) }
-  #     end
+    context "with valid attributes" do
+      let(:event) { FactoryGirl.build(:event) }
+      let(:attributes) { FactoryGirl.attributes_for(:event) }
 
-  #     it "redirects to the new event" do
-  #       should redirect_to(space_event_path(space, Event.last))
-  #     end
+      before(:each) {
+        expect {
+          post :create, :event => attributes
+        }.to change(MwebEvents::Event, :count).by(1)
+      }
 
-  #     it "assigns @event with the new event" do
-  #       should assign_to(:event).with(Event.last)
-  #     end
+      describe "creates the new event with the correct attributes" do
+        # TODO: for some reason the matcher is not found, maybe we just need to update rspec and other gems
+        pending { MwebEvents::Event.last.should have_same_attibutes_as(event) }
+      end
 
-  #     it "assigns @space with the new event's space" do
-  #       should assign_to(:space).with(Event.last.space)
-  #     end
+      it "redirects to the new event" do
+        should redirect_to(event_path(MwebEvents::Event.last))
+      end
 
-  #     it "sets the flash with a success message" do
-  #       should set_the_flash.to(I18n.t('event.created'))
-  #     end
+      it "assigns @event with the new event" do
+        should assign_to(:event).with(MwebEvents::Event.last)
+      end
 
-  #     it "sets the current user as the author" do
-  #       Event.last.author.should eq(user)
-  #     end
+      it "sets the flash with a success message" do
+        should set_the_flash.to(I18n.t('event.created'))
+      end
 
-  #     it "sets the event's space correctly" do
-  #       Event.last.space.should eq(space)
-  #     end
+      it "sets the current user as the author" do
+        # MwebEvents::Event.last.author.should eq(user)
+      end
 
-  #     it "assigns @webconf_room"
-  #     it "creates a new activity for the event created"
-  #   end
+    end
 
-  #   context "with invalid attributes" do
-  #     let(:invalid_attributes) { FactoryGirl.attributes_for(:event, :name => nil) }
+    context "with invalid attributes" do
+      let(:invalid_attributes) { FactoryGirl.attributes_for(:event, :name => nil) }
 
-  #     before(:each) { post :create, :space_id => space.to_param, :event => invalid_attributes }
+      before(:each) { post :create, :event => invalid_attributes }
 
-  #     it "assigns @event with the new event"
+      it "assigns @event with the new event"
 
-  #     describe "renders the view events/new with the correct layout" do
-  #       it { should render_template("events/new") }
-  #       it { should render_with_layout("spaces_show") }
-  #     end
+      describe "renders the view events/new with the correct layout" do
+        it { should render_template("mweb_events/events/new") }
+      end
 
-  #     it "sets the flash with an error message"
-  #     it "assigns @webconf_room"
-  #     it "does not create a new activity for the event that failed to be created"
-  #   end
-  # end
+      it "sets the flash with an error message"
+    end
+  end
 
-  # describe "#edit" do
-  #   let(:space) { FactoryGirl.create(:space) }
-  #   let(:event) { FactoryGirl.create(:event, :space => space) }
-  #   let(:user) { FactoryGirl.create(:superuser) }
-  #   before(:each) { sign_in(user) }
+  describe "#edit" do
+    let(:event) { FactoryGirl.create(:event) }
+    let(:owner) { event.owner }
+    before(:each) { sign_in(owner) }
 
-  #   context "layout and view" do
-  #     before(:each) { get :edit, :space_id => space.to_param, :id => event.to_param }
-  #     it { should render_template("events/edit") }
-  #     it { should render_with_layout("spaces_show") }
-  #   end
+    context "layout and view" do
+      before(:each) { get :edit, :id => event.to_param }
+      it { should render_template("mweb_events/events/edit") }
+    end
 
-  #   it "assigns @space"
-  #   it "assigns @event"
-  #   it "assigns @webconf_room"
-  # end
+    it "assigns @event with the event" do
+      # should assign_to(:event).with(event)
+    end
+  end
 
-  # describe "#update" do
-  #   let(:event) { FactoryGirl.create(:event) }
-  #   # before(:each) { sign_in(user) }
+  describe "#update" do
+    let(:event) { FactoryGirl.create(:event) }
+    let(:owner) { event.owner }
+    before(:each) { sign_in(owner) }
 
-  #   # context "with valid attributes" do
-  #   #   let(:attributes) { FactoryGirl.attributes_for(:event) }
+    context "with valid attributes" do
+      let(:attributes) { FactoryGirl.attributes_for(:event) }
+      before(:each) { put :update, :id => event, :event => attributes }
 
-  #   #   before(:each) { put :update, :space_id => space.to_param, :id => event.to_param, :event => attributes }
+      it "sets the correct attributes in the event"
 
-  #   #   it "sets the correct attributes in the event"
+      it "redirects to the event" do
+        should redirect_to(event_path(event))
+      end
 
-  #   #   it "redirects to the event" do
-  #   #     event.reload # because the event's id/permalink will change
-  #   #     should redirect_to(space_event_path(space, event))
-  #   #   end
+      it "assigns @event with the event" do
+        should assign_to(:event).with(event)
+      end
 
-  #   #   it "assigns @event with the event" do
-  #   #     should assign_to(:event).with(event)
-  #   #   end
+      it "sets the flash with a success message" do
+        should set_the_flash.to(I18n.t('event.updated'))
+      end
 
-  #   #   it "sets the flash with a success message" do
-  #   #     should set_the_flash.to(I18n.t('event.updated'))
-  #   #   end
+    end
 
-  #   #   it "assigns @space with the event's space" do
-  #   #     should assign_to(:space).with(event.space)
-  #   #   end
+    context "with invalid attributes" do
+      let(:invalid_attributes) { FactoryGirl.attributes_for(:event, :name => nil) }
 
-  #   #   it "assigns @webconf_room"
-  #   #   it "creates a new activity for the event updated"
-  #   # end
+      before(:each) { put :update, :id => event.to_param, :event => invalid_attributes }
 
-  #   # context "with invalid attributes" do
-  #   #   let(:invalid_attributes) { FactoryGirl.attributes_for(:event, :name => nil) }
+      it "assigns @event with the event"
 
-  #   #   before(:each) { put :update, :space_id => space.to_param, :id => event.to_param, :event => invalid_attributes }
+      describe "renders the view events/edit with the correct layout" do
+        it { should render_template("mweb_events/events/edit") }
+      end
 
-  #   #   it "assigns @event with the event"
+      it "sets the flash with an error message"
+    end
+  end
 
-  #   #   it "assigns @space with the event's space" do
-  #   #     should assign_to(:space).with(event.space)
-  #   #   end
+  it "#destroy"
 
-  #   #   describe "renders the view events/edit with the correct layout" do
-  #   #     it { should render_template("events/edit") }
-  #   #     it { should render_with_layout("spaces_show") }
-  #   #   end
-
-  #   #   it "sets the flash with an error message"
-  #   #   it "assigns @webconf_room"
-  #   #   it "does not create a new activity for the event that failed to be updated"
-  #   # end
-  # end
-
-  # it "#destroy"
-
-  # describe "abilities", :abilities => true do
-  #   render_views(false)
-
-  #   let(:attrs) { FactoryGirl.attributes_for(:event) }
-  #   let(:hash) { { :space_id => target.space.to_param } }
-  #   let(:hash_with_id) { hash.merge!(:id => target.to_param) }
-  #   let(:hash_with_attrs) { hash_with_id.merge!(:event => attrs) }
-  # end
+  describe "abilities", :abilities => true do
+  end
 
 end

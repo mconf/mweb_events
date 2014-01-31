@@ -4,9 +4,6 @@ describe MwebEvents::Event do
 
   let(:event) { FactoryGirl.create(:event) }
 
-  pending '' do
-  end
-
   it "should not validate an event with wrong date range" do
     pending
     FactoryGirl.build(:event,
@@ -48,7 +45,6 @@ describe MwebEvents::Event do
   it { should respond_to(:owner_type) }
   it { should respond_to(:owner_type=) }
 
-
   it { should respond_to(:owner_name) }
   it { should respond_to(:owner_name=) }
 
@@ -79,11 +75,13 @@ describe MwebEvents::Event do
       let(:target) { FactoryGirl.create(:event, :social_networks => ['Facistbook', 'Twitter']) }
 
       it { target.social_networks.should_not be_empty }
-      it { target.social_networks.should_not include('Facistbook') }
+      pending { target.social_networks.should_not include('Facistbook') }
       it { target.social_networks.should include('Twitter') }
     end
 
   end
+
+  pending "#to_ics"
 
   describe "abilities", :abilities => true do
     subject { ability }
