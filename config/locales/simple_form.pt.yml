@@ -13,7 +13,7 @@ pt:
         name: Nome
         location: Localização
         address: Endereço
-        owner_name: Este pertence a
+        owner_name: Este evento pertence a
         start_on: Data de início
         end_on: Data de Término
         time_zone: Fuso Horário
@@ -27,6 +27,8 @@ pt:
         social_networks: Quais botões de redes sociais devem ficar visíveis na página do evento?
         description: Digite a descrição do evento. Você pode usar Markdown para embelezar o texto.
         summary: Digite um resumo do evento em 140 ou menos caracteres.
+        start_on: Data e horário de início do evento.
+        end_on: Não é obrigatório, mas se ficar vazio o evento acaba 24 horas depois do início.
     error_notification:
       default_message: "Por favor corrija os erros abaixo:"
     # Labels and hints examples

@@ -10,6 +10,7 @@ en:
         address: Where?
         edit: Edit
       registration:
+        title: Registration
         button: Register
         manage: Manage
       summary:
@@ -26,3 +27,9 @@ en:
         facebook_link: Check out this cool event at Mconf! %{url}
         google_plus: Share on Google+
         linkedin: Share on Linkedin
+      organizers:
+        organized_by: This event is being organized by
+    participants:
+      form:
+        title: Registering for
+        submit: Register

@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancan'
   s.add_dependency 'friendly_id'
 
-
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'factory_girl_rails'

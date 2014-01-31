@@ -4,8 +4,6 @@ module MwebEvents
     load_and_authorize_resource :event, :class => MwebEvents::Event, :find_by => :permalink
     load_and_authorize_resource :participant, :class => MwebEvents::Participant, :through => :event
 
-    # GET /participants
-    # GET /participants.json
     def index
       respond_to do |format|
         format.html # index.html.erb
@@ -13,8 +11,6 @@ module MwebEvents
       end
     end
 
-    # GET /participants/1
-    # GET /participants/1.json
     def show
       respond_to do |format|
         format.html # show.html.erb
@@ -22,8 +18,6 @@ module MwebEvents
       end
     end
 
-    # GET /participants/new
-    # GET /participants/new.json
     def new
       email = current_user && current_user.email
       @participant.email = email
@@ -34,14 +28,10 @@ module MwebEvents
       end
     end
 
-    # GET /participants/1/edit
     def edit
     end
 
-    # POST /participants
-    # POST /participants.json
     def create
-      @participant = Participant.new(params[:participant])
       @participant.event = @event
       @participant.owner = current_user
 
@@ -56,8 +46,6 @@ module MwebEvents
       end
     end
 
-    # PUT /participants/1
-    # PUT /participants/1.json
     def update
       respond_to do |format|
         if @participant.update_attributes(params[:participant])
@@ -70,8 +58,6 @@ module MwebEvents
       end
     end
 
-    # DELETE /participants/1
-    # DELETE /participants/1.json
     def destroy
       @participant.destroy
 

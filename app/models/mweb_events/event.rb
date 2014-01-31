@@ -2,20 +2,26 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessible :address, :start_on, :end_on, :description, 
-      :location, :name, :time_zone, :social_networks, :summary
+    attr_accessible :address, :start_on, :end_on, :description,
+      :location, :name, :time_zone, :social_networks, :summary,
+      :owner_id, :owner_type
 
     geocoded_by :address
     after_validation :geocode
 
     belongs_to :owner, :polymorphic => true
-    has_many :participants
+    has_many :participants, :dependent => :destroy
 
     validates :name, :presence => true
     validates :start_on, :presence => true
     validates :summary, :length => {:maximum => 140}
 
     friendly_id :name, use: :slugged, :slug_column => :permalink
+    validates :permalink, :presence => true
+
+    # If the event has no ending date, use a day from start date
+    before_save :check_end_on
+    before_validation :check_summary
 
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {
@@ -114,6 +120,17 @@ module MwebEvents
         "GMT#{start_on.formatted_offset}"
       else
         "GMT#{date.formatted_offset}"
+      end
+    end
+
+    def check_end_on
+      write_attribute(:end_on, start_on + 1.day) if end_on.blank?
+    end
+
+    def check_summary
+      if summary.blank?
+        s = HTML::FullSanitizer.new.sanitize(description_html).truncate(136, :omission => '...')
+        write_attribute(:summary, s)
       end
     end
 

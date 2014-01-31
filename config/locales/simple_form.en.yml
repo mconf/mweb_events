@@ -19,6 +19,8 @@ en:
         social_networks: Which social network share buttons should be visible on the event page?
         summary: Type a 140 or less characters summary of the event.
         description: Type in the event description. You can use Markdown to make the text pretty.
+        start_on: Date and time for the event to start.
+        end_on: Not required, but if left blank the event will end 24 hours after it has started.
     error_notification:
       default_message: "Please review the problems below:"
     # Labels and hints examples

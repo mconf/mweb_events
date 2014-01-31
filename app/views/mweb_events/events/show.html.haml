@@ -20,15 +20,13 @@
 
       .well
         %aside
-          %h3 Organizers
-
-          %h3 Extra info and logos
+          .event-organizers
+            = render 'organizers'
 
   .row-fluid
     .span12
       %footer
         .well
-          %h1 Footer stuff
 
           - if can? :edit, @event
             %i.icon.icon-edit

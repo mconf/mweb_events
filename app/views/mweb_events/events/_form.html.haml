@@ -1,4 +1,4 @@
-= simple_form_for(@event) do |f|
+= simple_form_for(@event, :class => 'form-inline') do |f|
   = f.error_notification
 
   .form-inputs
@@ -6,6 +6,9 @@
     = f.input :owner_name, :disabled => true
 
     = f.input :name
+
+    = f.hidden_field :owner_id
+    = f.hidden_field :owner_type
 
     .input-append.date#start_on
       = f.label :start_on
@@ -25,23 +28,30 @@
 
     %br
 
-    = f.label :time_zone
-    = f.time_zone_select :time_zone, [Time.zone]
-    .time_zone_options{:'data-default' => Time.zone}
-    = f.hint :time_zone
+    .input.string.event_time_zone.field_with_hint
+      %span.hint
+        = f.hint :time_zone
 
-    %br
-    %br
+      = f.label :time_zone
+      = f.time_zone_select :time_zone, [Time.zone]
+      #time_zone_options{:'data-default' => Time.zone}
+
 
     = f.input :location
 
     = f.input :address
 
-    %br
+    .input.event_social_networks.field_with_hint
 
-    = f.label :social_networks
-    = f.hint :social_networks
-    = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
+      %span.hint
+        = f.hint :social_networks
+
+      = f.label :social_networks
+      .form-inline
+        = f.collection_check_boxes :social_networks, MwebEvents::SOCIAL_NETWORKS, :to_s, :to_s
+
+    %br
+    %br
 
     = f.input :summary, :input_html => { :rows => 3 }
 

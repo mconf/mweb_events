@@ -15,23 +15,26 @@ $ ->
 
     # Location
     if $("#event_location")[0].value is ""
-        $(".event_address").hide()
+        $("#event_address").attr('disabled', true)
 
-    show_time = 500
-    show_address = ->
+    enable_address = ->
       if @value isnt ""
-        $(".event_address").show(show_time)
+        $("#event_address").removeAttr("disabled")
       else
-        $(".event_address").hide(show_time)
+        $("#event_address").attr("disabled", true)
 
-    $("#event_location").on 'input keyup', show_address
+    $("#event_location").on 'input keyup', enable_address
 
-    # Description
+    # Description editor box
     opts =
       button: false
       autogrow:
         minHeight: 150
         maxHeight: 300
+      button:
+        preview: true
+        fullscreen: false
+        bar: true
 
     editor = new EpicEditor(opts).load()
     editor.importFile('epiceditor', $('#event_description').text())
