@@ -12,5 +12,21 @@
 
   %body{:class => "#{controller_name_for_view} #{params[:action]}"}
 
-    = render partial: "shared/flash_messages", flash: flash
-    = yield
+    .container
+      %ul.nav.nav-pills.pull-right
+        - if current_user
+          %p
+            Hello
+            = current_user.email
+          %li.active
+            = link_to t('.logout'), main_app.destroy_user_session_path, :method => 'delete'
+
+        - else
+          %li.active
+            = link_to t('.login'), main_app.new_user_session_path
+          %li
+            = link_to t('.register'), main_app.new_user_registration_path
+
+    .container-fluid
+      = render partial: "shared/flash_messages", flash: flash
+      = yield
