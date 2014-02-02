@@ -24,7 +24,8 @@ pt:
         email: E-mail
     hints:
       event:
-        location: Onde irá acontecer o evento? Por exemplo 'Sede do MConf'
+        time_zone: Escolha um fuso horário se o evento for acontecer em um fuso diferente do fuso horário do site.
+        location: Uma descrição breve de onde o evento irá acontecer. Por exemplo 'Sede do Mconf'.
         address: Endereço físico de onde se localizará o evento. Um endereço válido será mostrado como um marcador e mapa na página do evento.
         social_networks: Quais botões de redes sociais devem ficar visíveis na página do evento?
         description: Digite a descrição do evento. Você pode usar Markdown para embelezar o texto.
@@ -33,17 +34,3 @@ pt:
         end_on: Não é obrigatório, mas se ficar vazio o evento acaba 24 horas depois do início.
     error_notification:
       default_message: "Por favor corrija os erros abaixo:"
-    # Labels and hints examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-

@@ -16,7 +16,7 @@ pt:
         email: E-mail
     models:
       mweb_events/event: Evento
-      mweb_events/participant: Participant
+      mweb_events/participant: Participante
 
   mweb_events:
     _other:
@@ -45,9 +45,9 @@ pt:
         rss: RSS
       social_media:
         twitter: Compartilhar no Twitter
-        twitter_link: Olha só que evento legal no Mconf! %{url}
+        twitter_link: Olha só este evento em %{url}
         facebook: Compartilhar no Facebook
-        facebook_link: Olha só que evento legal no Mconf! %{url}
+        facebook_link: Olha só este evento em %{url}
         google_plus: Compartilhar no Google+
         linkedin: Compartilhar no Linkedin
       organizers:

@@ -10,11 +10,22 @@ en:
       # html: '<abbr title="required">*</abbr>'
     labels:
       event:
+        name: Name
+        location: Location
+        address: Address
         owner_name: This event belongs to
+        start_on: Start Date and Time
+        end_on: End Date and Time
+        time_zone: Time Zone
+        social_networks: Social Networks
+        description: Description
+        summary: Summary
+      participants:
+        email: Email
     hints:
       event:
         time_zone: Set this if the event will happen in a different time zone than the site is using.
-        location: Where is the event going to happen? For example 'Mconf Headquarters'
+        location: A general description for where is the event going to happen. For example 'Mconf Headquarters'.
         address: Where is the event location physically at. Entering a valid address will mark it on a map on the event page.
         social_networks: Which social network share buttons should be visible on the event page?
         summary: Type a 140 or less characters summary of the event.
@@ -23,17 +34,3 @@ en:
         end_on: Not required, but if left blank the event will end 24 hours after it has started.
     error_notification:
       default_message: "Please review the problems below:"
-    # Labels and hints examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-

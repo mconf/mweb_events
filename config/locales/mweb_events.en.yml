@@ -1,5 +1,23 @@
 ---
 en:
+  activerecord:
+    attributes:
+      mweb_events/event:
+        name: Name
+        location: Location
+        address: Address
+        start_on: Start Date and Time
+        end_on: End Date and Time
+        time_zone: Time Zone
+        social_networks: Social Network
+        description: Description
+        summary: Summary
+      mweb_events/participant:
+        email: Email
+    models:
+      mweb_events/event: Event
+      mweb_events/participant: Participant
+
   mweb_events:
     _other:
       cancel: Cancel
@@ -27,14 +45,16 @@ en:
         rss: RSS
       social_media:
         twitter: Share on Twitter
-        twitter_link: Check out this cool event at Mconf! %{url}
+        twitter_link: Check out this event at %{url}
         facebook: Share on Facebook
-        facebook_link: Check out this cool event at Mconf! %{url}
+        facebook_link: Check out this event at %{url}
         google_plus: Share on Google+
         linkedin: Share on Linkedin
       organizers:
+        organizers: Organizers
         organized_by: This event is being organized by
     participants:
-      form:
+      new:
         title: Registering for
+      form:
         submit: Register
