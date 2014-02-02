@@ -1,10 +1,7 @@
 %h2
   = t('.title')
 
-%section.event-registration
+%section.event-register
 
   - if can? :register, @event
-    = link_to t('.button'), new_event_participant_path(@event), :class => 'btn large main'
-
-  - if can? :update, @event
-    = link_to t('.manage'), event_participants_path(@event)
+    = link_to t('.button'), new_event_participant_path(@event), :class => 'btn btn-success large main'

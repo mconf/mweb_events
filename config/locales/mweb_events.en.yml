@@ -32,10 +32,10 @@ en:
       show:
         date: When?
         address: Where?
+        manage: Manage
       registration:
         title: Registration
         button: Register
-        manage: Manage
       summary:
         start_on: Starts on
         end_on: Ends on

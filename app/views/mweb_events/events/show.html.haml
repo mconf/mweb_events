@@ -5,29 +5,28 @@
 
   .row-fluid
     .span8
-      .well
-        = render 'registration'
-
-      .well
+      .well.event-description
         = render 'description'
 
-      .row-fluid
+      .row-fluid.event-social-media
         = render 'social_media'
 
     .span4
-      .well
+      .well.event-registration
+        = render 'registration'
+
+      .well.event-summary
         = render 'summary'
 
-      .well
+      .well.event-organizers
         %aside
-          .event-organizers
-            = render 'organizers'
+          = render 'organizers'
 
   .row-fluid
     .span12
-      %footer
-        .well
-
-          - if can? :edit, @event
-            %i.icon.icon-edit
-            = link_to t('_other.edit'), edit_event_path(@event)
+      %footer.well.event-footer
+        - if can? :edit, @event
+          %i.icon.icon-edit
+          = link_to t('_other.edit'), edit_event_path(@event)
+        - if can? :update, @event
+          = link_to t('.manage'), event_participants_path(@event)

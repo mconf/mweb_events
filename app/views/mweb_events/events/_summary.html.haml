@@ -1,54 +1,50 @@
-.event-summary
-  %h3
-    = @event.name
+%p.summary
+  = @event.summary
 
-  %p.description
-    = @event.summary
+%p
+  %i.icon.icon-calendar-empty
+  %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
+  %time{ :datetime => @event.start_on_with_time_zone }
+    = t('.start_on')
+    = l @event.start_on_with_time_zone
 
+-if @event.end_on
   %p
     %i.icon.icon-calendar-empty
-    %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
-    %time{ :datetime => @event.start_on_with_time_zone }
-      = t('.start_on')
-      = l @event.start_on_with_time_zone
+    %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
+    %time{ :datetime => @event.end_on_with_time_zone }
+      = t('.end_on')
+      = l @event.end_on_with_time_zone
 
-  -if @event.end_on
-    %p
-      %i.icon.icon-calendar-empty
-      %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
-      %time{ :datetime => @event.end_on_with_time_zone }
-        = t('.end_on')
-        = l @event.end_on_with_time_zone
+%p
+  %i.icon.icon-time
+  = t('.time_zone')
+  = @event.time_zone
 
-  %p
-    %i.icon.icon-time
-    = t('.time_zone')
-    = @event.time_zone
+- if !@event.latitude.nil? && !@event.longitude.nil?
+  .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
+    #map
 
-  - if !@event.latitude.nil? && !@event.longitude.nil?
-    .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
-      #map
+-if !@event.location.blank?
+  %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
+    %i.icon.icon-map-marker
+    = @event.location
+    - if !@event.address.blank?
+      |
+      = @event.address
 
-  -if !@event.location.blank?
-    %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
-      %i.icon.icon-map-marker
-      = @event.location
-      - if !@event.address.blank?
-        |
-        = @event.address
+%ul.nav.nav-pills.nav-stacked
+  %li
+    %a.calendar.summary-button{:href => event_path(@event, :format => 'ics')}
+      %i.icon.icon-calendar
+      = t('.calendar')
 
-  %ul.nav.nav-pills.nav-stacked
-    %li
-      %a.calendar.summary-button{:href => event_path(@event, :format => 'ics')}
-        %i.icon.icon-calendar
-        = t('.calendar')
+  %li
+    %a.contact.summary-button{:href => "#"}
+      %i.icon.icon-envelope
+      = t('.contact')
 
-    %li
-      %a.contact.summary-button{:href => "#"}
-        %i.icon.icon-envelope
-        = t('.contact')
-
-    %li
-      %a.rss.summary-button{:href => "#"}
-        %i.icon.icon-rss
-        = t('.rss')
+  %li
+    %a.rss.summary-button{:href => "#"}
+      %i.icon.icon-rss
+      = t('.rss')

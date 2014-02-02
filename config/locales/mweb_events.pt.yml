@@ -32,10 +32,10 @@ pt:
       show:
         date: Quando?
         address: Onde?
+        manage: Administração
       registration:
         title: Registro de participante
         button: Registre-se
-        manage: Administração
       summary:
         start_on: Começa em
         end_on: Acaba em

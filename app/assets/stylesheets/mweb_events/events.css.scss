@@ -8,7 +8,8 @@
 #map {
   height: 180px;
   padding-top: 10px;
-  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
 
 .event-header {
@@ -16,15 +17,19 @@
 }
 
 .event-summary {
-
-  i {
-    margin-right: 10px;
-  }
-
   p {
     font-size: 110%;
   }
 
+  ul {
+    margin: 20px 0 0 0;
+  }
+
+  .summary {
+    padding-bottom: 10px;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #ddd;
+  }
 }
 
 .summary-button {
@@ -40,7 +45,7 @@ hr {
   padding-bottom: 10px;
 }
 
-.social-buttons {
+.event-social-buttons {
   margin-left: 0;
 
   li {
@@ -60,6 +65,19 @@ hr {
 
 }
 
+.event-description {
+  ul {
+    list-style: circle;
+  }
+}
+
+.event-footer {
+  a { margin-right: 10px; }
+}
+
+.event-map {
+  margin: 20px 0 10px 0;
+}
 
 /* For event logos */
 
