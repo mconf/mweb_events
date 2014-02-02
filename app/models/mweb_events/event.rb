@@ -107,11 +107,19 @@ module MwebEvents
     end
 
     # Returns a string with the starting date of an event in the correct format
-    def get_formatted_date(date=nil)
+    def get_formatted_date(date=nil, with_tz=true)
       if date.nil?
-        I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone})")
+        if with_tz
+          I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone})")
+        else
+          I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M")
+        end
       else
-        I18n::localize(date, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone(date)})")
+        if with_tz
+          I18n::localize(date, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone(date)})")
+        else
+          I18n::localize(date, :format => "%A, %d %b %Y, %H:%M")
+        end
       end
     end
 

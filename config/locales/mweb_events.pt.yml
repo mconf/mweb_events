@@ -34,11 +34,11 @@ pt:
         address: Onde?
         manage: Administração
       registration:
-        title: Registro de participante
+        title: Participar
         button: Registre-se
       summary:
-        start_on: Começa em
-        end_on: Acaba em
+        start_on: "Em:"
+        end_on: "Até:"
         time_zone: Fuso Horário
         calendar: Adicionar ao Calendário
         contact: Fale com o organizador

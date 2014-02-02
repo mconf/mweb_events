@@ -6,7 +6,7 @@
   %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
   %time{ :datetime => @event.start_on_with_time_zone }
     = t('.start_on')
-    = l @event.start_on_with_time_zone
+    = @event.get_formatted_date(@event.start_on, false)
 
 -if @event.end_on
   %p
@@ -14,12 +14,12 @@
     %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
     %time{ :datetime => @event.end_on_with_time_zone }
       = t('.end_on')
-      = l @event.end_on_with_time_zone
+      = @event.get_formatted_date(@event.end_on, false)
 
 %p
   %i.icon.icon-time
   = t('.time_zone')
-  = @event.time_zone
+  = @event.time_zone + " (#{@event.get_formatted_timezone(@event.end_on)})"
 
 - if !@event.latitude.nil? && !@event.longitude.nil?
   .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
