@@ -2,14 +2,22 @@ module MwebEvents
   module EventsHelper
 
     def event_logo(event, options={})
-      options[:class] = "#{options[:class]} mweb_events-event-logo" # disabled tooltipped upwards
-      options[:title] = 'title'
-      options[:href] = mweb_events.event_path(event)
+      options[:class] = "#{options[:class]} mweb_events-event-logo"
 
-      day = content_tag(:div, sanitize(event.start_on.strftime("%d")), { :class => 'mweb_events-event-logo-day' })
-      month = content_tag(:div, localize(event.start_on, :format => "%b"), { :class => 'mweb_events-event-logo-month' })
-      hour = content_tag(:div, event.get_formatted_hour, { :class => 'mweb_events-event-logo-hour' })
-      content_tag(:a, day + month + hour, options)
+      day = sanitize(event.start_on.strftime("%d"))
+      month = localize(event.start_on, :format => "%b")
+      hour = event.get_formatted_hour
+
+      hour_tag = content_tag(:div, hour, { :class => 'mweb_events-event-logo-hour' })
+      day_tag = content_tag(:div, day + ' ' + month, { :class => 'mweb_events-event-logo-day' })
+      year_tag = content_tag(:div, '2014', { :class => 'mweb_events-event-logo-year' })
+
+      content_tag(:div, hour_tag + day_tag + year_tag, options)
+    end
+
+    def event_logo_link(event, options={})
+      href = mweb_events.event_path(event)
+      content_tag(:a, event_logo(event, options), { :href => href })
     end
 
     def button_url type

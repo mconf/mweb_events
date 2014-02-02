@@ -63,36 +63,42 @@ hr {
 
 /* For event logos */
 
-$font-big: 28px;
+$font-big: 26px;
 $font-color: #333;
 
 .mweb_events-event-logo {
   display: inline-block;
   float: left;
   text-align: center;
-  font-weight: bold;
   vertical-align: middle;
-  width: 100%;
+  width: 95%;
   color: $font-color;
 
-  .mweb_events-event-logo-day {
-    font-size: $font-big;
-    line-height: $font-big;
-    margin-bottom: 4px;
-    white-space: nowrap;
-  }
-
-  .mweb_events-event-logo-month {
-    font-size: $font-big * 0.8;
-    line-height: $font-big * 0.8;
-    margin-bottom: 6px;
-    white-space: nowrap;
-  }
-
   .mweb_events-event-logo-hour {
-    font-size: $font-big / 2;
-    line-height: $font-big / 2;
+    font-size: $font-big * 0.9;
+    line-height: $font-big * 0.9;
     white-space: nowrap;
+    margin: 5px 0;
+    font-weight: bold;
+    text-shadow: #ccc 1px 1px 3px;
+  }
+
+  .mweb_events-event-logo-day {
+    font-size: $font-big * 0.7;
+    line-height: $font-big * 0.7;
+    margin: 7px 0;
+    white-space: nowrap;
+    color: #444;
+    font-weight: bold;
+    text-shadow: #ddd 1px 1px 3px;
+  }
+
+  .mweb_events-event-logo-year {
+    font-size: $font-big * 0.6;
+    line-height: $font-big * 0.6;
+    margin: 6px 0;
+    white-space: nowrap;
+    color: #777;
   }
 }
 
