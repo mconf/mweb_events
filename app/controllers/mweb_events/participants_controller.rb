@@ -37,22 +37,10 @@ module MwebEvents
 
       respond_to do |format|
         if @participant.save
-          format.html { redirect_to @event, notice: t('mweb_events.participants.registered') }
+          format.html { redirect_to @event, notice: t('participant.created') }
           format.json { render json: @participant, status: :created, location: @participant }
         else
           format.html { render action: "new" }
-          format.json { render json: @participant.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-
-    def update
-      respond_to do |format|
-        if @participant.update_attributes(params[:participant])
-          format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
           format.json { render json: @participant.errors, status: :unprocessable_entity }
         end
       end
@@ -62,7 +50,7 @@ module MwebEvents
       @participant.destroy
 
       respond_to do |format|
-        format.html { redirect_to participants_url }
+        format.html { redirect_to event_participants_path(@event) }
         format.json { head :no_content }
       end
     end
