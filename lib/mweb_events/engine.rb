@@ -17,6 +17,7 @@ require 'compass-rails'
 require 'icalendar'
 require 'cancan'
 require 'friendly_id'
+require 'valid_email/email_validator'
 
 module MwebEvents
   class Engine < ::Rails::Engine

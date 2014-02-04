@@ -6,7 +6,7 @@ module MwebEvents
     belongs_to :event
 
     validates :event_id, :presence => true
-    validates :email, :presence => true, :uniqueness => { :scope => :event_id }
+    validates :email, :presence => true, :email => true, :uniqueness => { :scope => :event_id }
     validates :owner_id, :presence => true, :uniqueness => { :scope => :event_id }
 
   end

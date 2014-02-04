@@ -18,6 +18,11 @@ pt:
       mweb_events/event: Evento
       mweb_events/participant: Participante
 
+  valid_email:
+    validations:
+      email:
+        invalid: Não é um endereço de e-mail válido
+
   mweb_events:
     _other:
       cancel: Cancelar

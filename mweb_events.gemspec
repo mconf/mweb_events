@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'icalendar'
   s.add_dependency 'cancan'
   s.add_dependency 'friendly_id'
+  s.add_dependency 'valid_email'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'

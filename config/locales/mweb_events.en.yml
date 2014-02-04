@@ -18,6 +18,11 @@ en:
       mweb_events/event: Event
       mweb_events/participant: Participant
 
+  valid_email:
+    validations:
+      email:
+        invalid: Isn't a valid e-mail address
+
   mweb_events:
     _other:
       cancel: Cancel
