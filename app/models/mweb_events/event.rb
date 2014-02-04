@@ -23,6 +23,9 @@ module MwebEvents
     before_save :check_end_on
     before_validation :check_summary
 
+    # Test if we need to clear the coordinates because address was cleared
+    before_save :check_coordinates
+
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {
       where("end_on > ?", Time.now).order("start_on")
@@ -139,6 +142,13 @@ module MwebEvents
       if summary.blank?
         s = HTML::FullSanitizer.new.sanitize(description_html).truncate(136, :omission => '...')
         write_attribute(:summary, s)
+      end
+    end
+
+    def check_coordinates
+      if persisted? && address.blank?
+        write_attribute(:longitude, nil)
+        write_attribute(:latitude, nil)
       end
     end
 

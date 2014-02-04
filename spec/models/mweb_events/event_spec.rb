@@ -81,6 +81,38 @@ describe MwebEvents::Event do
 
   end
 
+  describe "coordinates are geocoded by address", :geocoding => true do
+    let(:target) { FactoryGirl.create(:event, :address => 'Porto Alegre, Brazil', :longitude => nil, :latitude => nil) }
+
+    it { target.longitude.should_not be_nil }
+    it { target.latitude.should_not be_nil }
+  end
+
+  describe "clear coordinates when address is set to blank" do
+    let(:target) { FactoryGirl.create(:event, :address => 'Porto Alegre, Brazil', :longitude => nil, :latitude => nil) }
+    before(:each) {
+      target.address = ''
+      target.save
+    }
+
+    it { target.longitude.should be_nil }
+    it { target.latitude.should be_nil }
+  end
+
+  describe "don't clear coordinates when other data is set to blank" do
+    let(:target) { FactoryGirl.create(:event, :address => 'Porto Alegre, Brazil', :location => 'My House',
+      :longitude => nil, :latitude => nil) }
+
+    before(:each) {
+      target.location = ''
+      target.save
+    }
+
+    it { target.longitude.should_not be_nil }
+    it { target.latitude.should_not be_nil }
+  end
+
+
   pending "#to_ics"
 
   describe "abilities", :abilities => true do
