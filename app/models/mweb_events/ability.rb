@@ -21,6 +21,11 @@ module MwebEvents
       # Participants
       can :read, Participant
       can :create, Participant
+
+      can :destroy, Participant do |p|
+        user == p.owner || p.event.owner == user
+      end
+
     end
 
   end

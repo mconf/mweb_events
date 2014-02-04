@@ -19,7 +19,6 @@ module MwebEvents
     it { should respond_to(:event_id) }
     it { should respond_to(:event_id=) }
 
-
     it "creates a new instance given valid attributes" do
       FactoryGirl.build(:participant).should be_valid
     end

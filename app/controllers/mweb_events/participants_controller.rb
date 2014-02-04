@@ -35,6 +35,7 @@ module MwebEvents
       @participant.event = @event
       @participant.owner = current_user
 
+
       respond_to do |format|
         if @participant.save
           format.html { redirect_to @event, notice: t('participant.created') }
@@ -50,7 +51,8 @@ module MwebEvents
       @participant.destroy
 
       respond_to do |format|
-        format.html { redirect_to event_participants_path(@event) }
+        path = can?(:update, @event) ? event_participants_path(@event) : event_path(@event)
+        format.html { redirect_to path, notice: t('participant.destroyed') }
         format.json { head :no_content }
       end
     end
