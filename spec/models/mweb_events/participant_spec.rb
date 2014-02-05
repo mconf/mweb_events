@@ -6,7 +6,6 @@ module MwebEvents
     it { should validate_presence_of(:event_id) }
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).scoped_to(:event_id) }
-    it { should validate_presence_of(:owner_id) }
     it { should validate_uniqueness_of(:owner_id).scoped_to(:event_id) }
 
     it { should belong_to(:event) }

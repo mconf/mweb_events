@@ -7,7 +7,7 @@ module MwebEvents
 
     validates :event_id, :presence => true
     validates :email, :presence => true, :email => true, :uniqueness => { :scope => :event_id }
-    validates :owner_id, :presence => true, :uniqueness => { :scope => :event_id }
+    validates :owner_id, :uniqueness => { :scope => :event_id }
 
   end
 end
