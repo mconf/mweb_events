@@ -22,16 +22,19 @@ en:
     validations:
       email:
         invalid: Isn't a valid e-mail address
+  _other:
+    cancel: Cancel
+    create: Create
+    destroy: Destroy
+    edit: Edit
+    save: Save
+    update: Update
+    more: Read More
 
   mweb_events:
-    _other:
-      cancel: Cancel
-      create: Create
-      destroy: Destroy
-      edit: Edit
-      save: Save
-      update: Update
-      more: Read More
+    participant:
+      created: Successfully registered for the event
+      destroyed: Succesfully removed from the event
     events:
       no_description: No description available
       show:

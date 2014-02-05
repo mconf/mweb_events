@@ -23,15 +23,19 @@ pt:
       email:
         invalid: Não é um endereço de e-mail válido
 
+  _other:
+    cancel: Cancelar
+    create: Criar
+    destroy: Destruir
+    edit: Editar
+    save: Salvar
+    update: Atualizar
+    more: Ler Mais
+
   mweb_events:
-    _other:
-      cancel: Cancelar
-      create: Criar
-      destroy: Destruir
-      edit: Editar
-      save: Salvar
-      update: Atualizar
-      more: Ler Mais
+    participant:
+      created: Inscrito no evento com sucesso
+      destroyed: Removido do evento com sucesso
     events:
       no_description: Sem descrição
       show:

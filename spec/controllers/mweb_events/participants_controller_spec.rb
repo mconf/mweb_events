@@ -43,7 +43,7 @@ describe MwebEvents::ParticipantsController do
       it { redirect_to event_path(event) }
 
       it "sets the flash with a success message" do
-        should set_the_flash.to(I18n.t('participant.created'))
+        should set_the_flash.to(I18n.t('mweb_events.participant.created'))
       end
 
       it { MwebEvents::Participant.last.owner.should eql(owner) }
@@ -87,7 +87,7 @@ describe MwebEvents::ParticipantsController do
       it { should redirect_to event_path(event) }
 
       it "sets the flash with a success message" do
-        should set_the_flash.to(I18n.t('participant.destroyed'))
+        should set_the_flash.to(I18n.t('mweb_events.participant.destroyed'))
       end
     end
 
@@ -105,7 +105,7 @@ describe MwebEvents::ParticipantsController do
       it { should redirect_to event_participants_path(event) }
 
       it "sets the flash with a success message" do
-        should set_the_flash.to(I18n.t('participant.destroyed'))
+        should set_the_flash.to(I18n.t('mweb_events.participant.destroyed'))
       end
 
     end

@@ -38,7 +38,7 @@ module MwebEvents
 
       respond_to do |format|
         if @participant.save
-          format.html { redirect_to @event, notice: t('participant.created') }
+          format.html { redirect_to @event, notice: t('mweb_events.participant.created') }
           format.json { render json: @participant, status: :created, location: @participant }
         else
           format.html { render action: "new" }
@@ -52,7 +52,7 @@ module MwebEvents
 
       respond_to do |format|
         path = can?(:update, @event) ? event_participants_path(@event) : event_path(@event)
-        format.html { redirect_to path, notice: t('participant.destroyed') }
+        format.html { redirect_to path, notice: t('mweb_events.participant.destroyed') }
         format.json { head :no_content }
       end
     end

@@ -85,7 +85,7 @@ describe MwebEvents::EventsController do
       end
 
       it "sets the flash with a success message" do
-        should set_the_flash.to(I18n.t('event.created'))
+        should set_the_flash.to(I18n.t('mweb_events.event.created'))
       end
 
       it "sets the current user as the author" do
@@ -144,7 +144,7 @@ describe MwebEvents::EventsController do
       end
 
       it "sets the flash with a success message" do
-        should set_the_flash.to(I18n.t('event.updated'))
+        should set_the_flash.to(I18n.t('mweb_events.event.updated'))
       end
 
     end

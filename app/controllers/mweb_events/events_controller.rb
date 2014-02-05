@@ -53,7 +53,7 @@ module MwebEvents
 
       respond_to do |format|
         if @event.save
-          format.html { redirect_to @event, notice: t('event.created') }
+          format.html { redirect_to @event, notice: t('mweb_events.event.created') }
           format.json { render json: @event, status: :created, location: @event }
         else
           format.html { render action: "new" }
@@ -65,7 +65,7 @@ module MwebEvents
     def update
       respond_to do |format|
         if @event.update_attributes(params[:event])
-          format.html { redirect_to @event, notice: t('event.updated') }
+          format.html { redirect_to @event, notice: t('mweb_events.event.updated') }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
