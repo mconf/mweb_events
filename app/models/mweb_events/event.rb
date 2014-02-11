@@ -42,6 +42,15 @@ module MwebEvents
       @owner_name || owner.try(:name) || owner.try(:email)
     end
 
+    # Override this method to get a correct url in production
+    def self.host
+      "example.com"
+    end
+
+    def full_url
+      MwebEvents::Engine.routes.url_helpers.event_path(self, :host => Event.host, :only_path => false)
+    end
+
     def should_generate_new_friendly_id?
       new_record?
     end
@@ -77,16 +86,18 @@ module MwebEvents
 
     def to_ics
       event = Icalendar::Event.new
-      event.start = self.start_on.strftime("%Y%m%dT%H%M%S")
-      event.end = self.end_on.strftime("%Y%m%dT%H%M%S")
-      event.summary = self.name
-      event.description = self.summary
-      event.location = self.location
+      event.start = start_on_with_time_zone.strftime("%Y%m%dT%H%M%S")
+      event.end = end_on_with_time_zone.strftime("%Y%m%dT%H%M%S")
+      event.summary = name
+      event.description = summary
+      event.location = "#{location}"
+      event.location += " - #{address}" if !address.blank?
       event.klass = "PUBLIC"
-      event.created = self.created_at
-      event.last_modified = self.updated_at
-      event.uid = event.url = self.permalink
-      event.add_comment("")
+      event.created = created_at.strftime("%Y%m%dT%H%M%S")
+      event.last_modified = updated_at.strftime("%Y%m%dT%H%M%S")
+      event.uid = permalink
+      event.url = full_url
+      event.add_comment summary
       event
     end
 
