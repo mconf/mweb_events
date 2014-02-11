@@ -10,6 +10,8 @@
 
     = csrf_meta_tags
 
+    = yield :head
+
   %body{:class => "#{controller_name_for_view} #{params[:action]}"}
 
     .container
