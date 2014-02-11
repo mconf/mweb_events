@@ -31,7 +31,7 @@ module MwebEvents
 
     def linkedin_button_url
       title = CGI.escape(@event.name)
-      summary = CGI.escape(@event.description)
+      summary = CGI.escape(@event.summary)
       url = CGI.escape(request.original_url)
       "http://www.linkedin.com/shareArticle?mini=true&url=#{url}&summary=#{summary}&title=#{title}&source=Mconf Events"
     end
@@ -41,8 +41,9 @@ module MwebEvents
     end
 
     def twitter_button_url
-      text = I18n.t('mweb_events.events.social_media.twitter_link', :url => CGI.escape(request.original_url))
-     "https://twitter.com/intent/tweet?text=#{text}"
+      url = request.original_url
+      text = "#{@event.summary}".truncate(140 - url.size) + " #{url}"
+     "https://twitter.com/intent/tweet?text=#{CGI.escape(text)}"
     end
 
     def facebook_button_url
