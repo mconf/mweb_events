@@ -57,6 +57,8 @@
 
     = f.input :description
 
+    = render 'markdown_modal'
+
     #epiceditor
 
     - cancel_path = @event.new_record? ? events_path : event_path(@event)

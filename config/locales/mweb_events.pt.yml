@@ -31,12 +31,17 @@ pt:
     save: Salvar
     update: Atualizar
     more: Ler Mais
+    close: Fechar
 
   mweb_events:
     participant:
       created: Inscrito no evento com sucesso
       destroyed: Removido do evento com sucesso
     events:
+      markdown_modal:
+        title: Como formatar o texto de descrição?
+        description_html: "O texto de descrição aceita formatação <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a>. Aqui estão algumas dicas rápidas:"
+        table_partial: markdown.pt
       no_description: Sem descrição
       show:
         date: Quando?

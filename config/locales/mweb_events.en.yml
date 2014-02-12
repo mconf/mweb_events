@@ -30,12 +30,17 @@ en:
     save: Save
     update: Update
     more: Read More
+    close: Close
 
   mweb_events:
     participant:
       created: Successfully registered for the event
       destroyed: Succesfully removed from the event
     events:
+      markdown_modal:
+        title: How to format the description text?
+        description_html: "The description text accepts <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a> formatted text. Here's a quick cheatsheet:"
+        table_partial: markdown.en
       no_description: No description available
       show:
         date: When?
