@@ -13,18 +13,6 @@ $ ->
     # Time zone
     $("#event_time_zone").select2()
 
-    # Location
-    if $("#event_location")[0].value is ""
-        $("#event_address").attr('disabled', true)
-
-    enable_address = ->
-      if @value isnt ""
-        $("#event_address").removeAttr("disabled")
-      else
-        $("#event_address").attr("disabled", true)
-
-    $("#event_location").on 'input keyup', enable_address
-
     # Description editor box
     opts =
       button: false
