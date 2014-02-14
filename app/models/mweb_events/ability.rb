@@ -8,6 +8,7 @@ module MwebEvents
       # Events
       can :read, Event
       can :create, Event
+      can :select, Event
 
       can [:update, :destroy], Event do |e|
         e.owner == user

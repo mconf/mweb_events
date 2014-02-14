@@ -4,6 +4,8 @@ module MwebEvents
     before_filter :load_events_in_order, :only => [:index]
     load_and_authorize_resource :find_by => :permalink
 
+    respond_to :json
+
     def index
       respond_to do |format|
         format.html # index.html.erb
@@ -80,6 +82,22 @@ module MwebEvents
       respond_to do |format|
         format.html { redirect_to events_url }
         format.json { head :no_content }
+      end
+    end
+
+    # Finds events by name (params[:q]) and returns a list of selected attributes
+    def select
+      name = params[:q]
+      limit = params[:limit] || 5
+      limit = 50 if limit.to_i > 50
+      if name.blank?
+        @events = Event.limit(limit).all
+      else
+        @events = Event.where("name like ?", "%#{name}%").limit(limit)
+      end
+
+      respond_with @events do |format|
+        format.json
       end
     end
 
