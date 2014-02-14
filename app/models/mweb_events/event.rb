@@ -26,9 +26,19 @@ module MwebEvents
     # Test if we need to clear the coordinates because address was cleared
     before_save :check_coordinates
 
+    # Events that are happening currently
+    scope :happening_now, lambda {
+      where("start_on <= ? AND end_on > ?", Time.zone.now, Time.zone.now).order("start_on")
+    }
+
+    # Events that have already happened
+    scope :past, lambda {
+      where("end_on < ?", Time.zone.now).order("end_on")
+    }
+
     # Events that are either in the future or are running now.
     scope :upcoming, lambda {
-      where("end_on > ?", Time.now).order("start_on")
+      where("end_on > ?", Time.zone.now).order("start_on")
     }
 
     # Events that happen between `from` and `to`
