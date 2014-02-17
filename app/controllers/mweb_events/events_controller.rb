@@ -7,6 +7,15 @@ module MwebEvents
     respond_to :json
 
     def index
+
+      if params[:show] == 'happening_now'
+        @events = @events.happening_now
+      elsif params[:show] == 'past_events'
+        @events = @events.past.reverse!
+      elsif params[:show] == 'upcoming_events'
+        @events = @events.upcoming
+      end # params == 'all' or blank
+
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @events }
