@@ -1,7 +1,6 @@
-%h2
-  = t('.title')
+- if can? :register, @event
+  %h2
+    = t('.title')
 
-%section.event-register
-
-  - if can? :register, @event
+  %section.event-register
     = link_to t('.button'), new_event_participant_path(@event), :class => 'btn btn-success large main'
