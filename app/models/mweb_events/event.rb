@@ -111,6 +111,11 @@ module MwebEvents
       event
     end
 
+    # Returns wheter the event has already happaned and is finished
+    def past?
+      end_on.past?
+    end
+
     # Returns whether the event is happening now or not.
     def is_happening_now?
       if start_on.past? && end_on.future?
