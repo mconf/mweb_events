@@ -7,10 +7,11 @@ module MwebEvents
       day = sanitize(event.start_on.strftime("%d"))
       month = localize(event.start_on, :format => "%b")
       hour = event.get_formatted_hour
+      year = sanitize(event.start_on.strftime("%Y"))
 
       hour_tag = content_tag(:div, hour, { :class => 'mweb_events-event-logo-hour' })
       day_tag = content_tag(:div, day + ' ' + month, { :class => 'mweb_events-event-logo-day' })
-      year_tag = content_tag(:div, '2014', { :class => 'mweb_events-event-logo-year' })
+      year_tag = content_tag(:div, year, { :class => 'mweb_events-event-logo-year' })
 
       content_tag(:div, hour_tag + day_tag + year_tag, options)
     end
