@@ -8,10 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require leaflet
- *= require select2
- *= require font-awesome
- *= require bootstrap-datetimepicker
+ * We list all dependencies here, but don't require them. They should be required
+ * by the application using this gem.
+ *
+ * require leaflet
+ * require select2
+ * require font-awesome
+ * require bootstrap-datetimepicker
  *= require_self
  *= require_tree ./mweb_events
  */

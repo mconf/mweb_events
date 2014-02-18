@@ -10,12 +10,16 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require epiceditor
-//= require leaflet
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap-datetimepicker
-//= require locales/bootstrap-datetimepicker.pt-BR
-//= require jquery.expander.min
-//= require select2
+//
+// We list all dependencies here, but don't require them. They should be required
+// by the application using this gem.
+//
+// require epiceditor
+// require leaflet
+// require jquery
+// require jquery_ujs
+// require bootstrap-datetimepicker
+// require locales/bootstrap-datetimepicker.pt-BR
+// require jquery.expander.min
+// require select2
 //= require_tree ./mweb_events
