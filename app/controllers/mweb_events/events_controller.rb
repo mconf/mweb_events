@@ -12,9 +12,11 @@ module MwebEvents
         @events = @events.happening_now
       elsif params[:show] == 'past_events'
         @events = @events.past.reverse!
-      elsif params[:show] == 'upcoming_events'
+      elsif params[:show] == 'all'
+        # no filtering
+      elsif params[:show] == 'upcoming_events' or !params[:show] #default case
         @events = @events.upcoming
-      end # params == 'all' or blank
+      end
 
       respond_to do |format|
         format.html # index.html.erb
