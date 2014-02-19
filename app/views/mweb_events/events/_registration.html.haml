@@ -1,4 +1,4 @@
-- if can? :register, @event
+- if can?(:register, @event) && !@event.past?
   %h2
     = t('.title')
 
