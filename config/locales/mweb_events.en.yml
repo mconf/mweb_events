@@ -3,15 +3,16 @@ en:
   activerecord:
     attributes:
       mweb_events/event:
-        name: Name
-        location: Location
         address: Address
-        start_on: Start Date and Time
-        end_on: End Date and Time
-        time_zone: Time Zone
-        social_networks: Social Network
         description: Description
+        end_on: End date
+        location: Location
+        name: Name
+        owner_name: This event belongs to
+        social_networks: Broadcast in social networks
+        start_on: Start date
         summary: Summary
+        time_zone: Time zone
       mweb_events/participant:
         email: Email
     models:
@@ -40,7 +41,6 @@ en:
       markdown_modal:
         title: How to format the description text?
         description_html: "The description text accepts <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a> formatted text. Here's a quick cheatsheet:"
-        table_partial: markdown.en
       no_description: No description available
       show:
         date: When?

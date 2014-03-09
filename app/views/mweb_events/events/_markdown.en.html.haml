@@ -1,17 +1,14 @@
-%table{cellpadding: "0", cellspacing: "0"}
+%table.table.table-bordered.table-striped
   %tr
     %td _your text_
-    %td.arrow →
     %td
       %em your text
   %tr
     %td **your text**
-    %td.arrow →
     %td
       %strong your text
   %tr
     %td `my code`
-    %td.arrow →
     %td
       %code my code
   %tr
@@ -19,7 +16,6 @@
       * Bulleted list
       %br>/
       * Second item
-    %td.arrow →
     %td
       \• Bulleted list
       %br>/
@@ -28,21 +24,18 @@
     %td
       1. Numbered list
       %br>/
-      1. Second item
-    %td.arrow →
+      2. Second item
     %td
       1. Numbered list
       %br>/
       2. Second item
   %tr
     %td [link name](URL)
-    %td.arrow →
     %td
       %a{href: "URL"} link name
   %tr
     %td ![Alt text](URL)
-    %td.arrow →
-    %td Image
+    %td (The image from the URL appears in the comment)
   %tr
     %td
       \## Header
@@ -52,7 +45,6 @@
       \#### Subsubhead
       %br>/
       \##### Etc.
-    %td.arrow →
     %td
       %b
         %span{style: "font-size:1.73em"} Header
@@ -64,5 +56,4 @@
         %span{style: "font-size:1em"} Etc.
   %tr
     %td ***
-    %td.arrow →
     %td Horizontal rule

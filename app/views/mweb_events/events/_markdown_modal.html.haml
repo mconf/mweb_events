@@ -12,7 +12,7 @@
     %p
       = t '.description_html'
 
-    = render t('.table_partial')
+    = render "markdown.#{I18n.locale}"
 
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"}

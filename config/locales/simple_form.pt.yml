@@ -11,29 +11,16 @@ pt:
     buttons:
       or: Ou
       cancel: Cancelar
-    labels:
-      event:
-        name: Nome
-        location: Localização
-        address: Endereço
-        owner_name: Este evento pertence a
-        start_on: Data e Horário de início
-        end_on: Data e Horário de Término
-        time_zone: Fuso Horário
-        social_networks: Redes Sociais
-        description: Descrição
-        summary: Resumo
-      participants:
-        email: E-mail
+    # labels:
     hints:
       event:
-        time_zone: Escolha um fuso horário se o evento for acontecer em um fuso diferente do fuso horário do site.
-        location: Uma descrição breve de onde o evento irá acontecer. Por exemplo 'Sede do Mconf'.
-        address: Endereço físico de onde se localizará o evento. Um endereço válido será mostrado como um marcador e mapa na página do evento.
-        social_networks: Quais botões de redes sociais devem ficar visíveis na página do evento?
+        time_zone: Escolha o fuso horário no qual este evento está sendo configurado.
+        location: Uma descrição breve de onde o evento irá acontecer. Por exemplo 'Universidade XY'.
+        address: O endereço físico completo de onde se localizará o evento. Um endereço válido fará com que um mapa seja criado na página do evento e o endereço seja marcado nele.
+        social_networks: Quais botões de compartilhamento em redes sociais devem ficar visíveis na página do evento?
         description: Digite a descrição do evento. Você pode usar Markdown para embelezar o texto.
-        summary: Digite um resumo do evento em 140 ou menos caracteres.
+        summary: Digite um resumo do evento em 140 caracteres ou menos.
         start_on: Data e horário de início do evento.
-        end_on: Não é obrigatório, mas se ficar vazio o evento acaba 24 horas depois do início.
+        end_on: Data e horário de fim do evento. É opcional, e se não informado o evento acabará 24 horas depois do início.
     error_notification:
       default_message: "Por favor corrija os erros abaixo:"

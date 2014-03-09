@@ -79,16 +79,9 @@ hr {
   margin: 20px 0 10px 0;
 }
 
-td.arrow {
-  font-size: 200%;
-  font-weight: bold;
-}
-
-td {
-  text-align: left;
-  padding-left: 30px;
-  width: 200px;
-  height: 60px;
+// the time zone select2 input in events/new and edit
+#s2id_event_time_zone {
+  min-width: 250px;
 }
 
 /* For event logos */
