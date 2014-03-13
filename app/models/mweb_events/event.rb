@@ -96,16 +96,17 @@ module MwebEvents
 
     def to_ics
       event = Icalendar::Event.new
-      event.start = start_on_with_time_zone.strftime("%Y%m%dT%H%M%S")
-      event.end = end_on_with_time_zone.strftime("%Y%m%dT%H%M%S")
+      event.dtstart = start_on.strftime("%Y%m%dT%H%M%SZ")
+      event.dtend = end_on.strftime("%Y%m%dT%H%M%SZ") if !end_on.blank?
       event.summary = name
+      event.organizer = owner_name
       event.description = summary
       event.location = "#{location}"
       event.location += " - #{address}" if !address.blank?
       event.klass = "PUBLIC"
       event.created = created_at.strftime("%Y%m%dT%H%M%S")
       event.last_modified = updated_at.strftime("%Y%m%dT%H%M%S")
-      event.uid = permalink
+      event.uid = full_url
       event.url = full_url
       event.add_comment summary
       event
