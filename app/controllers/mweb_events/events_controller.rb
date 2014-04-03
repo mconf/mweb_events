@@ -2,6 +2,7 @@ module MwebEvents
   class EventsController < ApplicationController
     layout "mweb_events/application"
     before_filter :load_events_in_order, :only => [:index]
+    before_filter :concat_datetimes, :only => [:create, :update]
     load_and_authorize_resource :find_by => :permalink
 
     respond_to :json
@@ -118,5 +119,14 @@ module MwebEvents
       @events = Event.order "start_on ASC"
     end
 
+    def concat_datetimes
+      if params[:event][:start_on_date]
+        params[:event][:start_on] = "#{params[:event][:start_on_date]} #{params[:event][:start_on_time]}"
+      end
+
+      if params[:event][:end_on_date]
+        params[:event][:end_on] = "#{params[:event][:end_on_date]} #{params[:event][:end_on_time]}"
+      end
+    end
   end
 end

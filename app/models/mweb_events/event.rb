@@ -2,9 +2,11 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessible :address, :start_on, :end_on, :description,
-      :location, :name, :time_zone, :social_networks, :summary,
-      :owner_id, :owner_type
+    attr_accessible :address, :start_on_time, :start_on_date, :description,
+      :location, :name, :time_zone, :end_on_time, :end_on_date,
+      :social_networks, :summary, :owner_id, :owner_type, :start_on, :end_on
+
+    attr_accessor :start_on_time, :start_on_date, :end_on_time, :end_on_date
 
     geocoded_by :address
     after_validation :geocode
@@ -94,6 +96,23 @@ module MwebEvents
       end_on.in_time_zone(time_zone) if end_on && time_zone
     end
 
+    # To format results on forms
+    def start_on_date
+      start_on.strftime('%d/%m/%Y') if start_on
+    end
+
+    def start_on_time
+      start_on.strftime('%H:%M') if start_on
+    end
+
+    def end_on_date
+      end_on.strftime('%d/%m/%Y') if end_on
+    end
+
+    def end_on_time
+      end_on.strftime('%H:%M') if end_on
+    end
+
     def to_ics
       event = Icalendar::Event.new
       event.dtstart = start_on.strftime("%Y%m%dT%H%M%SZ")
@@ -178,6 +197,5 @@ module MwebEvents
         write_attribute(:latitude, nil)
       end
     end
-
   end
 end

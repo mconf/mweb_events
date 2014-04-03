@@ -12,23 +12,47 @@
 
     .input.string.event_start_on.field_with_hint
 
-      .input-append.date#start_on
-        = f.label :start_on
-        = f.hint :start_on
-        = f.text_field :start_on, :'data-format' => 'dd/MM/yyyy hh:mm:ss'
+      .input-append.date#start_on_date.datepicker-field
+        = f.label :start_on_date
+        = f.hint :start_on_date
+        = f.text_field :start_on_date, :'data-format' => 'dd/MM/yyyy'
 
         %span.add-on
           %i{:'data-time-icon'=>"icon icon-time", :'data-date-icon'=>"icon icon-calendar"}
+
+      %i.icon-remove.clear-date{:'data-clear' => 'start_on_date'}
+
+      .input-append.date#start_on_time.datepicker-field
+        = f.label :start_on_time
+        = f.hint :start_on_time
+        = f.text_field :start_on_time, :'data-format' => 'hh:mm'
+
+        %span.add-on
+          %i{:'data-time-icon'=>"icon icon-time", :'data-date-icon'=>"icon icon-calendar"}
+
+      %i.icon-remove.clear-date{:'data-clear' => 'start_on_time'}
 
     .input.string.event_end_on.field_with_hint
 
-      .input-append.date#end_on
-        = f.label :end_on
-        = f.hint :end_on
-        = f.text_field :end_on, :'data-format' => 'dd/MM/yyyy hh:mm:ss'
+      .input-append.date#end_on_date.datepicker-field
+        = f.label :end_on_date
+        = f.hint :end_on_date
+        = f.text_field :end_on_date, :'data-format' => 'dd/MM/yyyy'
 
         %span.add-on
           %i{:'data-time-icon'=>"icon icon-time", :'data-date-icon'=>"icon icon-calendar"}
+
+      %i.icon-remove.clear-date{:'data-clear' => 'end_on_date'}
+
+      .input-append.date#end_on_time.datepicker-field
+        = f.label :end_on_time
+        = f.hint :end_on_time
+        = f.text_field :end_on_time, :'data-format' => 'hh:mm'
+
+        %span.add-on
+          %i{:'data-time-icon'=>"icon icon-time", :'data-date-icon'=>"icon icon-calendar"}
+
+      %i.icon-remove.clear-date{:'data-clear' => 'end_on_time'}
 
     .input.string.event_time_zone.field_with_hint
 

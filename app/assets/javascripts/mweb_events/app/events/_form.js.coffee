@@ -2,13 +2,29 @@ $ ->
   if MwebEvents.isOnPage('mweb_events-events', 'new') or MwebEvents.isOnPage('mweb_events-events', 'edit') or MwebEvents.isOnPage('mweb_events-events', 'create')
 
     # Calendar
-    $('#start_on, #end_on').datetimepicker
+    $('#start_on_date, #end_on_date').datetimepicker
       language: 'pt-BR'
+      pickTime: false
 
-    # Kind of a hack to show the arrows
-    $('#start_on i, #end_on i').on 'click', (e) ->
-      $('.icon-chevron-down').attr('class', 'icon icon-chevron-down')
-      $('.icon-chevron-up').attr('class', 'icon icon-chevron-up')
+    $('#start_on_time, #end_on_time').datetimepicker
+      language: 'pt-BR'
+      pickDate: false
+
+    # Hacky way to open the field when clicking the input
+
+    # Show the ok button
+    $('.datepicker-field, .add-on i').on 'click', (e) ->
+      $('.add-on i', this).click()
+
+      if $('.bootstrap-datetimepicker-widget a.btn.ok').length == 0
+        $('.bootstrap-datetimepicker-widget').append('<a class="btn ok btn-primary">Ok</a>')
+
+        $('.bootstrap-datetimepicker-widget a.ok').click ->
+          $('.bootstrap-datetimepicker-widget').hide()
+
+    # Make respective buttons clear their fields
+    $('.clear-date').on 'click', (e) ->
+      $('#event_' + $(this).attr('data-clear')).val('')
 
     # Time zone
     $("#event_time_zone").select2()
