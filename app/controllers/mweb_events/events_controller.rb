@@ -120,12 +120,16 @@ module MwebEvents
     end
 
     def concat_datetimes
-      if params[:event][:start_on_date]
+      if params[:event][:start_on_date].present?
         params[:event][:start_on] = "#{params[:event][:start_on_date]} #{params[:event][:start_on_time]}"
+      else
+        params[:event][:start_on] = ''
       end
 
-      if params[:event][:end_on_date]
+      if params[:event][:end_on_date].present?
         params[:event][:end_on] = "#{params[:event][:end_on_date]} #{params[:event][:end_on_time]}"
+      else
+        params[:event][:end_on] = ''
       end
     end
   end
