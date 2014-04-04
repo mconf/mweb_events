@@ -19,6 +19,11 @@ module MwebEvents
         @events = @events.upcoming
       end
 
+      # Use query parameter to search for events
+      if params[:q].present?
+        @events = @events.where("name like ?", "%#{params[:q]}%")
+      end
+
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @events }
