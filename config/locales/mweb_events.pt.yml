@@ -38,6 +38,10 @@ pt:
     participant:
       created: Inscrito no evento com sucesso
       destroyed: Removido do evento com sucesso
+    event:
+      created: Evento criado com sucesso
+      destroyed: Evento removido com sucesso
+      updated: Informações do evento atualizadas
     events:
       markdown_modal:
         title: Como formatar o texto de descrição?

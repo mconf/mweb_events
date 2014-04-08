@@ -37,6 +37,10 @@ en:
     participant:
       created: Successfully registered for the event
       destroyed: Succesfully removed from the event
+    event:
+      created: Successfully created the event
+      destroyed: Successfully deleted the event
+      updated: Event information updated
     events:
       markdown_modal:
         title: How to format the description text?
