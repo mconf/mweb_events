@@ -37,6 +37,7 @@ pt:
   mweb_events:
     participant:
       created: Inscrito no evento com sucesso
+      already_created: Este email já está inscrito neste evento.
       destroyed: Removido do evento com sucesso
     event:
       created: Evento criado com sucesso

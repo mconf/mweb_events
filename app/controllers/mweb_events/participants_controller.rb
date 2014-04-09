@@ -35,10 +35,12 @@ module MwebEvents
       @participant.event = @event
       @participant.owner = current_user
 
-
       respond_to do |format|
-        if @participant.save
-          format.html { redirect_to @event, notice: t('mweb_events.participant.created') }
+        # If user is already registered with this email succeed with another message and don't save
+        taken = @participant.email_taken?
+        notice = taken ? t('mweb_events.participant.already_created') : t('mweb_events.participant.created')
+        if taken || @participant.save
+          format.html { redirect_to @event, notice: notice }
           format.json { render json: @participant, status: :created, location: @participant }
         else
           format.html { render action: "new" }

@@ -2,6 +2,6 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :email
+    = f.input :email, :disabled => current_user.present?
 
   = f.button :wrapped, :cancel => event_path(@event), :value => t(".submit")
