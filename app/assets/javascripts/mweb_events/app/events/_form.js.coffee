@@ -3,7 +3,7 @@ $ ->
 
     # Calendar
     $('#start_on_date, #end_on_date').datetimepicker
-      language: 'pt-BR'
+      language: 'pt-BR' # TODO: use the user's language
       pickTime: false
 
     $('#start_on_time, #end_on_time').datetimepicker

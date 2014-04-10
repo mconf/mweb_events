@@ -13,7 +13,7 @@ module MwebEvents
       day_tag = content_tag(:div, day + ' ' + month, { :class => 'mweb_events-event-logo-day' })
       year_tag = content_tag(:div, year, { :class => 'mweb_events-event-logo-year' })
 
-      content_tag(:div, hour_tag + day_tag + year_tag, options)
+      content_tag(:div, day_tag + hour_tag + year_tag, options)
     end
 
     def event_logo_link(event, options={})
