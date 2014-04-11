@@ -16,6 +16,7 @@ module MwebEvents
 
     validates :name, :presence => true
     validates :start_on, :presence => true
+    validates :time_zone, :presence => true
     validates :summary, :length => {:maximum => 140}
 
     friendly_id :name, use: :slugged, :slug_column => :permalink
@@ -27,6 +28,8 @@ module MwebEvents
 
     # Test if we need to clear the coordinates because address was cleared
     before_save :check_coordinates
+
+    before_save :convert_dates_to_utc
 
     # Events that are happening currently
     scope :happening_now, lambda {
@@ -96,21 +99,30 @@ module MwebEvents
       end_on.in_time_zone(time_zone) if end_on && time_zone
     end
 
+    # Used to convert the dates to UTC in 'before_save'
+    def start_on=time_string
+      @start_on = time_string
+    end
+
+    def end_on=time_string
+      @end_on = time_string
+    end
+
     # To format results on forms
     def start_on_date
-      start_on.strftime('%d/%m/%Y') if start_on
+      start_on_with_time_zone.strftime('%d/%m/%Y') if start_on
     end
 
     def start_on_time
-      start_on.strftime('%H:%M') if start_on
+      start_on_with_time_zone.strftime('%H:%M') if start_on
     end
 
     def end_on_date
-      end_on.strftime('%d/%m/%Y') if end_on
+      end_on_with_time_zone.strftime('%d/%m/%Y') if end_on
     end
 
     def end_on_time
-      end_on.strftime('%H:%M') if end_on
+      end_on_with_time_zone.strftime('%H:%M') if end_on
     end
 
     def to_ics
@@ -174,9 +186,17 @@ module MwebEvents
 
     def get_formatted_timezone(date=nil)
       if date.nil?
-        "GMT#{start_on.formatted_offset}"
+        "GMT#{start_on_with_time_zone.formatted_offset}"
       else
-        "GMT#{date.formatted_offset}"
+        "GMT#{date.in_time_zone(time_zone).formatted_offset}"
+      end
+    end
+
+    # We store dates as UTC and convert to show and receive input
+    def convert_dates_to_utc
+      Time.use_zone time_zone do
+        write_attribute(:start_on, Time.zone.parse(@start_on.to_s).in_time_zone('UTC')) if defined? @start_on
+        write_attribute(:end_on, Time.zone.parse(@end_on.to_s).in_time_zone('UTC')) if defined? @end_on
       end
     end
 

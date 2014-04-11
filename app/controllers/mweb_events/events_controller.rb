@@ -31,6 +31,8 @@ module MwebEvents
     end
 
     def show
+      @time_zone = Time.zone
+
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @event }
