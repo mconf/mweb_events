@@ -99,15 +99,6 @@ module MwebEvents
       end_on.in_time_zone(time_zone) if end_on && time_zone
     end
 
-    # Used to convert the dates to UTC in 'before_save'
-    def start_on=time_string
-      @start_on = time_string
-    end
-
-    def end_on=time_string
-      @end_on = time_string
-    end
-
     # To format results on forms
     def start_on_date
       start_on_with_time_zone.strftime('%d/%m/%Y') if start_on
@@ -195,8 +186,10 @@ module MwebEvents
     # We store dates as UTC and convert to show and receive input
     def convert_dates_to_utc
       Time.use_zone time_zone do
-        write_attribute(:start_on, Time.zone.parse(@start_on.to_s).in_time_zone('UTC')) if defined? @start_on
-        write_attribute(:end_on, Time.zone.parse(@end_on.to_s).in_time_zone('UTC')) if defined? @end_on
+        write_attribute(:start_on,
+          Time.zone.parse(start_on.strftime("%d/%m/%Y %H:%M")).in_time_zone('UTC')) if time_zone_changed? || start_on_changed?
+        write_attribute(:end_on,
+          Time.zone.parse(end_on.strftime("%d/%m/%Y %H:%M")).in_time_zone('UTC')) if time_zone_changed? || end_on_changed?
       end
     end
 
