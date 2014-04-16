@@ -10,7 +10,7 @@ module MwebEvents
     validates :owner_id, :uniqueness => { :scope => :event_id }
 
     def email_taken?
-      Participant.where(:email => email, :event_id => event).first != self
+      Participant.where(:email => email, :event_id => event).first != self && email.present?
     end
 
   end
