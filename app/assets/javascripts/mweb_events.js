@@ -14,12 +14,14 @@
 // We list all dependencies here, but don't require them. They should be required
 // by the application using this gem.
 //
+//= require moment
+//= require moment/pt-br
 // require epiceditor
 // require leaflet
 // require jquery
 // require jquery_ujs
-// require bootstrap-datetimepicker
-// require locales/bootstrap-datetimepicker.pt-BR
+//= require bootstrap-datetimepicker
+//= require locales/bootstrap-datetimepicker.pt-BR.js
 // require jquery.expander.min
 // require select2
 //= require_tree ./mweb_events

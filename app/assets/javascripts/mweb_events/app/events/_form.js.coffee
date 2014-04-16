@@ -4,23 +4,16 @@ $ ->
     # Calendar
     $('#start_on_date, #end_on_date').datetimepicker
       language: 'pt-BR' # TODO: use the user's language
+      showToday: true
       pickTime: false
 
     $('#start_on_time, #end_on_time').datetimepicker
       language: 'pt-BR'
       pickDate: false
-
-    # Hacky way to open the field when clicking the input
-
-    # Show the ok button
-    $('.datepicker-field, .add-on i').on 'click', (e) ->
-      $('.add-on i', this).click()
-
-      if $('.bootstrap-datetimepicker-widget a.btn.ok').length == 0
-        $('.bootstrap-datetimepicker-widget').append('<a class="btn ok btn-primary">Ok</a>')
-
-        $('.bootstrap-datetimepicker-widget a.ok').click ->
-          $('.bootstrap-datetimepicker-widget').hide()
+      minuteStepping: 10
+      icons:
+        up: "icon icon-chevron-up",
+        down: "icon icon-chevron-down"
 
     # Make respective buttons clear their fields
     $('.clear-date').on 'click', (e) ->

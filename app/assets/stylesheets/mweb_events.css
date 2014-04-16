@@ -14,7 +14,7 @@
  * require leaflet
  * require select2
  * require font-awesome
- * require bootstrap-datetimepicker
+ *= require bootstrap-datetimepicker
  *= require_self
  *= require_tree ./mweb_events
  */
