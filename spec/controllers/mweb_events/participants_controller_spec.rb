@@ -27,15 +27,14 @@ describe MwebEvents::ParticipantsController do
   end
 
   describe "#create" do
-    let(:owner) { FactoryGirl.create(:owner) }
     let(:event) { FactoryGirl.create(:event) }
 
     context "creating with valid attributes" do
+      let(:email) { Faker::Internet.email }
       before(:each) {
-        sign_in(owner)
 
         expect {
-          post :create, :event_id => event, :participant => FactoryGirl.attributes_for(:participant, :email => owner.email)
+          post :create, :event_id => event, :participant => FactoryGirl.attributes_for(:participant, :email => email)
         }.to change(MwebEvents::Participant, :count).by(1)
 
       }
@@ -46,15 +45,13 @@ describe MwebEvents::ParticipantsController do
         should set_the_flash.to(I18n.t('mweb_events.participant.created'))
       end
 
-      it { MwebEvents::Participant.last.owner.should eql(owner) }
+      it { MwebEvents::Participant.last.email.should eql(email) }
       it { MwebEvents::Participant.last.event.should eql(event) }
 
     end
 
     context "creating with invalid attributes" do
       before(:each) {
-        sign_in(owner)
-
         expect {
           post :create, :event_id => event, :participant => FactoryGirl.attributes_for(:participant, :email => 'booboo')
         }.to change(MwebEvents::Participant, :count).by(0)

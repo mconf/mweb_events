@@ -67,7 +67,7 @@ describe MwebEvents::EventsController do
 
       before(:each) {
         expect {
-          post :create, :event => attributes
+          post :create, :event => attributes.merge({:start_on_date => attributes[:start_on]})
         }.to change(MwebEvents::Event, :count).by(1)
       }
 
@@ -131,7 +131,7 @@ describe MwebEvents::EventsController do
 
     context "with valid attributes" do
       let(:attributes) { FactoryGirl.attributes_for(:event) }
-      before(:each) { put :update, :id => event, :event => attributes }
+      before(:each) { put :update, :id => event, :event => attributes.merge({:start_on_date => attributes[:start_on]}) }
 
       it "sets the correct attributes in the event"
 

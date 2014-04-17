@@ -9,8 +9,8 @@ FactoryGirl.define do
     e.location { Faker::Name.name }
     e.address { Faker::Address.street_address }
     e.social_networks { MwebEvents::SOCIAL_NETWORKS.sample(3) }
-    e.start_on { Time.now + 2.hours }
-    e.end_on { Time.now + 4.hours }
+    e.start_on { Time.zone.now + 2.hours }
+    e.end_on { Time.zone.now + 2.days }
     e.association :owner
     # e.permalink { name.split.join('-') }
   end
