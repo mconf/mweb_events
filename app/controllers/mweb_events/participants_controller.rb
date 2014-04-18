@@ -33,8 +33,10 @@ module MwebEvents
 
     def create
       @participant.event = @event
-      @participant.owner = current_user
-
+      if current_user
+        @participant.owner = current_user
+        @participant.email = current_user.email
+      end
       respond_to do |format|
         # If user is already registered with this email succeed with another message and don't save
         taken = @participant.email_taken?

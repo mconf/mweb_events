@@ -3,10 +3,16 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  # Just so we can only test what matters in the spec files
-  if ENV["RAILS_ENV"] == 'test'
-    skip_before_filter :authenticate_user!
-  end
+  skip_before_filter :authenticate_user!, :if => Proc.new {
+    # Just so we can only test what matters in the spec files
+    ENV["RAILS_ENV"] == 'test' ||
+    # Don't ask for login on event show and register
+    controller_name == 'events' && params[:action] == 'index' ||
+    controller_name == 'events' && params[:action] == 'show' ||
+    controller_name == 'participants' && params[:action] == 'new' ||
+    controller_name == 'participants' && params[:action] == 'create'
+  }
+
 
   # Get engine authorizations
   before_filter do
