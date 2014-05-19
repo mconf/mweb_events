@@ -62,13 +62,18 @@ pt:
         title: Participar
         button: Registre-se
       summary:
-        start_on: "Em:"
-        end_on: "Até:"
-        time_zone: Fuso Horário
-        calendar: Adicionar ao Calendário
+        calendar: Adicionar ao calendário
         contact: Fale com o organizador
+        end_on: "Até:"
+        more_options: "Mais opções:"
         rss: RSS
+        showing_time_zone: "(Mostrando no fuso horário %{time_zone})"
+        start_on: "Em:"
+        time_zone: Fuso Horário
+        when: "Quando?"
+        where: "Onde?"
       social_media:
+        title: "Compartilhe este evento:"
         twitter: Compartilhar no Twitter
         twitter_link: Olha só este evento em %{url}
         facebook: Compartilhar no Facebook

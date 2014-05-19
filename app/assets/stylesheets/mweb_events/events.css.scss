@@ -17,24 +17,47 @@
 }
 
 .event-summary {
-  p {
-    font-size: 110%;
-  }
-
-  ul {
-    margin: 20px 0 0 0;
-  }
 
   .summary {
     padding-bottom: 10px;
     margin: 0 0 15px 0;
     border-bottom: 1px solid #ddd;
   }
+
+  .event-map {
+    margin: 5px 0;
+  }
+
+  .summary-block {
+    padding: 5px 0 10px 0;
+  }
+
+  .summary-dates-indented {
+    margin-left: 15px;
+  }
+
+  .observation {
+    color: #666;
+    font-size: 90%;
+  }
+
+  .summary-button {
+    font-weight: bold;
+    font-size: 110%;
+  }
+
+  ul.summary-options {
+    margin: 10px 10px 0 10px;
+
+    li { margin: 5px 0; }
+  }
+
 }
 
-.summary-button {
-  font-weight: bold;
-  font-size: 120%;
+.event-organizers {
+  h3 {
+    margin-top: 0;
+  }
 }
 
 .event-container {
@@ -53,16 +76,6 @@ hr {
     margin-right: 10px;
   }
 
-  a {
-    text-decoration: none;
-    color: #fff;
-  }
-
-  a:hover {
-    color: #ccf;
-    text-decoration: none;
-  }
-
 }
 
 .event-description {
@@ -73,10 +86,6 @@ hr {
 
 .event-footer {
   a { margin-right: 10px; }
-}
-
-.event-map {
-  margin: 20px 0 10px 0;
 }
 
 // the time zone select2 input in events/new and edit

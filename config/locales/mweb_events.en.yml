@@ -61,13 +61,18 @@ en:
         title: Registration
         button: Register
       summary:
-        start_on: "From:"
-        end_on: "To:"
-        time_zone: Time Zone
-        calendar: Add to Calendar
+        calendar: Add to calendar
         contact: Contact the organizer
+        end_on: "End:"
+        more_options: "More options:"
         rss: RSS
+        showing_time_zone: "(Showing in the time zone %{time_zone})"
+        start_on: "Start:"
+        time_zone: Time Zone
+        when: "When?"
+        where: "Where?"
       social_media:
+        title: "Share this event:"
         twitter: Share on Twitter
         twitter_link: Check out this event at %{url}
         facebook: Share on Facebook

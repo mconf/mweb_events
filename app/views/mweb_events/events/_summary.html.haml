@@ -1,52 +1,67 @@
 %p.summary
   = @event.summary
 
-%p
-  %i.icon.icon-calendar-empty
-  %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
-  %time{ :datetime => @event.start_on_with_time_zone }
-    = t('.start_on')
-    -# @time_zone is the current user or webstie timezone
-    = @event.get_formatted_date(@event.start_on.in_time_zone(@time_zone), false)
 
--if @event.end_on
+.summary-block
+
   %p
     %i.icon.icon-calendar-empty
-    %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
-    %time{ :datetime => @event.end_on_with_time_zone }
-      = t('.end_on')
+    = t('.when')
+
+  %p.summary-dates-indented
+    %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
+    %time{ :datetime => @event.start_on_with_time_zone }
+      = t('.start_on')
       -# @time_zone is the current user or webstie timezone
-      = @event.get_formatted_date(@event.end_on.in_time_zone(@time_zone), false)
+      = @event.get_formatted_date(@event.start_on.in_time_zone(@time_zone), false)
 
-%p
-  %i.icon.icon-time
-  = t('.time_zone')
-  = @event.time_zone + " (#{@event.get_formatted_timezone(@event.end_on)})"
+  - if @event.end_on
+    %p.summary-dates-indented
+      %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
+      %time{ :datetime => @event.end_on_with_time_zone }
+        = t('.end_on')
+        -# @time_zone is the current user or webstie timezone
+        = @event.get_formatted_date(@event.end_on.in_time_zone(@time_zone), false)
 
-- if !@event.latitude.nil? && !@event.longitude.nil?
-  .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
-    #map
+  %p.observation.summary-dates-indented
+    = t('.showing_time_zone', :time_zone => @event.get_formatted_timezone)
 
--if !@event.location.blank?
-  %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
+.summary-block
+
+  %p
     %i.icon.icon-map-marker
-    = @event.location
-    - if !@event.address.blank?
-      |
-      = @event.address
+    = t('.where')
 
-%ul.nav.nav-pills.nav-stacked
-  %li
-    %a.calendar.summary-button{:href => event_path(@event, :format => 'ics')}
-      %i.icon.icon-calendar
-      = t('.calendar')
+  - if !@event.latitude.nil? && !@event.longitude.nil?
+    .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
+      #map
 
-  / %li
-  /   %a.contact.summary-button{:href => "#"}
-  /     %i.icon.icon-envelope
-  /     = t('.contact')
+  -if !@event.location.blank?
+    %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
+      = @event.location
+      - if !@event.address.blank?
+        |
+        = @event.address
 
-  / %li
-  /   %a.rss.summary-button{:href => "#"}
-  /     %i.icon.icon-rss
-  /     = t('.rss')
+.summary-block
+
+  %p
+    %i.icon.icon-gears
+    = t('.more_options')
+
+  %ul.summary-options
+
+    %li
+      %a.calendar.summary-button{:href => event_path(@event, :format => 'ics')}
+        %i.icon.icon-calendar
+        = t('.calendar')
+
+    -# %li
+    -#   %a.contact.summary-button{:href => "#"}
+    -#     %i.icon.icon-envelope
+    -#     = t('.contact')
+
+    -# %li
+    -#   %a.rss.summary-button{:href => "#"}
+    -#     %i.icon.icon-rss
+    -#     = t('.rss')
