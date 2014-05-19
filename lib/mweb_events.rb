@@ -5,5 +5,5 @@ Leaflet.attribution = " \u00A9 OpenStreetMap contrib. <a href=\"http://creativec
 Leaflet.max_zoom = 15
 
 module MwebEvents
-  SOCIAL_NETWORKS = ['Facebook', 'Google Plus', 'Twitter', 'Linkedin', 'Pinterest', 'Foursquare']
+  SOCIAL_NETWORKS = ['Facebook', 'Google Plus', 'Twitter', 'Linkedin']
 end
