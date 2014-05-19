@@ -66,7 +66,7 @@ en:
         end_on: "End:"
         more_options: "More options:"
         rss: RSS
-        showing_time_zone: "(Showing in the time zone %{time_zone})"
+        showing_time_zone: "(time zone %{time_zone})"
         start_on: "Start:"
         time_zone: Time Zone
         when: "When?"

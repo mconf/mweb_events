@@ -7,6 +7,9 @@
   %p
     %i.icon.icon-calendar-empty
     = t('.when')
+    %span.observation
+      - zone = "GMT#{@time_zone.formatted_offset}"
+      = t('.showing_time_zone', :time_zone => zone)
 
   %p.summary-dates-indented
     %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
@@ -22,9 +25,6 @@
         = t('.end_on')
         -# @time_zone is the current user or webstie timezone
         = @event.get_formatted_date(@event.end_on.in_time_zone(@time_zone), false)
-
-  %p.observation.summary-dates-indented
-    = t('.showing_time_zone', :time_zone => @event.get_formatted_timezone)
 
 .summary-block
 
