@@ -1,5 +1,5 @@
 $ ->
-  if MwebEvents.isOnPage('mweb_events-events', 'new') or MwebEvents.isOnPage('mweb_events-events', 'edit') or MwebEvents.isOnPage('mweb_events-events', 'update')
+  if MwebEvents.isOnPage('mweb_events-events', 'new|create|edit|update')
 
     # Calendar
     $('#start_on_date, #end_on_date').datetimepicker
@@ -7,20 +7,16 @@ $ ->
       showToday: true
       pickTime: false
 
-    $('#start_on_time, #end_on_time').datetimepicker
-      language: 'pt-BR'
-      pickDate: false
-      minuteStepping: 10
-      icons:
-        up: "icon icon-chevron-up",
-        down: "icon icon-chevron-down"
-
     # Make respective buttons clear their fields
     $('.clear-date').on 'click', (e) ->
-      $('#event_' + $(this).attr('data-clear')).val('')
+      targets = $(this).attr('data-clear').split(",")
+      targets.forEach (target) ->
+        $("#event_#{target.trim()}").val('')
+        $("#event_#{target.trim()}_#{n}i").val('') for n in [1..5]
 
     # Time zone
-    $("#event_time_zone").select2()
+    $("#event_time_zone").select2
+      width: "50%"
 
     # Description editor box
     opts =

@@ -6,11 +6,13 @@ pt:
         address: Endereço
         description: Descrição
         end_on: Data de término
+        end_on_date: Data de término
         location: Localização
         name: Nome
         owner_name: Este evento pertence a
-        start_on: Data de início
         social_networks: Divulgação em redes sociais
+        start_on: Data de início
+        start_on_date: Data de início
         summary: Resumo
         time_zone: Fuso horário
       mweb_events/participant:
@@ -44,6 +46,10 @@ pt:
       destroyed: Evento removido com sucesso
       updated: Informações do evento atualizadas
     events:
+      form:
+        at: "às"
+        clear_start_date: "Remover data de início"
+        clear_end_date: "Remover data de término"
       markdown_modal:
         title: Como formatar o texto de descrição?
         description_html: "O texto de descrição aceita formatação <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a>. Aqui estão algumas dicas rápidas:"

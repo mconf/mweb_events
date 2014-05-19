@@ -6,11 +6,13 @@ en:
         address: Address
         description: Description
         end_on: End date
+        end_on_date: End date
         location: Location
         name: Name
         owner_name: This event belongs to
         social_networks: Broadcast in social networks
         start_on: Start date
+        start_on_date: Start date
         summary: Summary
         time_zone: Time zone
       mweb_events/participant:
@@ -43,6 +45,10 @@ en:
       destroyed: Successfully deleted the event
       updated: Event information updated
     events:
+      form:
+        at: "at"
+        clear_start_date: "Clear start date"
+        clear_end_date: "Clear end date"
       markdown_modal:
         title: How to format the description text?
         description_html: "The description text accepts <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a> formatted text. Here's a quick cheatsheet:"

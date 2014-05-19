@@ -105,7 +105,7 @@ module MwebEvents
     end
 
     def start_on_time
-      start_on_with_time_zone.strftime('%H:%M') if start_on
+      start_on_with_time_zone
     end
 
     def end_on_date
@@ -113,7 +113,7 @@ module MwebEvents
     end
 
     def end_on_time
-      end_on_with_time_zone.strftime('%H:%M') if end_on
+      end_on_with_time_zone
     end
 
     def to_ics
