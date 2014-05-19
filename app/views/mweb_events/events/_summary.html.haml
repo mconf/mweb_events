@@ -8,7 +8,9 @@
     %i.icon.icon-calendar-empty
     = t('.when')
     %span.observation
-      - zone = "GMT#{@time_zone.formatted_offset}"
+      -# Have to call "now" to deal with daylight saving time, see:
+      -# https://github.com/rails/rails/issues/7297
+      - zone = "GMT#{@time_zone.now.formatted_offset}"
       = t('.showing_time_zone', :time_zone => zone)
 
   %p.summary-dates-indented
