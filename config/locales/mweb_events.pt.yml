@@ -52,7 +52,7 @@ pt:
         clear_end_date: "Remover data de término"
       markdown_modal:
         title: Como formatar o texto de descrição?
-        description_html: "O texto de descrição aceita formatação <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a>. Aqui estão algumas dicas rápidas:"
+        description_html: "O texto de descrição aceita formatação <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a>. Aqui estão algumas dicas rápidas (use o texto à esquerda para obter o resultado à direita):"
       no_description: Sem descrição
       show:
         date: Quando?

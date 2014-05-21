@@ -51,7 +51,7 @@ en:
         clear_end_date: "Clear end date"
       markdown_modal:
         title: How to format the description text?
-        description_html: "The description text accepts <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a> formatted text. Here's a quick cheatsheet:"
+        description_html: "The description text accepts <a href=\"http://daringfireball.net/projects/markdown/syntax\">Markdown</a> formatted text. Here's a quick cheatsheet (use the text at the left to get the result at the right):"
       no_description: No description available
       show:
         date: When?
