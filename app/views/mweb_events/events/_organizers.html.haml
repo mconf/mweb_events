@@ -3,4 +3,5 @@
 
 %p
   = t('.organized_by')
-  = @event.owner.try(:name) || @event.owner.try(:email)
+  %ul
+    %li= @event.owner.try(:name) || @event.owner.try(:email)

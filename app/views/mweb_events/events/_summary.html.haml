@@ -34,16 +34,21 @@
     %i.icon.icon-map-marker
     = t('.where')
 
-  - if !@event.latitude.nil? && !@event.longitude.nil?
-    .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
-      #map
+  - if !@event.address.blank? or (!@event.latitude.nil? && !@event.longitude.nil?)
 
-  -if !@event.location.blank?
-    %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
-      = @event.location
-      - if !@event.address.blank?
-        |
-        = @event.address
+    - if !@event.latitude.nil? && !@event.longitude.nil?
+      .event-map{:'data-zoom' => Leaflet.max_zoom, :'data-latitude' => @event.latitude, :'data-longitude' => @event.longitude, :'data-layer' => Leaflet.tile_layer, :'data-address' => @event.address, :'data-attribution' => Leaflet.attribution }
+        #map
+
+    - if !@event.location.blank?
+      %p{:itemprop=>"location", :itemtype=>"http://schema.org/Place"}
+        = @event.location
+        - if !@event.address.blank?
+          |
+          = @event.address
+
+  - else
+    %span.observation= t('.where_not_specified')
 
 .summary-block
 

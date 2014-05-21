@@ -1,6 +1,6 @@
 %section.event-share
-  %h3
-    = t('.title')
+  - if @event.social_networks.length > 0
+    %h3= t('.title')
 
   %ul.event-social-buttons
 

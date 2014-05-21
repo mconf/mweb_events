@@ -59,7 +59,7 @@ en:
         manage: Manage
       registration:
         title: Registration
-        button: Register
+        button: Register in this event
       summary:
         calendar: Add to calendar
         contact: Contact the organizer
@@ -71,6 +71,7 @@ en:
         time_zone: Time Zone
         when: "When?"
         where: "Where?"
+        where_not_specified: "(Location not specified)"
       social_media:
         title: "Share this event:"
         twitter: Share on Twitter
@@ -81,7 +82,7 @@ en:
         linkedin: Share on Linkedin
       organizers:
         organizers: Organizers
-        organized_by: This event is being organized by
+        organized_by: "This event is being organized by:"
     participants:
       new:
         title: Registering for

@@ -60,7 +60,7 @@ pt:
         manage: Administração
       registration:
         title: Participar
-        button: Registre-se
+        button: Registrar-se neste evento
       summary:
         calendar: Adicionar ao calendário
         contact: Fale com o organizador
@@ -72,6 +72,7 @@ pt:
         time_zone: Fuso Horário
         when: "Quando?"
         where: "Onde?"
+        where_not_specified: "(Localização não especificada)"
       social_media:
         title: "Compartilhe este evento:"
         twitter: Compartilhar no Twitter
@@ -82,7 +83,7 @@ pt:
         linkedin: Compartilhar no Linkedin
       organizers:
         organizers: Organizadores
-        organized_by: Este evento está sendo organizado por
+        organized_by: "Este evento está sendo organizado por:"
     participants:
       new:
         title: Inscrevendo-se em
