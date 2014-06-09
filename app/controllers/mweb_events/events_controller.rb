@@ -14,7 +14,7 @@ module MwebEvents
       elsif params[:show] == 'past_events'
         @events = @events.past.reverse!
       elsif params[:show] == 'all'
-        # no filtering
+        @events = @events.reverse!
       elsif params[:show] == 'upcoming_events' or !params[:show] #default case
         @events = @events.upcoming
       end
