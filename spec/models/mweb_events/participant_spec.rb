@@ -26,5 +26,30 @@ module MwebEvents
       FactoryGirl.build(:participant, :email => 'booboo').should_not be_valid
     end
 
+    describe ".email_taken?" do
+      let(:participant) { FactoryGirl.create(:participant) }
+
+      context "when it is the same event and same email" do
+        let(:late_participant) { FactoryGirl.build(:participant, :email => participant.email, :event => participant.event) }
+        it { late_participant.email_taken?.should be_true }
+      end
+
+      context "when it is the same event but different email" do
+        let(:late_participant) { FactoryGirl.build(:participant, :event => participant.event) }
+        it { late_participant.email_taken?.should be_false }
+      end
+
+      context "when it is not same event but the same email" do
+        let(:late_participant) { FactoryGirl.build(:participant, :email => participant.email) }
+        it { late_participant.email_taken?.should be_false }
+      end
+
+      context "when it is not same event and not the same email" do
+        let(:late_participant) { FactoryGirl.build(:participant, :email => participant.email) }
+        it { late_participant.email_taken?.should be_false }
+      end
+
+    end
+
   end
 end

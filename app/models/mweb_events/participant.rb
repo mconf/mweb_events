@@ -11,7 +11,7 @@ module MwebEvents
 
     def email_taken?
       found = Participant.where(:email => email, :event_id => event).first
-      found && email.present? && found.email != email
+      found && email.present? && found.email == email
     end
 
   end

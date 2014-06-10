@@ -63,6 +63,24 @@ describe MwebEvents::ParticipantsController do
 
     end
 
+    context "creating with a taken email" do
+      let(:participant) { FactoryGirl.create(:participant, :event => event) }
+
+      before(:each) {
+        participant
+        expect {
+          post :create, :event_id => event, :participant => FactoryGirl.attributes_for(:participant, :email => participant.email)
+        }.to change(MwebEvents::Participant, :count).by(0)
+      }
+
+      it { redirect_to event_path(event) }
+
+      it "sets the flash with an already registered success message" do
+        should set_the_flash.to(I18n.t('mweb_events.participant.already_created'))
+      end
+
+    end
+
   end
 
   describe "#destroy" do
