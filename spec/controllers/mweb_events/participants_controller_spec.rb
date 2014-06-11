@@ -26,6 +26,8 @@ describe MwebEvents::ParticipantsController do
     it "assigns @participant"
   end
 
+  describe "#concat_datetimes"
+
   describe "#create" do
     let(:event) { FactoryGirl.create(:event) }
 

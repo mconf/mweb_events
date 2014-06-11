@@ -61,6 +61,15 @@ describe MwebEvents::Event do
     it { MwebEvents::Event.within(today + 4.day, today + 5.day).should be_empty }
   end
 
+  describe ".upcoming" do
+  end
+
+  describe ".past" do
+  end
+
+  describe ".happening now" do
+  end
+
   describe "social_networks attribute tokenization" do
 
     context "valid social network names" do

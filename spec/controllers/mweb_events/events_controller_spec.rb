@@ -5,24 +5,83 @@ describe MwebEvents::EventsController do
   routes { MwebEvents::Engine.routes }
 
   describe "#index" do
-
     context "layout and view" do
       before(:each) { get :index }
       it { should render_template("mweb_events/events/index") }
+      it { assigns(:events) }
     end
 
-    it "assigns @events"
+    context "if params[:show]" do
+      let(:zone) { Time.zone }
+      let(:now) { Time.zone.now }
+      let(:e1) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 3.hour, :end_on => now - 1.hour) }
+      let(:e2) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 2.hour, :end_on => now - 1.hour) }
+      let(:e3) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 2.hour, :end_on => now + 1.minute) }
+      let(:e4) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 1.hour, :end_on => now + 1.minute) }
+      let(:e5) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now + 1.hour, :end_on => now + 2.hour) }
+      let(:e6) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now + 2.hour, :end_on => now + 3.hour) }
 
-    # context "if params[:show] == 'past_events'" do
-    #   it "assigns @past_events"
-    # end
-    # context "if params[:show] == 'upcoming_events'" do
-    #   it "assigns @upcoming_events"
-    # end
-    # context "if params[:show] not set or invalid" do
-    #   it "assigns @last_past_events"
-    #   it "assigns @first_upcoming_events"
-    # end
+      context "is 'past_events'" do
+        before(:each) { get :index, :show => 'past_events' }
+
+        it { assigns(:events).should eq([e2, e1]) }
+      end
+
+      context "is 'upcoming_events'" do
+        before(:each) { get :index, :show => 'upcoming_events' }
+
+        it { assigns(:events).should eq([e5, e6]) }
+      end
+
+      context "is not present acts like 'upcoming_events'" do
+        before(:each) { get :index }
+
+        it { assigns(:events).should eq([e5, e6]) }
+      end
+
+      context "is 'happening_now'" do
+        before(:each) { get :index, :show => 'happening_now' }
+
+        it { assigns(:events).should eq([e3, e4]) }
+      end
+
+      context "is 'all'" do
+        before(:each) { get :index, :show => 'all' }
+
+        it { assigns(:events).should eq([e6, e5, e4, e3, e2, e1]) }
+      end
+    end
+
+    context "if params[:q] is present" do
+      let(:e1) { FactoryGirl.create(:event, :name => 'Party Hard') }
+      let(:e2) { FactoryGirl.create(:event, :name => 'Party Soft') }
+
+      context "find all" do
+        before(:each) { get :index, :q => 'Party' }
+
+        it { assigns(:events).should include(e1, e2) }
+      end
+
+      context "find one" do
+        before(:each) { get :index, :q => 'hard' }
+
+        it { assigns(:events).should include(e1) }
+      end
+
+      context "find nothing" do
+        before(:each) { get :index, :q => 'Stay home and rest' }
+
+        it { assigns(:events).should eq([]) }
+      end
+
+      context "find nothing with empty query" do
+        before(:each) { get :index, :q => '' }
+
+        it { assigns(:events).should eq([]) }
+      end
+
+    end
+
   end
 
   describe "#index.atom" do
@@ -35,26 +94,24 @@ describe MwebEvents::EventsController do
 
   describe "#show" do
     let(:event) { FactoryGirl.create(:event) }
+    before(:each) { get :show, :id => event.to_param }
 
     context "layout and view" do
-      before(:each) { get :show, :id => event.to_param }
       it { should render_template("mweb_events/events/show") }
     end
 
-    it "assigns @event"
-    it "assigns @attendees with the users that confirmed attendance"
-    it "assigns @not_attendees with the users that confirmed that will not attend"
+    it { assigns(:event).should eq(event) }
   end
 
   describe "#new" do
     let(:owner) { FactoryGirl.create(:owner) }
+    before(:each) { get :new }
 
     context "layout and view" do
-      before(:each) { get :new }
       it { should render_template("mweb_events/events/new") }
     end
 
-    it "assigns @event"
+    it { assigns(:event) }
   end
 
   describe "#create" do
@@ -81,15 +138,15 @@ describe MwebEvents::EventsController do
       end
 
       it "assigns @event with the new event" do
-        should assign_to(:event).with(MwebEvents::Event.last)
+        assigns(:event).should eq(MwebEvents::Event.last)
       end
 
       it "sets the flash with a success message" do
         should set_the_flash.to(I18n.t('mweb_events.event.created'))
       end
 
-      it "sets the current user as the author" do
-        # MwebEvents::Event.last.author.should eq(user)
+      it "sets the current user as the owner" do
+        MwebEvents::Event.last.owner.should eq(owner)
       end
 
     end
@@ -112,15 +169,17 @@ describe MwebEvents::EventsController do
   describe "#edit" do
     let(:event) { FactoryGirl.create(:event) }
     let(:owner) { event.owner }
-    before(:each) { sign_in(owner) }
+    before(:each) {
+      sign_in(owner)
+      get :edit, :id => event.to_param
+    }
 
     context "layout and view" do
-      before(:each) { get :edit, :id => event.to_param }
       it { should render_template("mweb_events/events/edit") }
     end
 
     it "assigns @event with the event" do
-      # should assign_to(:event).with(event)
+      assigns(:event).should eq(event)
     end
   end
 
@@ -140,7 +199,7 @@ describe MwebEvents::EventsController do
       end
 
       it "assigns @event with the event" do
-        should assign_to(:event).with(event)
+        assigns(:event).should eq(event)
       end
 
       it "sets the flash with a success message" do

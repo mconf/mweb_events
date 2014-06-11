@@ -1,7 +1,6 @@
 module MwebEvents
   class EventsController < ApplicationController
     layout "mweb_events/application"
-    before_filter :load_events_in_order, :only => [:index]
     before_filter :concat_datetimes, :only => [:create, :update]
     load_and_authorize_resource :find_by => :permalink
 
@@ -10,13 +9,13 @@ module MwebEvents
     def index
 
       if params[:show] == 'happening_now'
-        @events = @events.happening_now
+        @events = @events.happening_now.order('start_on ASC')
       elsif params[:show] == 'past_events'
-        @events = @events.past.reverse!
+        @events = @events.past.order('start_on DESC')
       elsif params[:show] == 'all'
-        @events = @events.reverse!
+        @events = @events.order('start_on DESC')
       elsif params[:show] == 'upcoming_events' or !params[:show] #default case
-        @events = @events.upcoming
+        @events = @events.upcoming.order('start_on ASC')
       end
 
       # Use query parameter to search for events
@@ -121,10 +120,6 @@ module MwebEvents
     end
 
     private
-
-    def load_events_in_order
-      @events = Event.order "start_on ASC"
-    end
 
     def concat_datetimes
       if params[:event][:start_on_date].present?
