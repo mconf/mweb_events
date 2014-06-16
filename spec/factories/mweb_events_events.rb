@@ -13,6 +13,10 @@ FactoryGirl.define do
     e.end_on { Time.zone.now + 2.days }
     e.association :owner
     # e.permalink { name.split.join('-') }
+
+    after(:build) do |event|
+      event.stub(:geocode) { event.longitude, event.latitude = 0, 0 }
+    end
   end
 end
 
