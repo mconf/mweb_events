@@ -14,10 +14,10 @@ describe MwebEvents::EventsController do
     context "if params[:show]" do
       let(:zone) { Time.zone }
       let(:now) { Time.zone.now }
-      let(:e1) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 3.hour, :end_on => now - 1.hour) }
+      let(:e1) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 3.hour, :end_on => now - 2.hour) }
       let(:e2) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 2.hour, :end_on => now - 1.hour) }
-      let(:e3) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 2.hour, :end_on => now + 1.minute) }
-      let(:e4) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 1.hour, :end_on => now + 1.minute) }
+      let(:e3) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 2.hour, :end_on => now + 5.minute) }
+      let(:e4) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 1.hour, :end_on => now + 10.minute) }
       let(:e5) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now + 1.hour, :end_on => now + 2.hour) }
       let(:e6) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now + 2.hour, :end_on => now + 3.hour) }
 
