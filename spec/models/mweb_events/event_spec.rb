@@ -121,8 +121,55 @@ describe MwebEvents::Event do
     it { target.latitude.should_not be_nil }
   end
 
-
   pending "#to_ics"
+
+  describe "#is_registered?" do
+    let(:target) { FactoryGirl.create(:event) }
+
+    context "for an email" do
+      context "when the email is not registered yet" do
+        it { target.is_registered?("any@any.com").should be_false }
+      end
+
+      context "when the email is already registered" do
+        before {
+          @participant = FactoryGirl.create(:participant, :event => target)
+        }
+        it { target.is_registered?(@participant.owner.email).should be_true }
+      end
+
+      context "when the email is registered in another event" do
+        before {
+          second_event = FactoryGirl.create(:event)
+          @participant = FactoryGirl.create(:participant, :event => second_event)
+        }
+        it { target.is_registered?(@participant.owner.email).should be_false }
+      end
+    end
+
+    context "for a user" do
+      let(:user) { FactoryGirl.create(:owner) }
+
+      context "when the user is not registered yet" do
+        it { target.is_registered?(user).should be_false }
+      end
+
+      context "when the user is already registered" do
+        before {
+          @participant = FactoryGirl.create(:participant, :event => target, :owner => user)
+        }
+        it { target.is_registered?(user).should be_true }
+      end
+
+      context "when the user is registered in another event" do
+        before {
+          second_event = FactoryGirl.create(:event)
+          @participant = FactoryGirl.create(:participant, :event => second_event, :owner => user)
+        }
+        it { target.is_registered?(@participant.owner.email).should be_false }
+      end
+    end
+  end
 
   describe "abilities", :abilities => true do
     subject { ability }

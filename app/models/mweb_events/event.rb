@@ -210,5 +210,15 @@ module MwebEvents
         write_attribute(:latitude, nil)
       end
     end
+
+    # Returns whether a user (any model) or email (a string) is already registered in this event.
+    def is_registered?(user_or_email)
+      if user_or_email.is_a?(String)
+        Participant.where(:email => user_or_email, :event_id => self.id).count > 0
+      else
+        Participant.where(:owner_type => user_or_email.class.name, :owner_id => user_or_email.id,
+                          :event_id => self.id).count > 0
+      end
+    end
   end
 end
