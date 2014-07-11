@@ -49,7 +49,6 @@ describe MwebEvents::ParticipantsController do
 
       it { MwebEvents::Participant.last.email.should eql(email) }
       it { MwebEvents::Participant.last.event.should eql(event) }
-
     end
 
     context "creating with invalid attributes" do
@@ -81,6 +80,21 @@ describe MwebEvents::ParticipantsController do
         should set_the_flash.to(I18n.t('mweb_events.participant.already_created'))
       end
 
+    end
+
+    context "creating two by email in the same event" do
+      let(:email) { Faker::Internet.email }
+      let(:email2) { Faker::Internet.email }
+      let(:participant) { FactoryGirl.create(:participant, :owner => nil, :event => event, :email => email) }
+
+      before(:each) {
+        participant
+        expect {
+          post :create, :event_id => event.to_param, :participant => FactoryGirl.attributes_for(:participant, :email => email2)
+        }.to change(MwebEvents::Participant, :count).by(1)
+      }
+
+      it { redirect_to event_path(event) }
     end
 
   end
