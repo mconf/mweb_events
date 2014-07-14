@@ -9,14 +9,12 @@ gemspec
 gem "jquery-rails"
 gem 'epic-editor-rails', :git => 'https://github.com/zethussuen/epic-editor-rails.git'
 
-gem 'devise'
+gem 'devise', '~> 3.0.0'
 
 group :test do
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'populator'
-  gem 'guard-rspec'
-  gem 'capybara'
 end
 
 # Declare any dependencies that are still in development here instead of in
