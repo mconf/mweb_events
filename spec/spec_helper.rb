@@ -7,7 +7,6 @@ require 'rspec/rails'
 require 'factory_girl_rails'
 require 'shoulda-matchers'
 require 'cancan/matchers'
-require 'capybara/rspec'
 
 Rails.backtrace_cleaner.remove_silencers!
 

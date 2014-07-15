@@ -47,7 +47,6 @@ module MwebEvents
     end
 
     def new
-
       if params[:owner_id] && params[:owner_type]
         @event.owner_id = params[:owner_id]
         @event.owner_type = params[:owner_type]
@@ -65,7 +64,7 @@ module MwebEvents
     end
 
     def create
-      @event = Event.new(params[:event])
+      @event = Event.new(event_params)
 
       if @event.owner.nil?
         @event.owner = current_user
@@ -84,7 +83,7 @@ module MwebEvents
 
     def update
       respond_to do |format|
-        if @event.update_attributes(params[:event])
+        if @event.update_attributes(event_params)
           format.html { redirect_to @event, notice: t('mweb_events.event.updated') }
           format.json { head :no_content }
         else
@@ -139,5 +138,15 @@ module MwebEvents
       (1..5).each { |n| params[:event].delete("start_on_time(#{n}i)") }
       (1..5).each { |n| params[:event].delete("end_on_time(#{n}i)") }
     end
+
+    private
+    def event_params
+      params.require(:event).permit(
+        :address, :start_on_time, :start_on_date, :description,
+        :location, :name, :time_zone, :end_on_time, :end_on_date,
+        :social_networks, :summary, :owner_id, :owner_type, :start_on, :end_on
+      )
+    end
+
   end
 end

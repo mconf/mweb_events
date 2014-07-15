@@ -61,5 +61,10 @@ module MwebEvents
       end
     end
 
+    private
+    def participant_params
+      params.require(:participant).permit(:email, :event, :event_id, :owner, :owner_id)
+    end
+
   end
 end

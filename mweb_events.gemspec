@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-rails', '~> 3.2'
   s.add_dependency 'compass-rails', '~> 1.0'
   s.add_dependency 'icalendar'
-  s.add_dependency 'cancan'
+  s.add_dependency 'cancancan', '~> 1.8'
   s.add_dependency 'friendly_id'
   s.add_dependency 'valid_email'
   s.add_dependency 'momentjs-rails', '~> 2.5.0'

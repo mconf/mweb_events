@@ -10,7 +10,7 @@ PATH
   specs:
     mweb_events (0.0.1)
       bootstrap3-datetimepicker-rails (~> 3.0.0)
-      cancan
+      cancancan (~> 1.8)
       coffee-rails (>= 4.0.0)
       compass-rails (~> 1.0)
       epic-editor-rails
@@ -65,14 +65,10 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
-    bcrypt-ruby (3.1.5)
-      bcrypt (>= 3.1.3)
     bootstrap3-datetimepicker-rails (3.0.0.2)
       momentjs-rails (~> 2.5.0)
-    bourne (1.4.0)
-      mocha (~> 0.13.2)
     builder (3.2.2)
-    cancan (1.6.10)
+    cancancan (1.8.4)
     chunky_png (1.3.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -89,10 +85,11 @@ GEM
     compass-rails (1.1.7)
       compass (>= 0.12.2)
       sprockets (<= 2.11.0)
-    devise (3.0.4)
-      bcrypt-ruby (~> 3.0)
+    devise (3.2.4)
+      bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -136,11 +133,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    metaclass (0.0.1)
     mime-types (1.25.1)
     minitest (5.4.0)
-    mocha (0.13.3)
-      metaclass (~> 0.0.1)
     momentjs-rails (2.5.1)
       railties (>= 3.1)
     multi_json (1.10.1)
@@ -187,9 +181,8 @@ GEM
       sprockets-rails (~> 2.0)
     select2-rails (3.5.9)
       thor (~> 0.14)
-    shoulda-matchers (1.5.6)
+    shoulda-matchers (2.6.1)
       activesupport (>= 3.0.0)
-      bourne (~> 1.3)
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -229,13 +222,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  devise (~> 3.0.0)
+  devise (~> 3.2.4)
   epic-editor-rails!
   factory_girl_rails
   faker
   jquery-rails
+  minitest
   mweb_events!
   populator
   rspec-rails
-  shoulda-matchers
+  shoulda-matchers (~> 2.6.1)
   sqlite3

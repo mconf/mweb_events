@@ -9,11 +9,12 @@ gemspec
 gem "jquery-rails"
 gem 'epic-editor-rails', :git => 'https://github.com/zethussuen/epic-editor-rails.git'
 
-gem 'devise', '~> 3.0.0'
+gem 'devise', '~> 3.2.4'
 
 group :test do
   gem 'faker'
-  gem 'shoulda-matchers'
+  gem 'minitest'
+  gem 'shoulda-matchers', '~> 2.6.1', :require => false
   gem 'populator'
 end
 

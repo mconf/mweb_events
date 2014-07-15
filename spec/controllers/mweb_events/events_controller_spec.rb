@@ -12,7 +12,7 @@ describe MwebEvents::EventsController do
     end
 
     context "if params[:show]" do
-      let(:zone) { Time.zone }
+      let(:zone) { Time.zone.name }
       let(:now) { Time.zone.now }
       let(:e1) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 3.hour, :end_on => now - 2.hour) }
       let(:e2) { FactoryGirl.create(:event, :time_zone => zone, :start_on => now - 2.hour, :end_on => now - 1.hour) }
