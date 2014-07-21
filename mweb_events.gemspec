@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'therubyracer'
   s.add_dependency 'less-rails'
   s.add_dependency 'twitter-bootstrap-rails'
-  s.add_dependency 'font-awesome-rails', '~> 3.2'
+  s.add_dependency 'font-awesome-rails', '~> 4.1.0.0'
   s.add_dependency 'compass-rails', '~> 1.0'
   s.add_dependency 'icalendar'
   s.add_dependency 'cancancan', '~> 1.8'
