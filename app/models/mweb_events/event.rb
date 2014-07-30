@@ -121,7 +121,7 @@ module MwebEvents
       event.description = summary
       event.location = "#{location}"
       event.location += " - #{address}" if !address.blank?
-      event.klass = "PUBLIC"
+      event.ip_class = "PUBLIC"
       event.created = created_at.strftime("%Y%m%dT%H%M%S")
       event.last_modified = updated_at.strftime("%Y%m%dT%H%M%S")
       event.uid = full_url
