@@ -126,7 +126,6 @@ module MwebEvents
       event.last_modified = updated_at.strftime("%Y%m%dT%H%M%S")
       event.uid = full_url
       event.url = full_url
-      event.add_comment summary
       event
     end
 
