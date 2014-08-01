@@ -12,7 +12,7 @@
     %p
       = t '.description_html'
 
-    = render "markdown.#{I18n.locale}"
+    = render "markdown_#{I18n.locale.to_s.underscore}"
 
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"}
