@@ -3,6 +3,7 @@ module MwebEvents
     layout "mweb_events/application"
     before_filter :concat_datetimes, :only => [:create, :update]
     load_and_authorize_resource :find_by => :permalink
+    before_filter :set_date_locale, :only => [:new, :edit]
 
     respond_to :json
 
@@ -130,13 +131,20 @@ module MwebEvents
 
       if params[:event][:end_on_date].present?
         time = "#{params[:event]['end_on_time(4i)']}:#{params[:event]['end_on_time(5i)']}"
-        params[:event][:end_on] = "#{params[:event][:end_on_date]} #{time}}"
+        params[:event][:end_on] = "#{params[:event][:end_on_date]} #{time}"
       else
         params[:event][:end_on] = ''
       end
 
       (1..5).each { |n| params[:event].delete("start_on_time(#{n}i)") }
       (1..5).each { |n| params[:event].delete("end_on_time(#{n}i)") }
+    end
+
+    def set_date_locale
+      # can be overriden by the application
+      @date_locale = 'en'
+      @date_format = 'MM-dd-yyyy'
+      @event.date_display_format = '%m/%d/%Y'
     end
 
     private

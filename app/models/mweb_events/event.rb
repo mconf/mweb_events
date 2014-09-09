@@ -2,7 +2,7 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessor :start_on_time, :start_on_date, :end_on_time, :end_on_date
+    attr_accessor :start_on_time, :start_on_date, :end_on_time, :end_on_date, :date_display_format
 
     geocoded_by :address
     after_validation :geocode
@@ -96,8 +96,9 @@ module MwebEvents
     end
 
     # To format results on forms
+    # Defaults to 'en' date format but can be set using event.date_display_format=
     def start_on_date
-      start_on_with_time_zone.strftime('%d/%m/%Y') if start_on
+      start_on_with_time_zone.strftime(date_display_format || "%m/%d/%Y") if start_on
     end
 
     def start_on_time
@@ -105,7 +106,7 @@ module MwebEvents
     end
 
     def end_on_date
-      end_on_with_time_zone.strftime('%d/%m/%Y') if end_on
+      end_on_with_time_zone.strftime(date_display_format || "%m/%d/%Y") if end_on
     end
 
     def end_on_time
@@ -180,12 +181,12 @@ module MwebEvents
 
     # We store dates as UTC and convert to show and receive input
     def convert_dates_to_utc
-      Time.use_zone time_zone do
-        write_attribute(:start_on,
-          Time.zone.parse(start_on.strftime("%d/%m/%Y %H:%M")).in_time_zone('UTC')) if time_zone_changed? || start_on_changed?
-        write_attribute(:end_on,
-          Time.zone.parse(end_on.strftime("%d/%m/%Y %H:%M")).in_time_zone('UTC')) if time_zone_changed? || end_on_changed?
-      end
+      tz = ActiveSupport::TimeZone[time_zone].formatted_offset
+
+      write_attribute(:start_on,
+        DateTime.strptime("#{start_on.strftime("%d/%m/%Y %H:%M")} #{tz}", I18n.t('_other.datetimepicker.format_rails'))) if time_zone_changed? || start_on_changed?
+      write_attribute(:end_on,
+        DateTime.strptime("#{end_on.strftime("%d/%m/%Y %H:%M")} #{tz}", I18n.t('_other.datetimepicker.format_rails'))) if time_zone_changed? || end_on_changed?
     end
 
     def check_end_on

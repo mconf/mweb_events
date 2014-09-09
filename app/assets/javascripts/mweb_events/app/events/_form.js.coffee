@@ -2,10 +2,14 @@ $ ->
   if MwebEvents.isOnPage('mweb_events-events', 'new|create|edit|update')
 
     # Calendar
-    $('#start_on_date, #end_on_date').datetimepicker
-      language: 'pt-BR' # TODO: use the user's language
-      showToday: true
-      pickTime: false
+    setup_datetimepicker = (id) ->
+      $(id).datetimepicker
+        language: $(id).attr('data-date-locale') || 'en'
+        showToday: true
+        pickTime: false
+
+    setup_datetimepicker '#start_on_date'
+    setup_datetimepicker '#end_on_date'
 
     # Make respective buttons clear their fields
     $('.clear-date').on 'click', (e) ->
