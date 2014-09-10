@@ -25,7 +25,7 @@ module MwebEvents
     # Test if we need to clear the coordinates because address was cleared
     before_save :check_coordinates
 
-    before_save :concat_date_time
+    before_validation :concat_date_time
 
     # Events that are happening currently
     scope :happening_now, lambda {
@@ -88,11 +88,13 @@ module MwebEvents
     end
 
     def start_on_with_time_zone
-      start_on.in_time_zone(time_zone) if start_on && time_zone
+      offset = Time.now.in_time_zone(time_zone).utc_offset
+      start_on.utc + offset if start_on && time_zone
     end
 
     def end_on_with_time_zone
-      end_on.in_time_zone(time_zone) if end_on && time_zone
+      offset = Time.now.in_time_zone(time_zone).utc_offset
+      end_on.utc + offset if end_on && time_zone
     end
 
     # To format results on forms
@@ -204,12 +206,12 @@ module MwebEvents
       if date_stored_format.present?
         tz = ActiveSupport::TimeZone[time_zone].formatted_offset
 
-        if time_zone_changed? || (start_on_time.present? && start_on_date.present?)
+        if time_zone_changed? && (@start_on_time.present? && @start_on_date.present?)
           write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
         end
 
-        if time_zone_changed? || (end_on_time.present? && end_on_date.present?)
-          write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format)) if time_zone_changed? || end_on_changed?
+        if time_zone_changed? && (@end_on_time.present? && @end_on_date.present?)
+          write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format))
         end
       end
     end

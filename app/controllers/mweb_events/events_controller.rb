@@ -123,12 +123,16 @@ module MwebEvents
 
     def concat_datetimes
       if params[:event][:start_on_date].present?
+        params[:event]['start_on_time(4i)'] ||= '00'
+        params[:event]['start_on_time(5i)'] ||= '00'
         params[:event][:start_on_time] = "#{params[:event]['start_on_time(4i)']}:#{params[:event]['start_on_time(5i)']}"
       else
         params[:event][:start_on] = ''
       end
 
       if params[:event][:end_on_date].present?
+        params[:event]['end_on_time(4i)'] ||= '00'
+        params[:event]['end_on_time(5i)'] ||= '00'
         params[:event][:end_on_time] = "#{params[:event]['end_on_time(4i)']}:#{params[:event]['end_on_time(5i)']}"
       else
         params[:event][:end_on] = ''
@@ -142,7 +146,7 @@ module MwebEvents
       # can be overriden by the application
       @date_locale = 'en'
       @date_format = 'MM-dd-yyyy'
-      @date_stored_format = '%m/%d/%Y %H:%M %z'
+      @event.date_stored_format = '%m/%d/%Y %H:%M %z'
       @event.date_display_format = '%m/%d/%Y'
     end
 
