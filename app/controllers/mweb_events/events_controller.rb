@@ -123,15 +123,13 @@ module MwebEvents
 
     def concat_datetimes
       if params[:event][:start_on_date].present?
-        time = "#{params[:event]['start_on_time(4i)']}:#{params[:event]['start_on_time(5i)']}"
-        params[:event][:start_on] = "#{params[:event][:start_on_date]} #{time}"
+        params[:event][:start_on_time] = "#{params[:event]['start_on_time(4i)']}:#{params[:event]['start_on_time(5i)']}"
       else
         params[:event][:start_on] = ''
       end
 
       if params[:event][:end_on_date].present?
-        time = "#{params[:event]['end_on_time(4i)']}:#{params[:event]['end_on_time(5i)']}"
-        params[:event][:end_on] = "#{params[:event][:end_on_date]} #{time}"
+        params[:event][:end_on_time] = "#{params[:event]['end_on_time(4i)']}:#{params[:event]['end_on_time(5i)']}"
       else
         params[:event][:end_on] = ''
       end
@@ -144,6 +142,7 @@ module MwebEvents
       # can be overriden by the application
       @date_locale = 'en'
       @date_format = 'MM-dd-yyyy'
+      @date_stored_format = '%m/%d/%Y %H:%M %z'
       @event.date_display_format = '%m/%d/%Y'
     end
 
@@ -152,7 +151,7 @@ module MwebEvents
       params.require(:event).permit(
         :address, :start_on_time, :start_on_date, :description,
         :location, :name, :time_zone, :end_on_time, :end_on_date,
-        :social_networks, :summary, :owner_id, :owner_type, :start_on, :end_on
+        :social_networks, :summary, :owner_id, :owner_type, :start_on, :end_on, :date_stored_format
       )
     end
 

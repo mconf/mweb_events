@@ -2,7 +2,7 @@ module MwebEvents
   class Event < ActiveRecord::Base
     extend FriendlyId
 
-    attr_accessor :start_on_time, :start_on_date, :end_on_time, :end_on_date, :date_display_format
+    attr_accessor :date_display_format, :date_stored_format
 
     geocoded_by :address
     after_validation :geocode
@@ -25,7 +25,7 @@ module MwebEvents
     # Test if we need to clear the coordinates because address was cleared
     before_save :check_coordinates
 
-    before_save :convert_dates_to_utc
+    before_save :concat_date_time
 
     # Events that are happening currently
     scope :happening_now, lambda {
@@ -113,6 +113,23 @@ module MwebEvents
       end_on_with_time_zone
     end
 
+    def end_on_date= date
+      @end_on_date = date
+    end
+
+    def end_on_time= time
+      @end_on_time = time
+    end
+
+    def start_on_date= date
+      @start_on_date = date
+    end
+
+    def start_on_time= time
+      @start_on_time = time
+    end
+
+
     def to_ics
       event = Icalendar::Event.new
       event.dtstart = start_on.strftime("%Y%m%dT%H%M%SZ")
@@ -179,14 +196,22 @@ module MwebEvents
       end
     end
 
-    # We store dates as UTC and convert to show and receive input
-    def convert_dates_to_utc
-      tz = ActiveSupport::TimeZone[time_zone].formatted_offset
+    # Puts a (start|end)on_date and (start|end)on_time together and stores
+    # it the correct timezone. Needs 'date_stored_format' to be provided
+    # by the form to handle the way different locales express dates.
+    # Should be called after submiting the new and edit form actions.
+    def concat_date_time
+      if date_stored_format.present?
+        tz = ActiveSupport::TimeZone[time_zone].formatted_offset
 
-      write_attribute(:start_on,
-        DateTime.strptime("#{start_on.strftime("%d/%m/%Y %H:%M")} #{tz}", I18n.t('_other.datetimepicker.format_rails'))) if time_zone_changed? || start_on_changed?
-      write_attribute(:end_on,
-        DateTime.strptime("#{end_on.strftime("%d/%m/%Y %H:%M")} #{tz}", I18n.t('_other.datetimepicker.format_rails'))) if time_zone_changed? || end_on_changed?
+        if time_zone_changed? || (start_on_time.present? && start_on_date.present?)
+          write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
+        end
+
+        if time_zone_changed? || (end_on_time.present? && end_on_date.present?)
+          write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format)) if time_zone_changed? || end_on_changed?
+        end
+      end
     end
 
     def check_end_on
