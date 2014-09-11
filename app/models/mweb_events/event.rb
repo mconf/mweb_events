@@ -206,11 +206,11 @@ module MwebEvents
       if date_stored_format.present?
         tz = ActiveSupport::TimeZone[time_zone].formatted_offset
 
-        if time_zone_changed? && (@start_on_time.present? && @start_on_date.present?)
+        if time_zone_changed? || (@start_on_time.present? && @start_on_date.present?)
           write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
         end
 
-        if time_zone_changed? && (@end_on_time.present? && @end_on_date.present?)
+        if time_zone_changed? || (@end_on_time.present? && @end_on_date.present?)
           write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format))
         end
       end
@@ -218,6 +218,13 @@ module MwebEvents
 
     def check_end_on
       write_attribute(:end_on, start_on + 1.day) if end_on.blank?
+
+      # Swap dates if it ends before it starts
+      if end_on < start_on
+        tmp = start_on
+        write_attribute(:start_on, end_on)
+        write_attribute(:end_on, tmp)
+      end
     end
 
     def check_summary

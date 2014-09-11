@@ -123,19 +123,15 @@ module MwebEvents
 
     def concat_datetimes
       if params[:event][:start_on_date].present?
-        params[:event]['start_on_time(4i)'] ||= '00'
-        params[:event]['start_on_time(5i)'] ||= '00'
+        params[:event]['start_on_time(4i)'] = '00' if params[:event]['start_on_time(4i)'].blank?
+        params[:event]['start_on_time(5i)'] = '00' if params[:event]['start_on_time(5i)'].blank?
         params[:event][:start_on_time] = "#{params[:event]['start_on_time(4i)']}:#{params[:event]['start_on_time(5i)']}"
-      else
-        params[:event][:start_on] = ''
       end
 
       if params[:event][:end_on_date].present?
-        params[:event]['end_on_time(4i)'] ||= '00'
-        params[:event]['end_on_time(5i)'] ||= '00'
+        params[:event]['end_on_time(4i)'] = '00' if params[:event]['end_on_time(4i)'].blank?
+        params[:event]['end_on_time(5i)'] = '00' if params[:event]['end_on_time(5i)'].blank?
         params[:event][:end_on_time] = "#{params[:event]['end_on_time(4i)']}:#{params[:event]['end_on_time(5i)']}"
-      else
-        params[:event][:end_on] = ''
       end
 
       (1..5).each { |n| params[:event].delete("start_on_time(#{n}i)") }
