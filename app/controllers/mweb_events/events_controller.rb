@@ -5,7 +5,7 @@ module MwebEvents
     load_and_authorize_resource :find_by => :permalink
     before_filter :set_date_locale, :only => [:new, :edit]
 
-    respond_to :json
+    respond_to :html, :json
 
     def index
 
@@ -15,18 +15,17 @@ module MwebEvents
         @events = @events.past.order('start_on DESC')
       elsif params[:show] == 'all'
         @events = @events.order('start_on DESC')
-      elsif params[:show] == 'upcoming_events' or !params[:show] #default case
+      elsif params[:show] == 'upcoming_events' or params[:show].blank? #default case
         @events = @events.upcoming.order('start_on ASC')
+
+        # if there are no upcoming events and user accessed without parameters show all
+        redirect_to events_path(:show => 'all') if @events.empty? && params[:show].blank?
+        return
       end
 
       # Use query parameter to search for events
       if params[:q].present?
         @events = @events.where("name like ?", "%#{params[:q]}%")
-      end
-
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @events }
       end
     end
 
@@ -54,11 +53,6 @@ module MwebEvents
       else
         @event.owner_name = current_user.try(:email)
       end
-
-      respond_to do |format|
-        format.html # new.html.erb
-        format.json { render json: @event }
-      end
     end
 
     def edit
@@ -74,10 +68,8 @@ module MwebEvents
       respond_to do |format|
         if @event.save
           format.html { redirect_to @event, notice: t('mweb_events.event.created') }
-          format.json { render json: @event, status: :created, location: @event }
         else
           format.html { render action: "new" }
-          format.json { render json: @event.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -86,10 +78,8 @@ module MwebEvents
       respond_to do |format|
         if @event.update_attributes(event_params)
           format.html { redirect_to @event, notice: t('mweb_events.event.updated') }
-          format.json { head :no_content }
         else
           format.html { render action: "edit" }
-          format.json { render json: @event.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -99,7 +89,6 @@ module MwebEvents
 
       respond_to do |format|
         format.html { redirect_to events_url, notice: t('mweb_events.event.destroyed') }
-        format.json { head :no_content }
       end
     end
 
@@ -112,10 +101,6 @@ module MwebEvents
         @events = Event.limit(limit).all
       else
         @events = Event.where("name like ?", "%#{name}%").limit(limit)
-      end
-
-      respond_with @events do |format|
-        format.json
       end
     end
 
