@@ -136,7 +136,7 @@ module MwebEvents
       params.require(:event).permit(
         :address, :start_on_time, :start_on_date, :description,
         :location, :name, :time_zone, :end_on_time, :end_on_date,
-        :social_networks, :summary, :owner_id, :owner_type, :start_on, :end_on, :date_stored_format
+        :summary, :owner_id, :owner_type, :date_stored_format, :social_networks => []
       )
     end
 
