@@ -15,7 +15,7 @@ module MwebEvents
         @events = @events.past.order('start_on DESC')
       elsif params[:show] == 'all'
         @events = @events.order('start_on DESC')
-      elsif params[:show] == 'upcoming_events' or params[:show].blank? #default case
+      elsif params[:show] == 'upcoming_events' || params[:show].blank? #default case
         @events = @events.upcoming.order('start_on ASC')
 
         # if there are no upcoming events and user accessed without parameters show all
@@ -134,7 +134,7 @@ module MwebEvents
     private
     def event_params
       params.require(:event).permit(
-        :address, :start_on_time, :start_on_date, :description,
+        :address, :start_on_time, :start_on_date, :description, :start_on, :end_on,
         :location, :name, :time_zone, :end_on_time, :end_on_date,
         :summary, :owner_id, :owner_type, :date_stored_format, :social_networks => []
       )

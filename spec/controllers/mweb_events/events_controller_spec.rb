@@ -6,9 +6,43 @@ describe MwebEvents::EventsController do
 
   describe "#index" do
     context "layout and view" do
-      before(:each) { get :index }
-      it { should render_template("mweb_events/events/index") }
-      it { assigns(:events) }
+      context 'with no events' do
+        before { get :index }
+
+        it { should redirect_to events_path(:show => 'all') }
+        it { assigns(:events).with([]) }
+      end
+
+      context 'with no upcoming events' do
+        before {
+          t = Time.zone.now
+          @events = [
+            FactoryGirl.create(:event, :start_on => t - 3.day, :end_on => t - 1.day),
+            FactoryGirl.create(:event, :start_on => t - 2.day, :end_on => t - 1.day),
+            FactoryGirl.create(:event, :start_on => t - 1.day, :end_on => t - 1.hour)
+          ]
+
+          get :index
+        }
+
+        it { should redirect_to events_path(:show => 'all') }
+        it { assigns(:events).with(@events) }
+      end
+
+      context 'with upcoming events' do
+        before {
+          t = Time.zone.now
+          @events = [
+            FactoryGirl.create(:event, :start_on => t - 3.day, :end_on => t - 1.day),
+            FactoryGirl.create(:event, :start_on => t + 1.day, :end_on => t + 10.day),
+          ]
+
+          get :index
+        }
+
+        it { should render_template("mweb_events/events/index") }
+        it { assigns(:events).with([@events[1]]) }
+      end
     end
 
     context "if params[:show]" do
@@ -124,7 +158,7 @@ describe MwebEvents::EventsController do
 
       before(:each) {
         expect {
-          post :create, :event => attributes.merge({:start_on_date => attributes[:start_on]})
+          post :create, :event => attributes
         }.to change(MwebEvents::Event, :count).by(1)
       }
 
