@@ -21,7 +21,6 @@
 // require jquery
 // require jquery_ujs
 //= require bootstrap-datetimepicker
-//= require locales/bootstrap-datetimepicker.pt-BR.js
 // require jquery.expander.min
 // require select2
 //= require_tree ./mweb_events

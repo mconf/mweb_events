@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 4.1.4'
-  s.add_dependency 'sass-rails', '>= 4.0.0'
-  s.add_dependency 'coffee-rails', '>= 4.0.0'
-  s.add_dependency 'simple_form', '>= 3.0.0'
+  s.add_dependency 'sass-rails', '~> 4.0.3'
+  s.add_dependency 'coffee-rails', '~> 4.0.0'
+  s.add_dependency 'simple_form', '~> 3.0.0'
   s.add_dependency 'haml'
   s.add_dependency 'haml-rails'
   s.add_dependency 'jquery-rails', '~> 3.1.1'
@@ -35,11 +35,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-rails', '~> 4.1.0.0'
   s.add_dependency 'compass-rails', '~> 1.0'
   s.add_dependency 'icalendar'
-  s.add_dependency 'cancancan', '~> 1.8'
+  s.add_dependency 'cancancan', '~> 1.9'
   s.add_dependency 'friendly_id'
   s.add_dependency 'valid_email'
-  s.add_dependency 'momentjs-rails', '~> 2.5.0'
-  s.add_dependency 'bootstrap3-datetimepicker-rails', '~> 3.0.0'
+  s.add_dependency 'momentjs-rails', '>= 2.8.1'
+  s.add_dependency 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
