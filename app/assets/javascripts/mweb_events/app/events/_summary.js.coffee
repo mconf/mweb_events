@@ -1,6 +1,9 @@
 $ ->
 
   renderMap = ->
+    # if coordinates have not been rendered, exit and do nothing
+    return unless $('.event-map').length
+
     lat = $('.event-map').attr('data-latitude')
     long = $('.event-map').attr('data-longitude')
     zoom = $('.event-map').attr('data-zoom')
@@ -21,6 +24,5 @@ $ ->
 
   if MwebEvents.isOnPage 'mweb_events-events', 'show'
     renderMap()
-
 
 #    = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])
