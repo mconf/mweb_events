@@ -217,7 +217,7 @@ module MwebEvents
         tz = ActiveSupport::TimeZone[time_zone].formatted_offset
 
         start_present = @start_on_time.present? && @start_on_date.present?
-        if (time_zone_changed? && start_on.present?) || start_present
+        if (time_zone_changed? && start_on_changed?) || start_present
           if start_present
             write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
           else
@@ -226,7 +226,7 @@ module MwebEvents
         end
 
         end_present = (@end_on_time.present? && @end_on_date.present?)
-        if (time_zone_changed? && end_on.present?) || end_present
+        if (time_zone_changed? && end_on_changed?) || end_present
           if end_present
             write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format))
           else
