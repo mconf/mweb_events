@@ -17,6 +17,10 @@ pt:
         time_zone: Fuso horário
       mweb_events/participant:
         email: E-mail
+    errors:
+      mweb_events/event:
+        start_on: data de início inválida
+        end_on: data de término inválida
     models:
       mweb_events/event: Evento
       mweb_events/participant: Participante
