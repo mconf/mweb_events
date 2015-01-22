@@ -100,7 +100,13 @@ module MwebEvents
     # To format results on forms
     # Defaults to 'en' date format but can be set using event.date_display_format=
     def start_on_date
-      start_on_with_time_zone.strftime(date_display_format || "%m/%d/%Y") if start_on
+      if @start_on_date
+        # showing date sent on last request
+        @start_on_date
+      else
+        # fetching date from database and converting for display
+        start_on.strftime(date_display_format || "%m/%d/%Y") if start_on
+      end
     end
 
     def start_on_time
@@ -108,7 +114,11 @@ module MwebEvents
     end
 
     def end_on_date
-      end_on_with_time_zone.strftime(date_display_format || "%m/%d/%Y") if end_on
+      if @end_on_date
+        @end_on_date
+      else
+        end_on.strftime(date_display_format || "%m/%d/%Y") if end_on
+      end
     end
 
     def end_on_time
@@ -206,12 +216,22 @@ module MwebEvents
       if date_stored_format.present?
         tz = ActiveSupport::TimeZone[time_zone].formatted_offset
 
-        if time_zone_changed? || (@start_on_time.present? && @start_on_date.present?)
-          write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
+        start_present = @start_on_time.present? && @start_on_date.present?
+        if (time_zone_changed? && start_on.present?) || start_present
+          if start_present
+            write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
+          else
+            errors.add(:start_on, I18n.t('activerecord.errors.mweb_events/event.start_on'))
+          end
         end
 
-        if time_zone_changed? || (@end_on_time.present? && @end_on_date.present?)
-          write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format))
+        end_present = (@end_on_time.present? && @end_on_date.present?)
+        if (time_zone_changed? && end_on.present?) || end_present
+          if end_present
+            write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format))
+          else
+            errors.add(:end_on, I18n.t('activerecord.errors.mweb_events/event.end_on'))
+          end
         end
       end
     end
