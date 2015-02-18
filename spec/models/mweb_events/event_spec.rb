@@ -61,6 +61,27 @@ describe MwebEvents::Event do
     it { MwebEvents::Event.within(today + 4.day, today + 5.day).should be_empty }
   end
 
+  describe ".description_html" do
+    let(:event) { FactoryGirl.create(:event, description: description) }
+
+    context "with simple markdown syntax" do
+      let(:description) { '#Using _markdown_' }
+      it { event.description_html.should eq("<h1>Using <em>markdown</em></h1>\n") }
+    end
+
+    context "with simple html mixed in" do
+      let(:description) { '#Using _markdown_ and some html <p>See?</p>' }
+
+      it { event.description_html.should eq("<h1>Using <em>markdown</em> and some html &lt;p&gt;See?\&lt;/p&gt;</h1>\n") }
+    end
+
+    context "with dangerous html mixed in" do
+      let(:description) { '#Using _markdown_ and <script>alert(\'Danger\')</script>' }
+
+      it { event.description_html.should eq("<h1>Using <em>markdown</em> and &lt;script&gt;alert(&#39;Danger&#39;)&lt;/script&gt;</h1>\n") }
+    end
+  end
+
   describe ".upcoming" do
   end
 

@@ -69,7 +69,7 @@ module MwebEvents
     def description_html
       if not description.blank?
         require 'redcarpet'
-        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new)
+        markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true))
         html = markdown.render description
       else
         html = I18n.t('mweb_events.events.no_description')
