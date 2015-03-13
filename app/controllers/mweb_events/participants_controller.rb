@@ -55,7 +55,7 @@ module MwebEvents
       @participant.destroy
 
       respond_to do |format|
-        path = can?(:update, @event) ? event_participants_path(@event) : event_path(@event)
+        path = can?(:update, @event) ? :back : event_path(@event)
         format.html { redirect_to path, notice: t('mweb_events.participant.destroyed') }
         format.json { head :no_content }
       end
