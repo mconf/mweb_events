@@ -17,6 +17,10 @@ en:
         time_zone: Time zone
       mweb_events/participant:
         email: Email
+    errors:
+      mweb_events/event:
+        start_on: invalid start date
+        end_on: invalid end date
     models:
       mweb_events/event: Event
       mweb_events/participant: Participant

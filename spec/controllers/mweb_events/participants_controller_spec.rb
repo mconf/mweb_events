@@ -123,9 +123,11 @@ describe MwebEvents::ParticipantsController do
     end
 
     context "when is the event's owner" do
+      let(:referer) { '/any' }
 
       before(:each) {
         sign_in(event_owner)
+        request.env["HTTP_REFERER"] = referer
 
         expect {
           delete :destroy, :id => participant.to_param, :event_id => event.to_param
@@ -133,7 +135,7 @@ describe MwebEvents::ParticipantsController do
 
       }
 
-      it { should redirect_to event_participants_path(event) }
+      it { should redirect_to referer }
 
       it "sets the flash with a success message" do
         should set_the_flash.to(I18n.t('mweb_events.participant.destroyed'))

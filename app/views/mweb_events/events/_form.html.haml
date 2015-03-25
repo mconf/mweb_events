@@ -11,8 +11,10 @@
     = f.hidden_field :owner_type
 
     = f.hidden_field :date_stored_format
+    - error_messages = { start_on: @event.errors[:start_on].try(:join, ', '), end_on: @event.errors[:end_on].try(:join, ', ') }
+    - errors = { start_on: @event.errors[:start_on].present?, end_on: @event.errors[:end_on].present? }
 
-    .input.string.event_start_on.field_with_hint
+    .input.string.event_start_on.field_with_hint{ class: ('field_with_errors' if errors[:start_on]) }
       = f.label :start_on_date
       .input-append.date#start_on_date.datepicker-field{:'data-date-locale' => @date_locale, :'date-format' => @date_format}
         = f.hint :start_on_date
@@ -21,10 +23,14 @@
           %i{:'class'=>"icon icon-calendar"}
       %span= t(".at")
       #start_on_time
-        = f.input :start_on_time, :label => false, :as => :time, :minute_step => 5, :prompt => { :hour => "", :minute => "" }
+        = f.input :start_on_time, :label => false, :as => :time, :minute_step => 5, default: Time.parse('00:00')
       %i.icon-remove-sign.clear-date.tooltipped{:'data-clear' => 'start_on_date, start_on_time', :title => t(".clear_start_date")}
 
-    .input.string.event_end_on.field_with_hint
+      - if errors[:start_on]
+        %span.error
+          = error_messages[:start_on]
+
+    .input.string.event_end_on.field_with_hint{class: ('field_with_errors' if errors[:end_on]) }
       = f.label :end_on_date
       .input-append.date#end_on_date.datepicker-field{:'data-date-locale' => @date_locale, :'date-format' => @date_format}
         = f.hint :end_on_date
@@ -33,8 +39,12 @@
           %i{:'class'=>"icon icon-calendar"}
       %span= t(".at")
       #end_on_time
-        = f.input :end_on_time, :label => false, :as => :time, :minute_step => 5, :prompt => { :hour => "", :minute => "" }
+        = f.input :end_on_time, :label => false, :as => :time, :minute_step => 5, default: Time.parse('00:00')
       %i.icon-remove-sign.clear-date.tooltipped{:'data-clear' => 'end_on_date, end_on_time', :title => t(".clear_end_date")}
+
+      - if errors[:end_on]
+        %span.error
+          = error_messages[:end_on]
 
     .input.string.event_time_zone.field_with_hint
 

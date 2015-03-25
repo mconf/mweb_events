@@ -16,7 +16,7 @@ $ ->
       targets = $(this).attr('data-clear').split(",")
       targets.forEach (target) ->
         $("#event_#{target.trim()}").val('')
-        $("#event_#{target.trim()}_#{n}i").val('') for n in [1..5]
+        $("#event_#{target.trim()}_#{n}i").val('00') for n in [1..5]
 
     # Time zone
     $("#event_time_zone").select2

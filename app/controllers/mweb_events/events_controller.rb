@@ -3,7 +3,7 @@ module MwebEvents
     layout "mweb_events/application"
     before_filter :concat_datetimes, :only => [:create, :update]
     load_and_authorize_resource :find_by => :permalink
-    before_filter :set_date_locale, :only => [:new, :edit]
+    before_filter :set_date_locale, if: -> { @event.present? }
 
     respond_to :html, :json
 
@@ -105,7 +105,6 @@ module MwebEvents
     end
 
     private
-
     def concat_datetimes
       if params[:event][:start_on_date].present?
         params[:event]['start_on_time(4i)'] = '00' if params[:event]['start_on_time(4i)'].blank?
@@ -131,7 +130,6 @@ module MwebEvents
       @event.date_display_format = '%m/%d/%Y'
     end
 
-    private
     def event_params
       params.require(:event).permit(
         :address, :start_on_time, :start_on_date, :description, :start_on, :end_on,
