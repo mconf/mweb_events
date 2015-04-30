@@ -3,14 +3,21 @@ module MwebEvents
 
     def event_logo(event, options={})
       options[:class] = "#{options[:class]} mweb_events-event-logo"
-
+      format = I18n.t('_other.datetime.simple_format').split(/-| /)
       day = sanitize(event.start_on.strftime("%d"))
       month = localize(event.start_on, :format => "%b")
       hour = event.get_formatted_hour
       year = sanitize(event.start_on.strftime("%Y"))
 
+      day_txt =
+        if format.first == "dd"
+          day + ' ' + month
+        else
+          month + ' ' + day
+        end
+
       hour_tag = content_tag(:div, hour, { :class => 'mweb_events-event-logo-hour' })
-      day_tag = content_tag(:div, day + ' ' + month, { :class => 'mweb_events-event-logo-day' })
+      day_tag = content_tag(:div, day_txt , { :class => 'mweb_events-event-logo-day' })
       year_tag = content_tag(:div, year, { :class => 'mweb_events-event-logo-year' })
 
       content_tag(:div, day_tag + hour_tag + year_tag, options)
