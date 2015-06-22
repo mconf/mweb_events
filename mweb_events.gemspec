@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 4.1.4'
-  s.add_dependency 'sass-rails', '~> 4.0.3'
+  s.add_dependency 'sass-rails'
   s.add_dependency 'coffee-rails', '~> 4.0.0'
   s.add_dependency 'simple_form', '~> 3.1.0'
   s.add_dependency 'haml'
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'less-rails'
   s.add_dependency 'twitter-bootstrap-rails'
   s.add_dependency 'font-awesome-rails', '~> 4.1.0.0'
-  s.add_dependency 'compass-rails', '~> 1.0'
+  s.add_dependency 'compass-rails'
   s.add_dependency 'icalendar'
   s.add_dependency 'cancancan', '~> 1.9'
   s.add_dependency 'friendly_id'
