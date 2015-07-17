@@ -39,6 +39,9 @@ pt:
     update: Atualizar
     more: Ler Mais
     close: Fechar
+    datetime:
+      complete_rails_format: "%A, %d %b %Y, %H:%M"
+      simple_format: "dd-MM-yyyy hh:mm"
 
   mweb_events:
     participant:
