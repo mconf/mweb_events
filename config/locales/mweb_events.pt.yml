@@ -67,16 +67,19 @@ pt:
         button: Registrar-se neste evento
       summary:
         calendar: Adicionar ao calendário
+        change_dates_info: "Ver no fuso horário do evento"
         contact: Fale com o organizador
         end_on: "Fim:"
         more_options: "Mais opções:"
         rss: RSS
-        showing_time_zone: "(fuso horário %{time_zone})"
+        original_time: Data no fuso horário do evento
+        original_time_info: Data original no fuso horário dos organizadores do evento organizadores
         start_on: "Início:"
         time_zone: Fuso Horário
         when: "Quando?"
         where: "Onde?"
         where_not_specified: "(Localização não especificada)"
+        your_time_info: "Datas mostradas em seu fuso horário (%{time_zone})"
       social_media:
         title: "Compartilhe este evento:"
         twitter: Compartilhar no Twitter

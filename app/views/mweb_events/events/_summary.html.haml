@@ -7,26 +7,39 @@
   %p
     %i.icon.icon-calendar-empty
     = t('.when')
-    %span.observation
-      -# Have to call "now" to deal with daylight saving time, see:
-      -# https://github.com/rails/rails/issues/7297
-      - zone = "GMT#{@time_zone.now.formatted_offset}"
-      = t('.showing_time_zone', :time_zone => zone)
+    %i.icon.icon-info-sign.tooltipped.your-time-info{title: t('.your_time_info', time_zone: @time_zone.name)}
 
-  %p.summary-dates-indented
-    %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
-    %time{ :datetime => @event.start_on_with_time_zone }
-      = t('.start_on')
-      -# @time_zone is the current user or webstie timezone
-      = @event.get_formatted_date(@event.start_on.in_time_zone(@time_zone), false)
+    - if @event.time_zone != @time_zone.name
+      %i.icon.icon-info-sign.tooltipped.original-time-info{title: t('.original_time_info')}
+      %i.icon.icon-exchange.tooltipped#change-dates{title: t('.change_dates_info')}
 
-  - if @event.end_on
+  .your-dates
     %p.summary-dates-indented
-      %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
-      %time{ :datetime => @event.end_on_with_time_zone }
-        = t('.end_on')
+      %meta{:itemprop => "startDate", :content => @event.start_on_with_time_zone}
+      %time{ :datetime => @event.start_on_with_time_zone }
+        = t('.start_on')
         -# @time_zone is the current user or webstie timezone
-        = @event.get_formatted_date(@event.end_on.in_time_zone(@time_zone), false)
+        = "#{@event.get_formatted_date(@event.start_on.in_time_zone(@time_zone), false)} (#{@time_zone.name})"
+
+    - if @event.end_on
+      %p.summary-dates-indented
+        %meta{:itemprop => "endDate", :content => @event.end_on_with_time_zone}
+        %time{ :datetime => @event.end_on_with_time_zone }
+          = t('.end_on')
+          -# @time_zone is the current user or webstie timezone
+          = "#{@event.get_formatted_date(@event.end_on.in_time_zone(@time_zone), false)} (#{@time_zone.name})"
+
+  - if @event.time_zone != @time_zone.name
+    .original-dates
+      %p.observation.summary-dates-indented
+        = t('.original_time')
+      %p.summary-dates-indented
+        = t('.start_on')
+        = "#{@event.get_formatted_date(@event.start_on_with_time_zone, false)} (#{@event.time_zone})"
+
+      %p.summary-dates-indented
+        = t('.end_on')
+        = "#{@event.get_formatted_date(@event.end_on_with_time_zone, false)} (#{@event.time_zone})"
 
 .summary-block
 

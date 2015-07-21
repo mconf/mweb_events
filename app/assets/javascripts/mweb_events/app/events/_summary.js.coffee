@@ -25,4 +25,10 @@ $ ->
   if MwebEvents.isOnPage 'mweb_events-events', 'show'
     renderMap()
 
+  $('#change-dates').on 'click', ->
+    $('.original-dates').toggle 250
+    $('.your-dates').toggle 250
+    $('.your-time-info').toggle 0
+    $('.original-time-info').toggle 0
+
 #    = map(:center => { :latlng => latlng, :zoom => 15 }, :markers => [{ :latlng => latlng, :popup => @event.address}])

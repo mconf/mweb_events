@@ -66,16 +66,19 @@ en:
         button: Register in this event
       summary:
         calendar: Add to calendar
+        change_dates_info: "See in the event's time zone"
         contact: Contact the organizer
         end_on: "End:"
         more_options: "More options:"
+        original_time: Date in the event timezone
+        original_time_info: Original date set in the event's organizers timezone
         rss: RSS
-        showing_time_zone: "(time zone %{time_zone})"
         start_on: "Start:"
         time_zone: Time Zone
         when: "When?"
         where: "Where?"
         where_not_specified: "(Location not specified)"
+        your_time_info: "Dates shown in your time zone (%{time_zone})"
       social_media:
         title: "Share this event:"
         twitter: Share on Twitter
