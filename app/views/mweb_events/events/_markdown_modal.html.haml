@@ -16,7 +16,10 @@
     - partial_name = "markdown_#{I18n.locale.to_s.underscore}"
 
     - # fall back to english if not found
-    = render partial_name rescue render "markdown_en"
+    - begin
+      = render partial_name
+    - rescue ActionView::MissingTemplate
+      = render "markdown_en"
 
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"}
