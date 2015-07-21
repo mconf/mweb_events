@@ -12,7 +12,11 @@
     %p
       = t '.description_html'
 
-    = render "markdown_#{I18n.locale.to_s.underscore}"
+    - # try to get a partial translated to the current locale
+    - partial_name = "markdown_#{I18n.locale.to_s.underscore}"
+
+    - # fall back to english if not found
+    = render partial_name rescue render "markdown_en"
 
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"}
