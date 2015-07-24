@@ -88,13 +88,11 @@ module MwebEvents
     end
 
     def start_on_with_time_zone
-      offset = Time.now.in_time_zone(time_zone).utc_offset
-      start_on.utc + offset if start_on && time_zone
+      start_on.try(:in_time_zone, time_zone)
     end
 
     def end_on_with_time_zone
-      offset = Time.now.in_time_zone(time_zone).utc_offset
-      end_on.utc + offset if end_on && time_zone
+      end_on.try(:in_time_zone, time_zone)
     end
 
     # To format results on forms
@@ -105,7 +103,7 @@ module MwebEvents
         @start_on_date
       else
         # fetching date from database and converting for display
-        start_on.strftime(date_display_format || "%m/%d/%Y") if start_on
+        start_on_with_time_zone.strftime(date_display_format || "%m/%d/%Y") if start_on
       end
     end
 
@@ -117,7 +115,7 @@ module MwebEvents
       if @end_on_date
         @end_on_date
       else
-        end_on.strftime(date_display_format || "%m/%d/%Y") if end_on
+        end_on_with_time_zone.strftime(date_display_format || "%m/%d/%Y") if end_on
       end
     end
 
@@ -187,19 +185,20 @@ module MwebEvents
     def get_formatted_date(date=nil, with_tz=true)
       if date.nil?
         if with_tz
-          I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone})")
+          I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M (#{time_zone})")
         else
           I18n::localize(start_on, :format => "%A, %d %b %Y, %H:%M")
         end
       else
         if with_tz
-          I18n::localize(date, :format => "%A, %d %b %Y, %H:%M (#{get_formatted_timezone(date)})")
+          I18n::localize(date, :format => "%A, %d %b %Y, %H:%M (#{time_zone})")
         else
           I18n::localize(date, :format => "%A, %d %b %Y, %H:%M")
         end
       end
     end
 
+    # Currently unused
     def get_formatted_timezone(date=nil)
       if date.nil?
         "GMT#{start_on_with_time_zone.formatted_offset}"
@@ -214,12 +213,19 @@ module MwebEvents
     # Should be called after submiting the new and edit form actions.
     def concat_date_time
       if date_stored_format.present?
-        tz = ActiveSupport::TimeZone[time_zone].formatted_offset
 
         start_present = @start_on_time.present? && @start_on_date.present?
         if (time_zone_changed? && start_on_changed?) || start_present
           if start_present
-            write_attribute(:start_on, DateTime.strptime("#{@start_on_date} #{@start_on_time} #{tz}", date_stored_format))
+
+            # strptime doesnt do time zones correctly because of daylight savings time
+            # so we parse it without and use ActiveSupport::TimeZone to do the time zone
+            date = DateTime.parse(@start_on_date)
+            time = DateTime.parse(@start_on_time)
+            date = date.change hour: time.hour, min: time.min
+
+            date = ActiveSupport::TimeZone[time_zone].parse(date.strftime(date_stored_format))
+            write_attribute(:start_on, date)
           else
             errors.add(:start_on, I18n.t('activerecord.errors.mweb_events/event.start_on'))
           end
@@ -228,7 +234,12 @@ module MwebEvents
         end_present = (@end_on_time.present? && @end_on_date.present?)
         if (time_zone_changed? && end_on_changed?) || end_present
           if end_present
-            write_attribute(:end_on, DateTime.strptime("#{@end_on_date} #{@end_on_time} #{tz}", date_stored_format))
+            date = DateTime.parse(@end_on_date)
+            time = DateTime.parse(@end_on_time)
+            date = date.change hour: time.hour, min: time.min
+
+            date = ActiveSupport::TimeZone[time_zone].parse(date.strftime(date_stored_format))
+            write_attribute(:end_on, date)
           else
             errors.add(:end_on, I18n.t('activerecord.errors.mweb_events/event.end_on'))
           end

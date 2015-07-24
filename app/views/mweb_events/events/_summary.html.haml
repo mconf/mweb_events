@@ -19,7 +19,7 @@
       %time{ :datetime => @event.start_on_with_time_zone }
         = t('.start_on')
         -# @time_zone is the current user or webstie timezone
-        = "#{@event.get_formatted_date(@event.start_on.in_time_zone(@time_zone), false)} (#{@time_zone.name})"
+        = formatted_date_in_time_zone(@event, @event.start_on, @time_zone.name)
 
     - if @event.end_on
       %p.summary-dates-indented
@@ -27,7 +27,7 @@
         %time{ :datetime => @event.end_on_with_time_zone }
           = t('.end_on')
           -# @time_zone is the current user or webstie timezone
-          = "#{@event.get_formatted_date(@event.end_on.in_time_zone(@time_zone), false)} (#{@time_zone.name})"
+          = formatted_date_in_time_zone(@event, @event.end_on, @time_zone.name)
 
   - if @event.time_zone != @time_zone.name
     .original-dates
@@ -35,11 +35,11 @@
         = t('.original_time')
       %p.summary-dates-indented
         = t('.start_on')
-        = "#{@event.get_formatted_date(@event.start_on_with_time_zone, false)} (#{@event.time_zone})"
+        = formatted_date_in_time_zone(@event, @event.start_on, @event.time_zone)
 
       %p.summary-dates-indented
         = t('.end_on')
-        = "#{@event.get_formatted_date(@event.end_on_with_time_zone, false)} (#{@event.time_zone})"
+        = formatted_date_in_time_zone(@event, @event.end_on, @event.time_zone)
 
 .summary-block
 

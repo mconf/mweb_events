@@ -16,6 +16,10 @@ module MwebEvents
       content_tag(:div, day_tag + hour_tag + year_tag, options)
     end
 
+    def formatted_date_in_time_zone(event, date, time_zone)
+      "#{event.get_formatted_date(date.in_time_zone(time_zone), false)} (#{time_zone})"
+    end
+
     def event_logo_link(event, options={})
       href = mweb_events.event_path(event)
       content_tag(:a, event_logo(event, options), { :href => href })

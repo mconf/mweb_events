@@ -224,11 +224,7 @@ describe MwebEvents::EventsController do
 
     context "with valid attributes" do
       let(:attributes) { FactoryGirl.attributes_for(:event) }
-      before(:each) { put :update, :id => event, :event => attributes.merge(
-        {:start_on_date => attributes[:start_on].strftime('%m/%d/%Y'),
-         :start_on_time => attributes[:start_on].strftime('%H:%M')
-        }
-        ).except(:start_on, :end_on)
+      before(:each) { put :update, :id => event, event: {name: "#{event.name} New name"}
       }
 
       it "sets the correct attributes in the event"

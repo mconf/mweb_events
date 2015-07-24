@@ -126,7 +126,7 @@ module MwebEvents
       # can be overriden by the application
       @date_locale = 'en'
       @date_format = 'MM-dd-yyyy'
-      @event.date_stored_format = '%m/%d/%Y %H:%M %z'
+      @event.date_stored_format = '%m/%d/%Y %H:%M'
       @event.date_display_format = '%m/%d/%Y'
     end
 
