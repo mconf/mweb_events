@@ -39,6 +39,8 @@ pt:
     update: Atualizar
     more: Ler Mais
     close: Fechar
+    datetimepicker:
+      format_display: "%d/%m/%Y"
 
   mweb_events:
     participant:

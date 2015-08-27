@@ -38,6 +38,8 @@ en:
     update: Update
     more: Read More
     close: Close
+    datetimepicker:
+      format_display: "%m/%d/%Y"
 
   mweb_events:
     participant:

@@ -106,20 +106,18 @@ module MwebEvents
 
     private
     def concat_datetimes
-      if params[:event][:start_on_date].present?
-        params[:event]['start_on_time(4i)'] = '00' if params[:event]['start_on_time(4i)'].blank?
-        params[:event]['start_on_time(5i)'] = '00' if params[:event]['start_on_time(5i)'].blank?
-        params[:event][:start_on_time] = "#{params[:event]['start_on_time(4i)']}:#{params[:event]['start_on_time(5i)']}"
-      end
+      date_format = I18n.t('_other.datetimepicker.format_display')
 
-      if params[:event][:end_on_date].present?
-        params[:event]['end_on_time(4i)'] = '00' if params[:event]['end_on_time(4i)'].blank?
-        params[:event]['end_on_time(5i)'] = '00' if params[:event]['end_on_time(5i)'].blank?
-        params[:event][:end_on_time] = "#{params[:event]['end_on_time(4i)']}:#{params[:event]['end_on_time(5i)']}"
+      [:start_on, :end_on].each do |field|
+        if params[:event][field.to_s + '_time'] && params[:event][field.to_s + '_date']
+          time = "#{params[:event][field.to_s + '_time(4i)']}:#{params[:event][field.to_s + '_time(5i)']}"
+          params[:event][field] =
+            parse_in_timezone(params[:event]["#{field}_date"], time, params[:event][:time_zone], date_format)
+        end
+        (1..5).each { |n| params[:event].delete("#{field}_time(#{n}i)") }
+        params[:event].delete("#{field}_date")
       end
-
-      (1..5).each { |n| params[:event].delete("start_on_time(#{n}i)") }
-      (1..5).each { |n| params[:event].delete("end_on_time(#{n}i)") }
+      true
     end
 
     def set_date_locale
@@ -132,10 +130,25 @@ module MwebEvents
 
     def event_params
       params.require(:event).permit(
-        :address, :start_on_time, :start_on_date, :description, :start_on, :end_on,
-        :location, :name, :time_zone, :end_on_time, :end_on_date,
+        :address, :description, :start_on, :end_on, :location, :name, :time_zone,
         :summary, :owner_id, :owner_type, :date_stored_format, :social_networks => []
       )
+    end
+
+    def parse_in_timezone date, time, time_zone, date_format=nil
+
+      return unless date.present? && time.present?
+
+      if date_format.present?
+        d = DateTime.strptime(date, date_format)
+      else
+        d = DateTime.parse(date)
+      end
+      t = DateTime.parse(time)
+
+      d = d.change hour: t.hour, min: t.min
+
+      ActiveSupport::TimeZone[time_zone].parse(d.strftime('%c'))
     end
 
   end

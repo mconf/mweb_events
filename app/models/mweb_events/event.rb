@@ -25,8 +25,6 @@ module MwebEvents
     # Test if we need to clear the coordinates because address was cleared
     before_save :check_coordinates
 
-    before_validation :concat_date_time
-
     # Events that are happening currently
     scope :happening_now, lambda {
       where("start_on <= ? AND end_on > ?", Time.zone.now, Time.zone.now)
@@ -123,23 +121,6 @@ module MwebEvents
       end_on_with_time_zone
     end
 
-    def end_on_date= date
-      @end_on_date = date
-    end
-
-    def end_on_time= time
-      @end_on_time = time
-    end
-
-    def start_on_date= date
-      @start_on_date = date
-    end
-
-    def start_on_time= time
-      @start_on_time = time
-    end
-
-
     def to_ics
       event = Icalendar::Event.new
       event.dtstart = start_on.strftime("%Y%m%dT%H%M%SZ")
@@ -204,46 +185,6 @@ module MwebEvents
         "GMT#{start_on_with_time_zone.formatted_offset}"
       else
         "GMT#{date.in_time_zone(time_zone).formatted_offset}"
-      end
-    end
-
-    # Puts a (start|end)on_date and (start|end)on_time together and stores
-    # it the correct timezone. Needs 'date_stored_format' to be provided
-    # by the form to handle the way different locales express dates.
-    # Should be called after submiting the new and edit form actions.
-    def concat_date_time
-      if date_stored_format.present?
-
-        start_present = @start_on_time.present? && @start_on_date.present?
-        if (time_zone_changed? && start_on_changed?) || start_present
-          if start_present
-
-            # strptime doesnt do time zones correctly because of daylight savings time
-            # so we parse it without and use ActiveSupport::TimeZone to do the time zone
-            date = DateTime.parse(@start_on_date)
-            time = DateTime.parse(@start_on_time)
-            date = date.change hour: time.hour, min: time.min
-
-            date = ActiveSupport::TimeZone[time_zone].parse(date.strftime(date_stored_format))
-            write_attribute(:start_on, date)
-          else
-            errors.add(:start_on, I18n.t('activerecord.errors.mweb_events/event.start_on'))
-          end
-        end
-
-        end_present = (@end_on_time.present? && @end_on_date.present?)
-        if (time_zone_changed? && end_on_changed?) || end_present
-          if end_present
-            date = DateTime.parse(@end_on_date)
-            time = DateTime.parse(@end_on_time)
-            date = date.change hour: time.hour, min: time.min
-
-            date = ActiveSupport::TimeZone[time_zone].parse(date.strftime(date_stored_format))
-            write_attribute(:end_on, date)
-          else
-            errors.add(:end_on, I18n.t('activerecord.errors.mweb_events/event.end_on'))
-          end
-        end
       end
     end
 
