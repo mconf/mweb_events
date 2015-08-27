@@ -109,7 +109,7 @@ module MwebEvents
       date_format = I18n.t('_other.datetimepicker.format_display')
 
       [:start_on, :end_on].each do |field|
-        if params[:event][field.to_s + '_time'] && params[:event][field.to_s + '_date']
+        if params[:event][field.to_s + '_date']
           time = "#{params[:event][field.to_s + '_time(4i)']}:#{params[:event][field.to_s + '_time(5i)']}"
           params[:event][field] =
             parse_in_timezone(params[:event]["#{field}_date"], time, params[:event][:time_zone], date_format)
